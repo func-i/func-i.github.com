@@ -5,16 +5,21 @@
         <style>
             body{
                 font-family: 'Lucida Bright';
-/*                background-color: #4A555C;
-                color:white;
-*/
+                /*                background-color: #4A555C;
+                                color:white;
+                */
                 background-color: white;
                 color:#414141;
 
             }
             .logo{
+                padding-top: 365px; /* height of the replacement image */
+                height: 0px;
+                overflow: hidden;
+                background-image: url('logo.png');
+                background-repeat: no-repeat;
+                width: 840px;
                 margin: 0 auto;
-                display: block;
             }
             .tag-line{
                 font-size: 32px;
@@ -35,12 +40,9 @@
         </style>
     </head>
     <body>
-        <img src="logo.png" class="logo" alt="Functional Imperative"/>
-        <!--div class="company-name">
-            <span>Functional</span>Imperative
-        </div-->
+        <h1 class="logo">Functional Imperative</h1>
         <div class="tag-line">
-            We build Experiences for the New Web
+            We Build Experiences for the New Web
         </div>
         <div class="contact">
             For an informal chat, please <a href="mailto:josh@functionalimperative.com">Contact Us</a>
