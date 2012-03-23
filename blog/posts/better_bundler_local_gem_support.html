@@ -23,12 +23,7 @@
             }
             .navbar .brand{
                 color:#414141;
-            }
-
-            header h1{
-                font-size:54px;
-                padding-bottom:9px;
-            }
+            }           
         </style>
     </head>
     <body onload="prettyPrint()">
@@ -46,7 +41,7 @@
         <div class="container">
             <header>
                 <h1>Bundler gets better local gem support</h1>
-                <p class="lead">How we used it and why you will too <small>by <a href="https://github.com/Sailias">Sailias</a></small></p>
+                <p class="lead">How we used it and why you will too <small>by <a href="https://github.com/Sailias">Sailias</a>, Friday March 23rd, 2012</small></p>
             </header>
 
             <section>
@@ -79,7 +74,9 @@
                         <p>
                             Recent <a href="https://github.com/carlhuda/bundler/pull/1779" target="_blank">commits</a> from <a href="https://github.com/josevalim" target="_blank">Jos&eacute; Valim</a> to bundler have added functionality to configure local paths for each gem.
                         </p>
-                        <pre class="prettyprint lang-c">$> bundle config local.nokogiri /path/to/local/nokogiri</pre>
+                        <pre class="prettyprint lang-c">
+# in your project folder
+$> bundle config local.nokogiri /path/to/local/nokogiri</pre>
                         <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git', :branch => 'master'</pre>
                         <p>
                             That's it!  Bundler has now been configured to use the version of nokogiri at the specified location!
