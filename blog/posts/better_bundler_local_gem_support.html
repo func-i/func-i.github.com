@@ -3,9 +3,9 @@
     <head>
         <title>Func-i: Bundler gets better local gem support</title>
 
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="../css/prettify.css"  />
-        <script type="text/javascript" src="../js/prettify.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/prettify.css"  />
+        <script type="text/javascript" src="../../js/prettify.js"></script>
 
         <style>
             body{
@@ -36,7 +36,7 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="brand" href="../index.html">
-                        <img src="../img/logo_no_text_transparent_small.png"/>
+                        <img src="../../img/logo_no_text_transparent_small.png"/>
                         Functional Imperative
                     </a>
                 </div>
@@ -74,14 +74,15 @@
                             Once included in your Gemfile, all developers will now have a local version of this gem in the path specified even if they don't plan on modifying the gem like you do.
                             You could also run into path problems depending on your platform.
                             What if we could still use a local gem file <em>if</em> we wanted to and also allow the user to specify the location.
-                        </p>
+                            A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a> which resulted in...</p>
                         <h3>Bundler's latest answer</h3><br/>
                         <p>
-                            Recent <a href="https://github.com/carlhuda/bundler/commit/b435db0f07d680c0fd3d47576394d50a5c7b96d9" target="_blank">commits</a> to bundler have added functionality to configure local paths for each gem.
+                            Recent <a href="https://github.com/carlhuda/bundler/pull/1779" target="_blank">commits</a> from <a href="https://github.com/josevalim" target="_blank">Jos&eacute; Valim</a> to bundler have added functionality to configure local paths for each gem.
                         </p>
                         <pre class="prettyprint lang-c">$> bundle config local.nokogiri /path/to/local/nokogiri</pre>
                         <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git', :branch => 'master'</pre>
                         <p>
+                            That's it!  Bundler has now been configured to use the version of nokogiri at the specified location!
                             This feature only works for git dependencies and the branch option is required because it will match up with the branch in the local path to ensure your local gem isn't on another branch.
                             You can also switch between branches of this gem using this functionality.
                         </p>
