@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Func-i: Bundler gets better local gem support</title>
+
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../css/prettify.css"  />
+        <script type="text/javascript" src="../js/prettify.js"></script>
+
+        <style>
+            body{
+                font-family: 'Lucida Bright';
+                /*                background-color: #4A555C;
+                                color:white;
+                */
+                background-color: white;
+                color:#414141;
+
+            }
+            .navbar-inner{
+                background:none;
+                box-shadow:none;
+            }
+            .navbar .brand{
+                color:#414141;
+            }
+
+            header h1{
+                font-size:54px;
+                padding-bottom:9px;
+            }
+        </style>
+    </head>
+    <body onload="prettyPrint()">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="../index.html">
+                        <img src="../img/logo_no_text_transparent_small.png"/>
+                        Functional Imperative
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <header>
+                <h1>Bundler gets better local gem support</h1>
+                <p class="lead">How we used it and why you will too <small>by <a href="https://github.com/Sailias">Sailias</a></small></p>
+            </header>
+
+            <section>
+                <div class="row">
+                    <div class="span12">
+                        <p>
+                            There are times while developing that we need to tweak a gem to better suit our needs.   Consider the following Gemfile:
+                        </p>
+                        <pre class="prettyprint lang-ruby">gem 'nokogiri'</pre>
+                        <p>
+                            This will fetch the latest Nokogiri tag from RubyGems and install it in your $GEM_PATH.  What if you want to modify the nokogiri gem and submit a pull request?
+                        </p>
+                        <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git'</pre>
+                        <p>
+                            This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork then bundle update. If I commit some bad code I need to fix it and clutter my commit log with garbage so that's not even a real option.
+                            What we really need to do is include a local version of our gem in our project.
+                        </p>
+                        <h3>Here comes :path</h3><br/>
+                        <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git', :path => '/path/to/nokogiri'</pre>
+                        <p>
+                            This is currently the recommended approach.  When I bundle install, nokogiri will be installed into my local path where I can modify it.  From there I can commit and push my changes up.
+                        </p>
+                        <p>
+                            This approach does come with some drawbacks though.
+                            Once included in your Gemfile, all developers will now have a local version of this gem in the path specified even if they don't plan on modifying the gem like you do.
+                            You could also run into path problems depending on your platform.
+                            What if we could still use a local gem file <em>if</em> we wanted to and also allow the user to specify the location.
+                        </p>
+                        <h3>Bundler's latest answer</h3><br/>
+                        <p>
+                            Recent <a href="https://github.com/carlhuda/bundler/commit/b435db0f07d680c0fd3d47576394d50a5c7b96d9" target="_blank">commits</a> to bundler have added functionality to configure local paths for each gem.
+                        </p>
+                        <pre class="prettyprint lang-c">$> bundle config local.nokogiri /path/to/local/nokogiri</pre>
+                        <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git', :branch => 'master'</pre>
+                        <p>
+                            This feature only works for git dependencies and the branch option is required because it will match up with the branch in the local path to ensure your local gem isn't on another branch.
+                            You can also switch between branches of this gem using this functionality.
+                        </p>
+                        <p>
+                            Bundler will work just like path and will still load your local changes but will also keep track of the current revision in your Gemfile.lock to stay in sync with remote changes.
+                            This is a much more dynamic approach than :path which allows each user to control their config yet still keeps the simplicity that makes bundler <strong>amazing</strong>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!--section>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'func-i';
+                    var disqus_url = 'http://www.functionalimperative.com/blog/blog.html';
+                    var disqus_title = "Test"
+                    var disqus_developer = 1; // developer mode is on
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                
+            </section-->
+
+        </div>
+
+        <div id="footer">&nbsp;</div>
+    </body>
+</html>
