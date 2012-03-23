@@ -4,6 +4,8 @@
         <title>Func-i: Bundler changes</title>
 
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../css/prettify.css"  />
+        <script type="text/javascript" src="../js/prettify.js"></script>
 
         <style>
             body{
@@ -29,7 +31,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="prettyPrint()">
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
@@ -56,8 +58,11 @@
                         <p>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
                         </p>
-                        <pre>
-                            This is code...
+                        <pre class="prettyprint lang-ruby">
+                            class Voila < Base::A {
+                                def this_is_a_pretty_method
+end
+}
                         </pre>
                     </div>
                 </div>
