@@ -62,7 +62,7 @@
                 <div class="row">
                     <div class="span12">
                         <p>
-                            There are times while developing that we need to tweak a gem to better suit our needs.   Consider the following Gemfile:
+                            There are times when developing that we need to tweak a gem to better suit our needs.   Consider the following Gemfile:
                         </p>
                         <pre class="prettyprint lang-ruby">gem 'nokogiri'</pre>
                         <p>
@@ -70,20 +70,20 @@
                         </p>
                         <pre class="prettyprint lang-ruby">gem 'nokogiri', :git => 'git@github.com:Sailias/nokogiri.git'</pre>
                         <p>
-                            This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork then bundle update. If I commit some bad code I need to fix it and clutter my commit log with garbage so that's not even a real option.
+                            This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork, then bundle update. If I commit some bad code, I will end up cluttering my commit log with garbage, so this approach not even a real option.
                             What we really need to do is include a local version of our gem in our project.
                         </p>
                         <h3>Here comes :path</h3><br/>
                         <pre class="prettyprint lang-ruby">gem 'nokogiri', :path => '/path/to/nokogiri'</pre>
                         <p>
-                            Up until now, this was the recommended approach.  When I bundle install, nokogiri will be installed into my local path where I can modify it.  From there I can commit and push my changes up.
+                            Up until now, using the path option was the recommended approach. This will use a local repository where I can freely modify it as I see fit.  From there I can commit and push my changes up.
                         </p>
                         <p>
-                            This approach does come with some drawbacks though.
-                            Once included in your Gemfile, all developers will now have to install local version of this gem in the path specified even if they don't plan on modifying the gem like you do.
-                            This Gemfile is no longer production ready, the app will break and you now have a file that cannot be committed.  You could also run into path problems depending on your platform.
-                            What if we could still use a local gem <em>if we wanted to</em> and also allow the user to specify the location.
-                            A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a> which resulted in...</p>
+                            This approach does come with some drawbacks, though.
+                            Once included in your Gemfile, all developers will now have to install a local version of this gem in the path specified, even if they don't plan on modifying the gem like you do.
+                            This means the Gemfile is no longer production ready, the app can break and you now have a file that cannot be committed.  You could also run into path problems depending on your platform.
+                            What if we could still use a local gem <em>if we wanted to</em> and also allow the user to specify the location?
+                            A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a>, which resulted in...</p>
                         <h3>Bundler's latest answer</h3><br/>
                         <p>
                             Recent <a href="https://github.com/carlhuda/bundler/pull/1779" target="_blank">commits</a> from <a href="https://github.com/josevalim" target="_blank">Jos&eacute; Valim</a> to bundler have added functionality to configure local paths for each gem.
@@ -98,8 +98,8 @@ $> bundle config local.nokogiri /path/to/local/nokogiri</pre>
                             You can also switch between branches of this gem using this functionality.
                         </p>
                         <p>
-                            Bundler will work just like path and will still load your local changes but will also keep track of the current revision in your Gemfile.lock to stay in sync with remote changes.
-                            This is a much more dynamic approach than :path which allows each user to control their config yet still keeps the simplicity that makes bundler <strong>amazing</strong>.
+                            Bundler will work just like path and will still load your local changes, but will also keep track of the current revision in your Gemfile.lock in order to stay in sync with remote changes.
+                            This is a much more dynamic approach than :path, which allows each user to control their config, yet still keeps the simplicity that makes bundler <strong>amazing</strong>.
                         </p>
                     </div>
                 </div>
