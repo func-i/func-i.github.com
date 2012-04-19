@@ -3,9 +3,20 @@
     <head>
         <title>Func-i: Bundler gets better local gem support</title>
 
+        <meta name="description" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="../../css/prettify.css"  />
         <script type="text/javascript" src="../../js/prettify.js"></script>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+        <link href="../../css/fi.css" rel="stylesheet" type="text/css" />
+        <link id="theme" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/start/jquery-ui.css" rel="stylesheet" />
+
+        <!--[if IE]>
+	<link href="../../css/ie.css" rel="stylesheet" type="text/css" />
+                <![endif]-->
 
         <style>
             body{
@@ -17,13 +28,8 @@
                 color:#414141;
 
             }
-            .navbar-inner{
-                background:none;
-                box-shadow:none;
+            .container{
             }
-            .navbar .brand{
-                color:#414141;
-            }           
         </style>
 
         <script type="text/javascript">
@@ -41,19 +47,23 @@
         </script>
     </head>
     <body onload="prettyPrint()">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" href="../../index.html">
-                        <img src="../../img/logo_no_text_transparent_small.png"/>
-                        Functional Imperative
-                    </a>
-                </div>
-            </div>
+
+        <div id="nav">
+            <h2 id="logo2"><img src="../../img/logo-type.png" alt="logo-type" width="216" height="20" /></h2>
+            <ul>
+                <li id="nav-home"><a href="../../index.html#/home"><span>Home</span></a></li>
+                <li><a href="../../index.html#/about"><span>What we do</span></a></li>
+                <li><a href="../../index.html#/testimonials"><span>Portfolio</span></a></li>
+
+                <li><a href="../../index.html#/profiles"><span>Who we are</span></a></li>
+                <li><a class="active" href="#"><span>Blog</span></a>	</li>
+                <li><a href="../../index.html#/contact"><span>Contact Us</span></a>	</li>
+
+            </ul>
         </div>
 
         <div class="container">
-            <header>
+            <header style="margin-top:70px;">
                 <h1>Bundler gets better local gem support</h1>
                 <p class="lead">How we used it and why you will too <small>by <a href="https://github.com/Sailias">Sailias</a>, Friday March 23rd, 2012</small></p>
             </header>

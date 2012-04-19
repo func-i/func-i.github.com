@@ -41,12 +41,12 @@
             <h2 id="logo2"><img src="img/logo-type.png" alt="logo-type" width="216" height="20" /></h2>
             <ul>
                 <li id="nav-home"><a href="#home"><span>Home</span></a></li>
-                <li><a href="#about"><span>What we do</span></a></li>
-                <li><a href="#testimonials"><span>Portfolio</span></a></li>
+                <li id="nav-about"><a href="#about"><span>What we do</span></a></li>
+                <li id="nav-testimonials"><a href="#testimonials"><span>Portfolio</span></a></li>
 
-                <li><a href="#profiles"><span>Who we are</span></a></li>
-                <li><a href="#blog"><span>Blog</span></a>	</li>
-                <li><a href="#contact"><span>Contact Us</span></a>	</li>
+                <li id="nav-profiles"><a href="#profiles"><span>Who we are</span></a></li>
+                <li id="nav-blog"><a href="blog/posts/better_bundler_local_gem_support.html"><span>Blog</span></a>	</li>
+                <li id="nav-contact"><a href="#contact"><span>Contact Us</span></a>	</li>
 
             </ul>
         </div>
@@ -186,6 +186,37 @@
                 $('html,body').animate({scrollTop: target-70 },'slow');
             }
 
+            function playPauseVideo(elem){
+                $('.testimonial-video').trigger('pause');
+                $('#play-pause').hide();
+                if($(elem).hasClass('autoPlayVideo')){
+                    $(elem).find('.testimonial-video').trigger('play');
+                    $('#play-pause').html('PAUSE');
+                    $('#play-pause').show();
+                }
+            }
+
+            function setNavActiveState(elem){
+                var activeStep = $('.step.nested-active');
+                if(activeStep.length <= 0)
+                    activeStep = $('.step.active');
+
+                $('#nav .active').removeClass('active');
+
+                if(activeStep[0].id == 'home')
+                    $('#nav #nav-home a').addClass('active');
+                else if(activeStep[0].id == 'about')
+                    $('#nav #nav-about a').addClass('active');
+                else if(activeStep[0].id == 'testimonials')
+                    $('#nav #nav-testimonials a').addClass('active');
+                else if(activeStep[0].id == 'profiles')
+                    $('#nav #nav-profiles a').addClass('active');
+                else if(activeStep[0].id == 'blog')
+                    $('#nav #nav-blog a').addClass('active');
+                else if(activeStep[0].id == 'contact')
+                    $('#nav #nav-contact a').addClass('active');
+            }
+
             $(function() {
 
                 $('#fi').jmpress('template','pageAbout',{
@@ -201,16 +232,10 @@
 
                     },
                     'beforeChange': function(elem, data){
-                        $('.testimonial-video').trigger('pause');
-                        $('#play-pause').hide();
-                        if($(elem).hasClass('autoPlayVideo')){
-                            $(elem).find('.testimonial-video').trigger('play');
-                            $('#play-pause').html('PAUSE');
-                            $('#play-pause').show();
-                        }
+                        playPauseVideo(elem);
                     },
-                    'afterStepLoaded': function(elem, data){
-                        console.log(elem);
+                    'setActive': function(elem, data){
+                        setNavActiveState(elem);
                     }
                 });
                 $('.testimonial-video').simpleVideo();
@@ -228,10 +253,7 @@
                 });
                 $('#global-prev').click(function(){
                     $('#fi').jmpress('prev');
-                });
-	
-	
-	
+                });               	
             });
         </script>
 

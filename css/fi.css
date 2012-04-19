@@ -358,12 +358,12 @@ h2#logo2{
 
     background: #494949;
 }
-#nav li a:hover{
+#nav li a:hover,
+#nav li a.active {
     background: #FF6D28;
     -webkit-box-shadow:  	0;
     -moz-box-shadow:  		0;
     box-shadow: 					0;
-
 }
 
 .hint p{
