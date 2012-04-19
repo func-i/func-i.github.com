@@ -228,9 +228,6 @@
                     rotateY:720
                 });
                 $('#fi').jmpress({
-                    'loadStep': function() {
-
-                    },
                     'beforeChange': function(elem, data){
                         playPauseVideo(elem);
                     },
@@ -239,15 +236,18 @@
                     }
                 });
                 $('.testimonial-video').simpleVideo();
-	
+
+                $('video').bind('play', function(){
+                    $('#play-pause').html('PAUSE');
+                });
+                $('video').bind('pause', function(){
+                    $('#play-pause').html('PLAY');
+                });
+
                 $('#play-pause').click(function(){
                     $('.testimonial-video').trigger('toggle');
-                    if($('#play-pause').html() == 'PLAY'){
-                        $(this).html('PAUSE');
-                    }else{
-                        $(this).html('PLAY');
-                    }
                 });
+                
                 $('#global-next').click(function(){
                     $('#fi').jmpress('next');
                 });
