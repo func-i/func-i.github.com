@@ -47,8 +47,8 @@
                 <li id="nav-profiles"><a href="#profiles"><span>Who we are</span></a></li>
                 <li id="nav-blog"><a href="blog/posts/better_bundler_local_gem_support.html"><span>Blog</span></a>	</li>
                 <li id="nav-contact"><a href="#contact"><span>Contact Us</span></a>	</li>
-
             </ul>
+            <h3 id="phone_number"><a class="desktop-only" href="callto:+16474058994">Call <span class="dark">647.405.8994</span></a></h3>
         </div>
 
         <div id="fi">
@@ -104,14 +104,14 @@
                         to design the API for their <a href="http://www.uknowa.com">Hammerati</a> product. 
                         This partnership was quickly expanded to their entire process as
                         they were able to realize dramatic improvements in development velocity.
-                        With strong momentum and <strong>Fun<span class="bright">c-i</span></strong>'s help, uKnowa is poised to disrupt the entire construction industry.
+                        With strong momentum and <strong>F<span class="bright">i</span></strong>'s help, uKnowa is poised to disrupt the entire construction industry.
                     </p>
                 </div>
             </div>
 
             <div id="profiles" class="step" data-x="1600" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="-120" data-prev="#testimonials">
                 <h1><span class="dark">Who is</span> Functional<span class="dark">Imperative</span>?</h1>
-                <div id="profile-josh" class="step greyBack" data-x="-400" data-y="0" data-z="-800" data-rotate-x="0" data-rotate-y="30" >
+                <div id="profile-josh" class="profile-step step greyBack" data-x="-400" data-y="0" data-z="-800" data-rotate-x="0" data-rotate-y="30" >
                     <img src="img/josh.png" class="profile" alt="" />
                     <h2>Josh Borts</h2>
                     <p class="justify">
@@ -120,12 +120,12 @@
                     </p>
                     <p class="justify">
                         Having moved back to Canada at the start of 2011, he started <strong><span class="bright">Functional</span>Imperative</strong>
-                        to work with amazing businesses who want to change the world.
+                        to continue his drive to work with business that want to change the world.
                     </p>
                     <img src="img/small-logo.png" alt="" class="icon" />
 
                 </div>
-                <div id="profile-josh" class="step greyBack" data-x="400" data-y="0" data-z="-800" data-rotate-x="0" data-rotate-y="-30" >
+                <div id="profile-khurram" class="profile-step step greyBack" data-x="400" data-y="0" data-z="-1000" data-rotate-x="0" data-rotate-y="0" >
                     <img src="img/kvirani.png" class="profile" alt="" />
                     <h2>Khurram Virani</h2>
                     <p class="justify">
@@ -133,11 +133,26 @@
                         He brings the experience and expertise necessary to deliver the amazing experiences that today's web products demand.
                     </p>
                     <p class="justify">
-                        When not working, Khurram is a professional yodeler, having competed internationally but has yet to win.
+                        When not working, Khurram is a professional yodeler, having competed internationally but has yet to win a single medal.
                     </p>
                     <img src="img/small-logo.png" alt="" class="icon" />
 
                 </div>
+                <div id="profile-jon" class="profile-step step greyBack" data-x="1200" data-y="0" data-z="-800" data-rotate-x="0" data-rotate-y="-30" >
+                    <img src="img/salis.png" class="profile" alt="" />
+                    <h2>Jon Salis</h2>
+                    <p class="justify">
+                        Jon Salis is a software developer with a decade of experience, five of those were spent focusing on Ruby and Rails.
+                        After working as the lead developer for an Ontario natural gas company, he has joined our team as a senior Ruby developer.
+                    <p class="justify">
+                        When he is not contributing to open source projects or giving guest lectures at local colleges, you can find him having a beer after a competitive hockey game.
+                    </p>
+                    </p>
+                    <img src="img/small-logo.png" alt="" class="icon" />
+
+                </div>
+
+
             </div>
 
 
@@ -150,7 +165,8 @@
 
             <div id="contact" class="testimonials greyBack step"  data-z="3200" data-y="400" data-rotate-x="0">
                 <h1>Contact Us</h1>
-                <p class="center"><a href="mailto:josh@func-i.com">josh@func-i.com</a> | 647.405.8994</p>
+                <p class="center"><a href="mailto:josh@func-i.com">info@func-i.com</a> | <a class="mobile-only" href="tel:+16474058994">647.405.8994</a><a class="desktop-only" href="callto:+16474058994">647.405.8994</a></p>
+                <p class="center">#300 - 862 Richmond Street West, Toronto, Ontario</p>
 
 
             </div>
@@ -171,6 +187,7 @@
 
 
         </div>
+        <div id="unmute-mute" class="greyButton">MUTE</div>
         <div id="play-pause" class="greyButton">PLAY</div>
         <div id="global-prev" class="prev" >&lt;</div>
         <div id="global-next" class="next" >&gt;</div>
@@ -189,10 +206,12 @@
             function playPauseVideo(elem){
                 $('.testimonial-video').trigger('pause');
                 $('#play-pause').hide();
+                $('#unmute-mute').hide();
                 if($(elem).hasClass('autoPlayVideo')){
                     $(elem).find('.testimonial-video').trigger('play');
                     $('#play-pause').html('PAUSE');
                     $('#play-pause').show();
+                    $('#unmute-mute').show();
                 }
             }
 
@@ -247,13 +266,24 @@
                 $('#play-pause').click(function(){
                     $('.testimonial-video').trigger('toggle');
                 });
+                $('#unmute-mute').click(function(){
+                    $.each($('video'), function(index, video){
+                        video.muted = !video.muted;
+                    });
+
+                    if('MUTE' == $('#unmute-mute').html())
+                        $('#unmute-mute').html('UNMUTE');
+                    else
+                        $('#unmute-mute').html('MUTE');
+                });
+
                 
                 $('#global-next').click(function(){
                     $('#fi').jmpress('next');
                 });
                 $('#global-prev').click(function(){
                     $('#fi').jmpress('prev');
-                });               	
+                });
             });
         </script>
 

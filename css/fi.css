@@ -35,7 +35,9 @@ body {
 .step:not(.active) .step{
     opacity: 1;
 }
-#profile-josh.step:is(active){
+#profile-josh.step:is(active),
+#profile-khurram.step:is(active),
+#profile-jon.step:is(active){
     opacity: 1;
 }
 .greyBack{
@@ -157,10 +159,12 @@ body {
     display: inline;
     margin: 5px;
 }
-#profile-josh{
+.profile-step{
     width: 600px;
 }
-#profile-josh img.profile{
+#profile-josh img.profile,
+#profile-jon img.profile,
+#profile-khurram img.profile{
     float: left;
     margin: 20px;
 }
@@ -196,6 +200,11 @@ body {
 
 #contact{
     width: 500px;
+}
+
+#contact a{
+    color: #4A4A4A;
+    text-decoration: none;
 }
 
 #overview{
@@ -312,6 +321,21 @@ h2#logo2{
     top: 6px;
     margin: 0;
 }
+#phone_number{
+    position: absolute;
+    z-index: 1001;
+    right: 12px;
+    top: 7px;
+    margin: 0;
+}
+#phone_number a{
+    text-decoration: none;
+    color: #FF6D28;
+}
+#phone_number a span.dark{
+    color: #4A4A4A;
+}
+
 #nav{
     position: relative;
 }
@@ -418,6 +442,14 @@ h2#logo2{
     left: 0px;
     cursor: pointer;
 }
+#unmute-mute{
+    position: absolute;
+    z-index: 99999;
+    bottom: 32px;
+    left: 0px;
+    cursor: pointer;
+}
+
 
 .greyButton{
     display: block;
@@ -447,18 +479,25 @@ h2#logo2{
     background: #494949;
 }
 
-#play-pause.greyButton{
+#play-pause.greyButton,
+#unmute-mute.greyButton{
     width: 130px;
     font-size: 0.8em;
     text-align: center;
 }
+.mobile-only{
+    display:none;
+}
+
 
 
 @media only screen and (max-device-width: 480px) {
     /* insert styles here */
+    .desktop-only{
+        display:none;
+    }
     h2#logo2{
         display: none;
-
     }
     #nav{
         margin-top:500px;
