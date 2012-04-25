@@ -355,6 +355,7 @@ h2#logo2{
     margin: 0 px;
     display: inline-block;
     text-align: center;
+    position: relative;
 }
 #nav li a{
     display: block;
@@ -383,13 +384,45 @@ h2#logo2{
     background: #494949;
 }
 #nav li a:hover,
-#nav li a.active {
+#nav li.active>a {
     background: #FF6D28;
     -webkit-box-shadow:  	0;
     -moz-box-shadow:  		0;
     box-shadow: 					0;
 }
+#nav li.active>a {
+}
+	
+	#nav li ul{
+		
+		position: absolute;
+		left: 9999px;
+		top: 34px;
+		width: 200px;
+		text-align: left;
+		padding: 0 5px 5px 5px;
+			background: rgba(0,0,0,0.05);
+			-webkit-border-radius: 	0 0 3px 3px;
+	    -moz-border-radius: 		0 0 3px 3px;
+	    border-radius: 					0 0 3px 3px;
 
+	
+	}
+	#nav li#nav-profiles ul{
+		width: 325px;
+	}
+	#nav li.active ul{
+		left: -5px;	
+	}
+		#nav li ul li a{
+	    -webkit-border-radius: 	3px;
+	    -moz-border-radius: 		3px;
+	    border-radius: 					3px;
+	    font-size: 10px;
+	    background: #aaa;
+	    margin: 0;
+	    padding: 3px 5px;
+		}
 .hint p{
     font-size: 1.4em;
     text-align: center;
