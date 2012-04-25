@@ -587,3 +587,33 @@ h2#logo2{
     }
 
 }
+
+
+@media only screen and (max-width : 1025px) {
+/* Styles */
+	#nav ul {
+		text-align: right;
+		right:5px;
+	}
+
+	#phone_number{
+		left: 10px;
+		top: 37px;
+		font-size: 14px;
+	}
+}
+@media only screen and (max-width : 808px) {
+	#phone_number{
+		right: 10px;
+		top: 10px;
+		left: auto;
+	}
+	#nav ul{
+		text-align: center;
+		right: auto;
+		height: 80px;
+	}
+	#nav ul li{
+		margin-top: 35px;
+	}
+}
