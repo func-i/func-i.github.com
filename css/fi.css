@@ -641,12 +641,16 @@ h2#logo2{
 		top: 10px;
 		left: auto;
 	}
-	#nav ul{
+	#nav>ul{
 		text-align: center;
 		right: auto;
-		height: 80px;
+		height: 70px;
 	}
-	#nav ul li{
+	#nav>ul>li{
 		margin-top: 35px;
 	}
+		#nav>ul>li.active>ul{
+			left: -70%;
+		}
+
 }
