@@ -632,9 +632,20 @@ h2#logo2{
 	#nav>ul>li{
 		margin-top: 35px;
 		width: 16%;
+
 	}
+		#nav>ul>li>a{
+			font-size: 0.8em;
+		}
+
 		#nav>ul>li.active>ul{
 			left: -70%;
 		}
+
+}
+@media only screen and (max-width : 750px) {
+	#nav>ul>li{
+		font-size: 12px;
+	}
 
 }
