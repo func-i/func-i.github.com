@@ -622,24 +622,8 @@ h2#logo2{
 }
 
 
-@media only screen and (max-width : 1025px) {
-/* Styles */
-	#nav ul {
-		text-align: center;
 
-	}
-	#nav li ul{
-		
-	}
-	#phone_number{
-	}
-}
-@media only screen and (max-width : 808px) {
-	#phone_number{
-		right: 10px;
-		top: 10px;
-		left: auto;
-	}
+@media only screen and (max-width : 1020px) {
 	#nav>ul{
 		text-align: center;
 		right: auto;
