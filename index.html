@@ -14,16 +14,10 @@
 
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/simpleVideo.js"></script>
-
-
-        <!--[if !IE]>	<!-->
+        <!--script type="text/javascript" src="js/simpleVideo.js"></script-->
+        <link href="css/ie.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/ie.js"></script>
         <script type="text/javascript" src="js/jmpress.js"></script>
-        <!--<![endif]-->
-        <![endif]--><!--[if IE]>
-	<link href="css/ie.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/ie.js"></script>
-        <![endif]-->
 
         <script type="text/javascript">
             var _gaq = _gaq || [];
@@ -44,21 +38,21 @@
                 <li id="nav-home"><a href="#home"><span>Home</span></a></li>
                 <li id="nav-about"><a href="#about"><span>What we do</span></a></li>
                 <li id="nav-testimonials">
-                	<a href="#testimonials"><span>Portfolio</span></a>
-                	<ul>
-                		<li><a href="#testimonial-1">Social Street</a></li>
-                		<li><a href="#testimonial-2">Span6</a></li>
-                		<li><a href="#testimonial-3">uKnowa</a></li>
-                	</ul>
+                    <a href="#testimonials"><span>Portfolio</span></a>
+                    <ul>
+                        <li><a href="#testimonial-1">Social Street</a></li>
+                        <li><a href="#testimonial-2">Span6</a></li>
+                        <li><a href="#testimonial-3">uKnowa</a></li>
+                    </ul>
                 </li>
 
                 <li id="nav-profiles"><a href="#profiles"><span>Who we are</span></a>
-                <ul>
-                		<li><a href="#profile-josh">Josh Borts</a></li>
-                		<li><a href="#profile-khurram">Khurram Virani</a></li>
-                		<li><a href="#profile-jon">Jon Salis</a></li>
-                		<li><a href="#profile-jason">Jason Jang</a></li>
-                	</ul>
+                    <ul>
+                        <li><a href="#profile-josh">Josh Borts</a></li>
+                        <li><a href="#profile-khurram">Khurram Virani</a></li>
+                        <li><a href="#profile-jon">Jon Salis</a></li>
+                        <li><a href="#profile-jason">Jason Jang</a></li>
+                    </ul>
                 </li>
                 <li id="nav-blog"><a href="blog/posts/better_bundler_local_gem_support.html"><span>Blog</span></a>	</li>
                 <li id="nav-contact"><a href="#contact"><span>Contact Us</span></a>	</li>
@@ -96,10 +90,10 @@
                     </p>
                 </div>
                 <div id="testimonial-2" class="testimonials step greyBack" data-x="0" data-y="1600" data-z="-3000" data-rotate-x="0" data-rotate-y="0" data-scale="0">
-                <!--div id="" class="testimonials step greyBack autoPlayVideo" data-x="0" data-y="1600" data-z="-3000" data-rotate-x="0" data-rotate-y="0" data-scale="0">
-                    <video class="testimonial-video" width="700" height="442">
-                        <source src="http://span6.com/s6-home-video-cut4.mp4" type="video/mp4" />
-                    </video-->
+                    <!--div id="" class="testimonials step greyBack autoPlayVideo" data-x="0" data-y="1600" data-z="-3000" data-rotate-x="0" data-rotate-y="0" data-scale="0">
+                        <video class="testimonial-video" width="700" height="442">
+                            <source src="http://span6.com/s6-home-video-cut4.mp4" type="video/mp4" />
+                        </video-->
                     <a href="http://www.span6.com"><img src="img/span6.png" alt="" /></a>
 
                     <p class="justify">
@@ -128,7 +122,33 @@
 
             <div id="profiles" class="step" data-x="1600" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="-120" data-prev="#testimonials">
                 <h1><span class="dark">Who is</span> Functional<span class="dark">Imperative</span>?</h1>
-                <div id="profile-josh" class="profile-step step greyBack" data-x="-1200" data-y="0" data-z="-1000" data-rotate-x="0" data-rotate-y="40" >
+                <div id="profile-khurram" class="profile-step step greyBack" data-x="-1200" data-y="0" data-z="-1000" data-rotate-x="0" data-rotate-y="40" >
+                    <img src="img/kvirani.png" class="profile" alt="" />
+                    <h2>Khurram Virani</h2>
+                    <p class="justify">
+                        Co-Founder & Lead Developer, Khurram has worked in web development for most of the past decade.
+                        He brings the experience and expertise necessary to deliver the amazing experiences that today's web products demand.
+                    </p>
+                    <p class="justify">
+                        When not working, Khurram is a professional yodeler, having competed internationally but has yet to win a single medal.
+                    </p>
+                    <img src="img/small-logo.png" alt="" class="icon" />
+
+                </div>
+                <div id="profile-jon" class="profile-step step greyBack" data-x="-400" data-y="0" data-z="-1400" data-rotate-x="0" data-rotate-y="15" >
+                    <img src="img/salis.png" class="profile" alt="" />
+                    <h2>Jon Salis</h2>
+                    <p class="justify">
+                        Jon Salis is a software developer with a decade of experience, five of those were spent focusing on Ruby and Rails.
+                        After working as the lead developer for an Ontario natural gas company, he has joined our team as a senior Ruby developer.
+                    <p class="justify">
+                        When he is not contributing to open source projects or giving guest lectures at local colleges, you can find him having a beer after a competitive hockey game.
+                    </p>
+                    </p>
+                    <img src="img/small-logo.png" alt="" class="icon" />
+
+                </div>
+                <div id="profile-josh" class="profile-step step greyBack" data-x="400" data-y="0" data-z="-1400" data-rotate-x="0" data-rotate-y="-15" >
                     <img src="img/josh.png" class="profile" alt="" />
                     <h2>Josh Borts</h2>
                     <p class="justify">
@@ -142,45 +162,22 @@
                     <img src="img/small-logo.png" alt="" class="icon" />
 
                 </div>
-                <div id="profile-khurram" class="profile-step step greyBack" data-x="-400" data-y="0" data-z="-1400" data-rotate-x="0" data-rotate-y="15" >
-                    <img src="img/kvirani.png" class="profile" alt="" />
-                    <h2>Khurram Virani</h2>
-                    <p class="justify">
-                        Co-Founder & Lead Developer, Khurram has worked in web development for most of the past decade.
-                        He brings the experience and expertise necessary to deliver the amazing experiences that today's web products demand.
-                    </p>
-                    <p class="justify">
-                        When not working, Khurram is a professional yodeler, having competed internationally but has yet to win a single medal.
-                    </p>
-                    <img src="img/small-logo.png" alt="" class="icon" />
 
-                </div>
-                <div id="profile-jon" class="profile-step step greyBack" data-x="400" data-y="0" data-z="-1400" data-rotate-x="0" data-rotate-y="-15" >
-                    <img src="img/salis.png" class="profile" alt="" />
-                    <h2>Jon Salis</h2>
-                    <p class="justify">
-                        Jon Salis is a software developer with a decade of experience, five of those were spent focusing on Ruby and Rails.
-                        After working as the lead developer for an Ontario natural gas company, he has joined our team as a senior Ruby developer.
-                    <p class="justify">
-                        When he is not contributing to open source projects or giving guest lectures at local colleges, you can find him having a beer after a competitive hockey game.
-                    </p>
-                    </p>
-                    <img src="img/small-logo.png" alt="" class="icon" />
-
-                </div>
                 <div id="profile-jason" class="profile-step step greyBack" data-x="1200" data-y="0" data-z="-1000" data-rotate-x="0" data-rotate-y="-40" >
                     <img src="img/jason.png" class="profile" alt="" style="float: left; margin: 0 20px 0 0;" />
                     <h2>Jason Jang</h2>
                     <p class="justify">
 											He's a Front-End Developer and UX designer with 7 years in the industry. He's worked with a range of clients in various sizes through his freelance as well as through agencies.
-									
+
                     <p class="justify">
 											When he's not churning out HTML and CSS, or developing wireframes, he's playing <a href="http://www.convoysband.com">rock music</a>, or making <a href="http://www.thekoreantaco.com">Korean tacos</a>.
                     </p>
-	</p>
+                    </p>
                     <img src="img/small-logo.png" alt="" class="icon" />
 
                 </div>
+
+                <div style="clear:both"></div>
 
 
             </div>
@@ -217,8 +214,8 @@
 
 
         </div>
-        <div id="unmute-mute" class="greyButton">MUTE</div>
-        <div id="play-pause" class="greyButton">PLAY</div>
+        <!--div id="unmute-mute" class="greyButton">MUTE</div>
+        <div id="play-pause" class="greyButton">PLAY</div-->
         <div id="global-prev" class="prev" >&lt;</div>
         <div id="global-next" class="next" >&gt;</div>
 
@@ -233,7 +230,7 @@
                 $('html,body').animate({scrollTop: target-70 },'slow');
             }
 
-            function playPauseVideo(elem){
+            /*            function playPauseVideo(elem){
                 $('.testimonial-video').trigger('pause');
                 $('#play-pause').hide();
                 $('#unmute-mute').hide();
@@ -243,7 +240,7 @@
                     $('#play-pause').show();
                     $('#unmute-mute').show();
                 }
-            }
+            }*/
 
             function setNavActiveState(elem){
                 var activeStep = $('.step.nested-active');
@@ -266,33 +263,56 @@
                     $('#nav #nav-contact').addClass('active');
             }
 
+            function supportJImpress(){
+                console.log(navigator.userAgent);
+                if(navigator.userAgent.search('Linux') >= 0)
+                    return false;
+                else if(navigator.userAgent.search('Chrome') >= 0)
+                    return true;
+                else if(navigator.userAgent.search('Safari') >= 0)
+                    return true;
+                else if(navigator.userAgent.search('Firefox') >= 0)
+                    return true;
+                else
+                    return false;
+            }
+
             $(function() {
-
-                $('#fi').jmpress('template','pageAbout',{
-                    x:0,
-                    y:-1000,
-                    z:2000,
+                if(supportJImpress()){
+                    $('#fi').jmpress('template','pageAbout',{
+                        x:0,
+                        y:-1000,
+                        z:2000,
 	
-                    rotateX:0,
-                    rotateY:720
-                });
-                $('#fi').jmpress({
-                    'beforeChange': function(elem, data){
-                        playPauseVideo(elem);
-                    },
-                    'setActive': function(elem, data){
-                        setNavActiveState(elem);
-                    }
-                });
-                $('.testimonial-video').simpleVideo();
+                        rotateX:0,
+                        rotateY:720
+                    });
 
+                    $('#fi').jmpress({
+                        'beforeChange': function(elem, data){
+                            //playPauseVideo(elem);
+                        },
+                        'setActive': function(elem, data){
+                            setNavActiveState(elem);
+                        }
+                    });
+                }
+                else{
+                    $('body').addClass('jimpress-not-supported');
+
+                    $("#nav ul li a").click(function(){
+                        var anchor = $(this).attr('href').replace('#','');
+                        goToByScroll(anchor);
+                    });
+                }
+
+                /*$('.testimonial-video').simpleVideo();
                 $('video').bind('play', function(){
                     $('#play-pause').html('PAUSE');
                 });
                 $('video').bind('pause', function(){
                     $('#play-pause').html('PLAY');
                 });
-
                 $('#play-pause').click(function(){
                     $('.testimonial-video').trigger('toggle');
                 });
@@ -305,7 +325,7 @@
                         $('#unmute-mute').html('UNMUTE');
                     else
                         $('#unmute-mute').html('MUTE');
-                });
+                });*/
 
                 
                 $('#global-next').click(function(){
