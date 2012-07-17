@@ -269,9 +269,10 @@
             }
 
             function supportJImpress(){
-                return false;
                 console.log(navigator.userAgent);
                 if(navigator.userAgent.search('Linux') >= 0)
+                    return false;
+                if(navigator.userAgent.search('Mobile') >= 0)
                     return false;
                 else if(navigator.userAgent.search('Chrome') >= 0)
                     return true;
