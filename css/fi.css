@@ -564,6 +564,10 @@ h2#logo2{
     #nav ul li#nav-home{
         display: none;
     }
+
+    body.blog .container{
+        padding-top:400px;
+    }
     #home{
         position: absolute;
         top: 30px;
