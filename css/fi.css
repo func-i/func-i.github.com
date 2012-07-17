@@ -392,37 +392,37 @@ h2#logo2{
 }
 #nav li.active>a {
 }
-	
-	#nav li ul{
-		
-		position: absolute;
-		left: 9999px;
-		top: 34px;
-		width: 200px;
-		text-align: left;
-		padding: 0 5px 5px 5px;
-			background: rgba(0,0,0,0.05);
-			-webkit-border-radius: 	0 0 3px 3px;
-	    -moz-border-radius: 		0 0 3px 3px;
-	    border-radius: 					0 0 3px 3px;
 
-	
-	}
-	#nav li#nav-profiles ul{
-		width: 325px;
-	}
-	#nav li.active ul{
-		left: -5px;	
-	}
-		#nav li ul li a{
-	    -webkit-border-radius: 	3px;
-	    -moz-border-radius: 		3px;
-	    border-radius: 					3px;
-	    font-size: 10px;
-	    background: #aaa;
-	    margin: 0;
-	    padding: 3px 5px;
-		}
+#nav li ul{
+
+    position: absolute;
+    left: 9999px;
+    top: 34px;
+    width: 200px;
+    text-align: left;
+    padding: 0 5px 5px 5px;
+    background: rgba(0,0,0,0.05);
+    -webkit-border-radius: 	0 0 3px 3px;
+    -moz-border-radius: 		0 0 3px 3px;
+    border-radius: 					0 0 3px 3px;
+
+
+}
+#nav li#nav-profiles ul{
+    width: 325px;
+}
+#nav li.active ul{
+    left: -5px;
+}
+#nav li ul li a{
+    -webkit-border-radius: 	3px;
+    -moz-border-radius: 		3px;
+    border-radius: 					3px;
+    font-size: 10px;
+    background: #aaa;
+    margin: 0;
+    padding: 3px 5px;
+}
 .hint p{
     font-size: 1.4em;
     text-align: center;
@@ -525,27 +525,32 @@ h2#logo2{
 
 
 @media only screen and (max-device-width: 480px) {
+/*@media only screen and (max-width: 480px) {*/
     /* insert styles here */
     .desktop-only{
         display:none;
+    }
+    .mobile-only{
+        display:block;
     }
     h2#logo2{
         display: none;
     }
     #nav{
-        margin-top:500px;
-        position: relative;
+        margin-top:225px;
+        position: relative !important;
         display: block;
         width: 100%;
     }
     #nav ul{
         margin: 0;
         padding: 0;
-
     }
 
     #nav li{
         display: block;
+        width:100% !important;
+        margin-top:0px !important;
     }
     #nav ul li a{
         font-size: 2.4em;
@@ -563,6 +568,9 @@ h2#logo2{
         width: 100% !important;
         margin: 0 auto !important;
     }
+    #home img{
+        width: 90%;
+    }
 
     *{
         opacity: 1;
@@ -571,20 +579,28 @@ h2#logo2{
 
         opacity: 1 !important;
         width: auto !important;
-        margin: 150px 20px !important;
+        margin: 50px 20px !important;
+    }
+    .step h1{
+        font-size:32px;
     }
     .step p{
-        font-size: 40px;
+        font-size: 24px;
+        text-align:justify !important;
+    }
+    .step p.center{
+        text-align:center !important;
     }
 
     #about.step{
-        margin-top:
+        margin-top: 0px !important;
+        margin-bottom:0px !important;
     }
     .greyBack{
 
     }
     #fi{
-        padding-top: 700px;
+        padding-top: 500px;
     }
 
     .hint{
@@ -602,6 +618,9 @@ h2#logo2{
     #testimonials div p{
         text-align: left;
     }
+    #testimonials div img{
+        width:100%;
+    }
 
     p.center{
         text-align: center;
@@ -611,9 +630,9 @@ h2#logo2{
         top: 500px;
     }
 
-    #blog .breyButton{
+    #blog .greyButton{
         width: auto;
-        margin: 50px;
+        text-align: center;
     }
     #play-pause{
         display: none;
@@ -624,28 +643,28 @@ h2#logo2{
 
 
 @media only screen and (max-width : 1020px) {
-	#nav>ul{
-		text-align: center;
-		right: auto;
-		height: 70px;
-	}
-	#nav>ul>li{
-		margin-top: 35px;
-		width: 16%;
+    #nav>ul{
+        text-align: center;
+        right: auto;
+        height: 70px;
+    }
+    #nav>ul>li{
+        margin-top: 35px;
+        width: 16%;
 
-	}
-		#nav>ul>li>a{
-			font-size: 0.8em;
-		}
+    }
+    #nav>ul>li>a{
+        font-size: 0.8em;
+    }
 
-		#nav>ul>li.active>ul{
-			left: -70%;
-		}
+    #nav>ul>li.active>ul{
+        left: -70%;
+    }
 
 }
 @media only screen and (max-width : 750px) {
-	#nav>ul>li{
-		font-size: 12px;
-	}
+    #nav>ul>li{
+        font-size: 12px;
+    }
 
 }

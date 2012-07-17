@@ -192,7 +192,12 @@
 
             <div id="contact" class="testimonials greyBack step"  data-z="3200" data-y="400" data-rotate-x="0">
                 <h1>Contact Us</h1>
-                <p class="center"><a href="mailto:josh@func-i.com">info@func-i.com</a> | <a class="mobile-only" href="tel:+16474058994">647.405.8994</a><a class="desktop-only" href="callto:+16474058994">647.405.8994</a></p>
+                <p class="center">
+                    <a href="mailto:josh@func-i.com">info@func-i.com</a>
+                    <span class="desktop-only">|</span>
+                    <a class="mobile-only" href="tel:+16474058994">647.405.8994</a>
+                    <a class="desktop-only" href="callto:+16474058994">647.405.8994</a>
+                </p>
                 <p class="center">#300 - 862 Richmond Street West, Toronto, Ontario</p>
 
 
@@ -264,6 +269,7 @@
             }
 
             function supportJImpress(){
+                return false;
                 console.log(navigator.userAgent);
                 if(navigator.userAgent.search('Linux') >= 0)
                     return false;
