@@ -524,8 +524,8 @@ h2#logo2{
 
 
 
-/*@media only screen and (max-device-width: 480px) {*/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-device-width: 480px) {
+/*@media only screen and (max-width: 480px) {*/
     /* insert styles here */
     .desktop-only{
         display:none;
@@ -589,10 +589,10 @@ h2#logo2{
         margin: 50px 20px !important;
     }
     .step h1{
-        font-size:32px;
+        font-size:24px;
     }
     .step p{
-        font-size: 24px;
+        font-size: 18px;
         text-align:justify !important;
     }
     .step p.center{
