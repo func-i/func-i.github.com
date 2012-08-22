@@ -1,83 +1,86 @@
-*{
-	opacity: 1;
+body.jimpress-not-supported *{
+    opacity: 1;
 }
-.step{
-	margin: 200px auto;
-	opacity: 1 !important;
-	clear: both;
+body.jimpress-not-supported .step{
+    margin: 100px auto 0px auto;
+    opacity: 1 !important;
+    clear: both;
 }
-.greyBack{
-	filter:inherit;
-	background: #E0E0E0 url(../images/bg.png) repeat-x bottom;
-	-webkit-border-radius: 	20px;
-	-moz-border-radius: 		20px;
-	border-radius: 					20px;
-	behavior: url(PIE.htc);
+body.jimpress-not-supported .step p.justify{
+    text-align:left;
+}
+body.jimpress-not-supported .greyBack{
+    filter:inherit;
+    background: #E0E0E0 url(../images/bg.png) repeat-x bottom;
+    -webkit-border-radius: 	20px;
+    -moz-border-radius: 		20px;
+    border-radius: 					20px;
+    behavior: url(PIE.htc);
 
 }
 
-#home{
-	text-align: center;
+body.jimpress-not-supported #home{
+    text-align: center;
 }
-.hint{
-	display: none;
+body.jimpress-not-supported .hint{
+    display: none;
 }
-#global-next, #global-prev {
-	display: none;
+body.jimpress-not-supported #global-next, body.jimpress-not-supported #global-prev {
+    display: none;
 }
-#nav{
-	position: fixed;
-	top: 0px;
-	width: 100%;
-	background: #e1e1e1;
-	height: 35px;
-	z-index: 1000;
+body.jimpress-not-supported #nav{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background: #e1e1e1;
+    height: 35px;
+    z-index: 1000;
 }
-#testimonials{
-	width: 800px;
+body.jimpress-not-supported #testimonials{
+    width: 800px;
 }
-	#testimonials #play-pause{
-		margin: 20px auto;
-		display: block;
-	}
-	
-p.center{
-	text-align: center;
+body.jimpress-not-supported #testimonials #play-pause{
+    margin: 20px auto;
+    display: block;
 }
 
-#about{
-	margin-bottom: 400px;
+body.jimpress-not-supported p.center{
+    text-align: center;
 }
 
-#testimonials{
-	
-}
-	#testimonials .step{
-		margin: 50px 0;
-	}
-
-#profiles{
-	margin-top: 400px;
-}
-	#profiles .step{
-		float: left;
-		width: 250px;
-		clear: none;
-		margin: 50px 20px 150px;
-
-	}
-		#profiles .step img{
-			margin: 0 0 10px;
-			display: block;
-		}
-#contact{
-	margin-bottom: 800px;
+body.jimpress-not-supported #about{
+    /*margin-bottom: 400px;*/
 }
 
+body.jimpress-not-supported #testimonials{
 
-#nav li a{
- 		behavior: url(PIE.htc);
- 		letter-spacing: 1px;
+}
+body.jimpress-not-supported #testimonials .step{
+    margin: 50px 0;
+}
+
+body.jimpress-not-supported #profiles{
+    margin-top: 620px;
+}
+body.jimpress-not-supported #profiles .step{
+    float: left;
+    width: 250px;
+    clear: none;
+    margin: 50px 20px 50px;
+
+}
+body.jimpress-not-supported #profiles .step img{
+    margin: 0 0 10px;
+    display: block;
+}
+body.jimpress-not-supported #contact{
+    margin-bottom: 800px;
+}
+
+
+body.jimpress-not-supported #nav li a{
+    behavior: url(PIE.htc);
+    letter-spacing: 1px;
 
 }
 
