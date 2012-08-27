@@ -2,43 +2,14 @@
 <html>
     <head>
         <title>Functional Imperative</title>
-        <style>
-            body{
-                font-family: 'Lucida Bright';
-                /*                background-color: #4A555C;
-                                color:white;
-                */
-                background-color: white;
-                color:#414141;
 
-            }
-            .logo{
-                padding-top: 365px; /* height of the replacement image */
-                height: 0px;
-                overflow: hidden;
-                background-image: url('img/logo.png');
-                background-repeat: no-repeat;
-                width: 840px;
-                margin: 0 auto;
-            }
-            .tag-line{
-                font-size: 32px;
-                text-align: center;
-                /*font-family: monaco;*/
-            }
-            .contact{
-                font-size: 24px;
-                text-align: center;
-                /*font-family: monaco;*/
-                padding-top:100px;
-            }
-            .contact a{
-                color:#FF833C;
-                /*font-weight: bold;*/
-                text-decoration: none;
-            }
-        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+        <link href="css/fi.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="js/fi.js"></script>
 
         <script type="text/javascript">
 
@@ -51,19 +22,130 @@
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-
         </script>
+
+
 
     </head>
     <body>
-        <h1 class="logo">Functional Imperative</h1>
-        <div class="tag-line">
-            We Build Experiences for the New Web
-        </div>
-        <div class="contact">
-            For an informal chat, please <a href="mailto:josh@functionalimperative.com">Contact Us</a>
-        </div>
+      <div id="header">
+        <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a class="brand" href="#">FunctionalImperative</a>
 
-        <div id="footer">&nbsp;</div>
+              <ul class="nav pull-right">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Mission</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="splash_page">
+        <div class="container">
+
+          <div class="row">
+            <div class="span12">
+              <div class="centerer">
+                <div class="positioner">
+                  <h1 class="headline">We build experiences for the new web.</h1>
+                  <h3 class="subheadline">
+                    <a href="#contact-us" class="contact-us-btn">Contact Us</a> to see what we can build for you.
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="mission_page">
+        <div class="container">
+
+          <div class="row">
+            <div class="span6 offset1">
+              <h2 class="headline">Our Mission...</h2>
+              <p class="text">
+                We are a boutique web design & development agency based in Toronto. Our focus on launching early and iterating often helps entrepreneurs and established businesses alike validate their ideas and facilitates the transition from idea, through prototype, all the way to viral adoption.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="work">
+        <div class="container">
+          <div class="row">
+
+            <div class="span4 offset1">
+              <div class="text-holder">
+                <h2 class="headline">Hammerati</h2>
+                <p class="text">uKnowa hired.....</p>
+                <a href="www.hammerati.com" class="url">www.hammerati.com</a>
+              </div>
+            </div>
+
+            <div class="span7">
+              <img src="http://placehold.it/1500x1500"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="team">
+        <div class="container">
+          <div class="row">
+          </div>
+        </div>
+      </div>
+
+      <div id="contact_us">
+        <div class="container">
+          <div class="row">
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">
+        <div class="container">
+
+          <div class="row">
+            <div class="span12">
+              <h4 class="headline">FunctionalImperative</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span5">
+              <ol>
+                <li>Having or serving a ulitarian purpose; capable of serving the purpose for which it was designed</li>
+                <li>Absolutely necessary or required; unavoidable</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="navbar navbar-bottom">
+            <div class="navbar-inner">
+                <ul class="nav pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Mission</a></li>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+
+        </div>
+      </div>
+
+
+
     </body>
 </html>
