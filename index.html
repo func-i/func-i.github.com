@@ -9,7 +9,11 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
         <link href="css/fi.css" rel="stylesheet" type="text/css" />
 
+        <link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
         <script type="text/javascript" src="js/fi.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
 
         <script type="text/javascript">
 
@@ -23,9 +27,6 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-
-
-
     </head>
     <body>
       <div id="header">
@@ -35,11 +36,11 @@
               <a class="brand" href="#">FunctionalImperative</a>
 
               <ul class="nav pull-right">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Mission</a></li>
-                <li><a href="#">Work</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#splash" class="inline-link">Home</a></li>
+                <li><a href="#mission" class="inline-link">Mission</a></li>
+                <li><a href="#work" class="inline-link">Work</a></li>
+                <li><a href="#team" class="inline-link">Team</a></li>
+                <li><a href="#contact_us" class="inline-link">Contact</a></li>
                 <li><a href="#">Blog</a></li>
               </ul>
 
@@ -48,16 +49,16 @@
         </div>
       </div>
 
-      <div id="splash_page">
+      <div id="splash">
         <div class="container">
 
           <div class="row">
             <div class="span12">
               <div class="centerer">
                 <div class="positioner">
-                  <h1 class="headline">We build experiences for the new web.</h1>
+                  <h1>We build experiences for the new web.</h1>
                   <h3 class="subheadline">
-                    <a href="#contact-us" class="contact-us-btn">Contact Us</a> to see what we can build for you.
+                    <a href="#contact_us" class="inline-link contact-us-btn">Contact Us</a> to see what we can build for you.
                   </h3>
                 </div>
               </div>
@@ -66,12 +67,12 @@
         </div>
       </div>
 
-      <div id="mission_page">
+      <div id="mission">
         <div class="container">
 
           <div class="row">
             <div class="span6 offset1">
-              <h2 class="headline">Our Mission...</h2>
+              <h1>Our Mission...</h1>
               <p class="text">
                 We are a boutique web design & development agency based in Toronto. Our focus on launching early and iterating often helps entrepreneurs and established businesses alike validate their ideas and facilitates the transition from idea, through prototype, all the way to viral adoption.
               </p>
@@ -82,27 +83,91 @@
       </div>
 
       <div id="work">
+        <div class="screenshots">
+          <div class="positioner">
+            <img src="img/hammerati_screenshot.png"></img>
+          </div>
+        </div>
+
         <div class="container">
           <div class="row">
 
-            <div class="span4 offset1">
+            <div class="span1 left-arrow"></div>
+            <div class="span3">
               <div class="text-holder">
-                <h2 class="headline">Hammerati</h2>
-                <p class="text">uKnowa hired.....</p>
-                <a href="www.hammerati.com" class="url">www.hammerati.com</a>
+                <div class="work">
+                  <h2 class="headline">Hammerati</h2>
+                  <p class="text">uKnowa hired.....</p>
+                  <a href="www.hammerati.com" class="url">www.hammerati.com</a>
+                </div>
+                <div class="work">
+                  <h2 class="headline">Span6</h2>
+                  <p class="text">Span6 hired.....</p>
+                  <a href="www.hammerati.com" class="url">www.span6.com</a>
+                </div>
+                <div class="work">
+                  <h2 class="headline">SocialStreet</h2>
+                  <p class="text">SocialStreet hired.....</p>
+                  <a href="www.hammerati.com" class="url">www.SocialStreet.com</a>
+                </div>
               </div>
             </div>
-
-            <div class="span7">
-              <img src="http://placehold.it/1500x1500"></img>
-            </div>
+            <div class="span1 right-arrow"></div>
           </div>
         </div>
       </div>
 
       <div id="team">
         <div class="container">
-          <div class="row">
+          <div class="thumbs">
+            <div class="positioner">
+              <img src="img/team_member_thumb.png" data-index="0"></img>
+              <img src="img/team_member_thumb.png" data-index="1"></img>
+              <img src="img/team_member_thumb.png" data-index="2"></img>
+              <img src="img/team_member_thumb.png" data-index="3"></img>
+              <img src="img/team_member_thumb.png" data-index="4"></img>
+              <div class="selector"></div>
+            </div>
+          </div>
+
+          <div class="slider-container">
+            <div class="left-arrow"></div>
+            <div class="right-arrow"></div>
+
+            <div class="visible-container">
+              <div class="team-container">
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Josh</h3>
+                  <h5>Co-Founder & CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Josh</h3>
+                  <h5>Co-Founder & CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Josh</h3>
+                  <h5>Co-Founder & CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Josh</h3>
+                  <h5>Co-Founder & CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Josh</h3>
+                  <h5>Co-Founder & CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -110,6 +175,18 @@
       <div id="contact_us">
         <div class="container">
           <div class="row">
+            <div class="span3 offset1">
+              <div class="text-holder">
+                <div class="bookmark"></div>
+                <h4 class="headline">FunctionalImperative</h4>
+                <p class="text">Get in touch with us to hear how we can solve all your problems and make you dream of world peace</p>
+                <a href='mailto:info@func-i.com' class="email">info@func-i.com</a>
+                <div class="phone-number">647.405.8994</div>
+                <div class="office-headline">Head Office</div>
+                <div>#300 - 862 Richmond Street West,</div>
+                <div>Toronto, Ontario, Canada</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,18 +211,18 @@
           <div class="navbar navbar-bottom">
             <div class="navbar-inner">
                 <ul class="nav pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Mission</a></li>
-              <li><a href="#">Work</a></li>
-              <li><a href="#">Team</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-
+                  <li><a href="#splash" class="inline-link">Home</a></li>
+                  <li><a href="#mission" class="inline-link">Mission</a></li>
+                  <li><a href="#work" class="inline-link">Work</a></li>
+                  <li><a href="#team" class="inline-link">Team</a></li>
+                  <li><a href="#contact_us" class="inline-link">Contact</a></li>
+                  <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-
-
-    </body>
+    </div>
+  </body>
 </html>
