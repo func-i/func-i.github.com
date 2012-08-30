@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Functional Imperative</title>
+        <title>FunctionalImperative</title>
 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
@@ -33,13 +34,14 @@
         <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
             <div class="container">
-              <a class="brand" href="#">FunctionalImperative</a>
+              <a class="brand large-brand" href="#">FunctionalImperative</a>
+              <a class="brand small-brand" href="#"></a>
 
               <ul class="nav pull-right">
                 <li><a href="#splash" class="inline-link">Home</a></li>
                 <li><a href="#mission" class="inline-link">Mission</a></li>
                 <li><a href="#work" class="inline-link">Work</a></li>
-                <li><a href="#team" class="inline-link">Team</a></li>
+                <li><a href="#team" class="inline-link" style="display:none">Team</a></li>
                 <li><a href="#contact_us" class="inline-link">Contact</a></li>
                 <li><a href="#">Blog</a></li>
               </ul>
@@ -49,76 +51,89 @@
         </div>
       </div>
 
-      <div id="splash">
+      <div id="splash" class="section">
         <div class="container">
 
           <div class="row">
-            <div class="span12">
-              <div class="centerer">
-                <div class="positioner">
-                  <h1>We build experiences for the new web.</h1>
-                  <h3 class="subheadline">
-                    <a href="#contact_us" class="inline-link contact-us-btn">Contact Us</a> to see what we can build for you.
-                  </h3>
-                </div>
+            <div class="centerer">
+              <div class="positioner">
+                <h1>We build experiences for the new web.</h1>
+                <h3 class="subheadline">
+                  <a href="#contact_us" class="inline-link contact-us-btn">Contact Us</a> to see what we can build for you.
+                </h3>
               </div>
             </div>
           </div>
         </div>
+
+        <img src='img/fi_header_scientist.png' id="scientist"></img>
       </div>
 
-      <div id="mission">
-        <div class="container">
-
-          <div class="row">
-            <div class="span6 offset1">
+      <div id="mission" class="section">
+          <div class="text-container">
               <h1>Our Mission...</h1>
               <p class="text">
                 We are a boutique web design & development agency based in Toronto. Our focus on launching early and iterating often helps entrepreneurs and established businesses alike validate their ideas and facilitates the transition from idea, through prototype, all the way to viral adoption.
               </p>
-
-            </div>
           </div>
-        </div>
       </div>
 
-      <div id="work">
+      <div id="work" class="section">
         <div class="screenshots">
           <div class="positioner">
-            <img src="img/hammerati_screenshot.png"></img>
+            <img src="img/fi_projects_sstreet.png"></img>
+            <img src="img/fi_projects_span6.png"></img>
+            <img src="img/fi_projects_hammerati.png"></img>
+            <!--img src="img/fi_projects_cdling.png"></img>
+            <img src="img/fi_projects_equib.png"></img-->
           </div>
         </div>
 
-        <div class="container">
+        <div class="container text-container">
           <div class="row">
-
-            <div class="span1 left-arrow"></div>
-            <div class="span3">
+            <div class="left-arrow"></div>
               <div class="text-holder">
-                <div class="work">
+
+                <div class="work-text">
+                  <h2 class="headline">SocialStreet</h2>
+                  <p class="text">SocialStreet facilitates real world interactions by helping you find things to do with the people around you.</p>
+                  <p class="text">Entirely designed and built by FunctionalImperative, SocialStreet is an AJAX heavy user-experience that put the focus of an inherently location-based application right where it should be.</p>
+                  <a href="www.socialstreet.com" class="url">www.socialstreet.com</a>
+                </div>
+
+                <div class="work-text">
+                  <h2 class="headline">Span6</h2>
+                  <p class="text">Span6 is a cutting-edge Online Marketing & Sales platform that enables advertisers to easily channel traffic from affiliate campaigns, convert visitors into leads and track performance through the entire process.</p>
+                  <p class="text">Built from the ground up by FunctionalImperative, the work continues as Span6 grows into its market leading position.</p>
+                  <a href="www.span6.com" class="url">www.span6.com</a>
+                </div>
+
+                <div class="work-text">
                   <h2 class="headline">Hammerati</h2>
-                  <p class="text">uKnowa hired.....</p>
+                  <p class="text">uKnowa originally hired Fi to design the API for their Hammerati product. This partnership was quickly expanded to their entire process as they were able to realize dramatic improvements in development velocity.</p>
+                  <p class="text">With strong momentum and Fi's help, uKnowa is poised to disrupt the entire construction industry.</p>
                   <a href="www.hammerati.com" class="url">www.hammerati.com</a>
                 </div>
-                <div class="work">
+
+                <!--div class="work-text">
                   <h2 class="headline">Span6</h2>
                   <p class="text">Span6 hired.....</p>
                   <a href="www.hammerati.com" class="url">www.span6.com</a>
                 </div>
-                <div class="work">
+
+                <div class="work-text">
                   <h2 class="headline">SocialStreet</h2>
                   <p class="text">SocialStreet hired.....</p>
                   <a href="www.hammerati.com" class="url">www.SocialStreet.com</a>
-                </div>
+                </div!-->
               </div>
-            </div>
-            <div class="span1 right-arrow"></div>
+            <div class="right-arrow"></div>
           </div>
         </div>
       </div>
 
-      <div id="team">
-        <div class="container">
+      <div id="team" class="section" style="display:none">
+        <div class="centerer">
           <div class="thumbs">
             <div class="positioner">
               <img src="img/team_member_thumb.png" data-index="0"></img>
@@ -138,32 +153,35 @@
               <div class="team-container">
                 <div class="member">
                   <img src="img/team_member_holder.png"></img>
-                  <h3>Josh</h3>
-                  <h5>Co-Founder & CEO</h5>
+                  <h3>Josh Borts</h3>
+                  <h5>Co-Founder &amp; CEO</h5>
+                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
+                  <p>Having moved back to Canada at the start of 2011, he started FunctionalImperative to continue his drive to work with business that want to change the world.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Khurram Virani</h3>
+                  <h5>Co-Founder &amp; Lead Developer</h5>
+                  <p>Co-Founder &amp; Lead Developer, Khurram has worked in web development for most of the past decade. He brings the experience and expertise necessary to deliver the amazing experiences that today's web products demand.</p>
+                  <p>When not working, Khurram is a professional yodeler, having competed internationally but has yet to win a single medal.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Jon Salis</h3>
+                  <h5>Senior Developer</h5>
+                  <p>Jon Salis is a software developer with a decade of experience, five of those were spent focusing on Ruby and Rails. After working as the lead developer for an Ontario natural gas company, he has joined our team as a senior Ruby developer.</p>
+                  <p>When he is not contributing to open source projects or giving guest lectures at local colleges, you can find him having a beer after a competitive hockey game.</p>
+                </div>
+                <div class="member">
+                  <img src="img/team_member_holder.png"></img>
+                  <h3>Jason Jang</h3>
+                  <h5>Front-End Developer </h5>
                   <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
                 </div>
                 <div class="member">
                   <img src="img/team_member_holder.png"></img>
-                  <h3>Josh</h3>
-                  <h5>Co-Founder & CEO</h5>
-                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
-                </div>
-                <div class="member">
-                  <img src="img/team_member_holder.png"></img>
-                  <h3>Josh</h3>
-                  <h5>Co-Founder & CEO</h5>
-                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
-                </div>
-                <div class="member">
-                  <img src="img/team_member_holder.png"></img>
-                  <h3>Josh</h3>
-                  <h5>Co-Founder & CEO</h5>
-                  <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
-                </div>
-                <div class="member">
-                  <img src="img/team_member_holder.png"></img>
-                  <h3>Josh</h3>
-                  <h5>Co-Founder & CEO</h5>
+                  <h3>Mike Hutchinson</h3>
+                  <h5>Senior Designer</h5>
                   <p>Josh grew up in Montreal and studied computer engineering at Waterloo. His nomadic, adventurous & inquisitive nature has led him to work, live and travel around the world.</p>
                 </div>
               </div>
@@ -172,55 +190,49 @@
         </div>
       </div>
 
-      <div id="contact_us">
-        <div class="container">
-          <div class="row">
-            <div class="span3 offset1">
-              <div class="text-holder">
-                <div class="bookmark"></div>
-                <h4 class="headline">FunctionalImperative</h4>
-                <p class="text">Get in touch with us to hear how we can solve all your problems and make you dream of world peace</p>
-                <a href='mailto:info@func-i.com' class="email">info@func-i.com</a>
-                <div class="phone-number">647.405.8994</div>
-                <div class="office-headline">Head Office</div>
-                <div>#300 - 862 Richmond Street West,</div>
-                <div>Toronto, Ontario, Canada</div>
-              </div>
-            </div>
-          </div>
+      <div id="contact_us" class="section">
+        <div class="text-holder">
+          <div class="bookmark"></div>
+          <h4 class="headline">FunctionalImperative</h4>
+          <p class="text">Get in touch with us to hear how we can solve all your problems and make you dream of world peace</p>
+          <a href='mailto:info@func-i.com' class="email">info@func-i.com</a>
+          <div class="phone-number">647.405.8994</div>
+          <div class="office-headline">Head Office</div>
+          <div>#300 - 862 Richmond Street West,</div>
+          <div>Toronto, Ontario, Canada</div>
         </div>
       </div>
 
-      <div id="footer">
+      <div id="footer" class="section">
         <div class="container">
-
           <div class="row">
             <div class="span12">
               <h4 class="headline">FunctionalImperative</h4>
             </div>
           </div>
           <div class="row">
-            <div class="span5">
+            <div class="definition">
               <ol>
                 <li>Having or serving a ulitarian purpose; capable of serving the purpose for which it was designed</li>
                 <li>Absolutely necessary or required; unavoidable</li>
               </ol>
             </div>
           </div>
+        </div>
 
-          <div class="navbar navbar-bottom">
-            <div class="navbar-inner">
-                <ul class="nav pull-right">
-                  <li><a href="#splash" class="inline-link">Home</a></li>
-                  <li><a href="#mission" class="inline-link">Mission</a></li>
-                  <li><a href="#work" class="inline-link">Work</a></li>
-                  <li><a href="#team" class="inline-link">Team</a></li>
-                  <li><a href="#contact_us" class="inline-link">Contact</a></li>
-                  <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
+        <div class="navbar navbar-bottom">
+          <div class="navbar-inner">
+            <ul class="nav pull-right">
+              <li><a href="#splash" class="inline-link">Home</a></li>
+              <li><a href="#mission" class="inline-link">Mission</a></li>
+              <li><a href="#work" class="inline-link">Work</a></li>
+              <li><a href="#team" class="inline-link" style="display:none">Team</a></li>
+              <li><a href="#contact_us" class="inline-link">Contact</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
           </div>
         </div>
+
       </div>
 
     </div>

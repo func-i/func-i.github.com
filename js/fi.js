@@ -43,50 +43,100 @@ $(function(){
 });
 
 function slideWork(isSlideLeft){
+  var imageHeight = $('#work .screenshots img').outerHeight(true);
+  var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
 
+  if(isSlideLeft)
+    slideWorkTo(currentPosition - 1, isSlideLeft);
+  else
+    slideWorkTo(currentPosition + 1, isSlideLeft);
+
+}
+
+function slideWorkTo(slideTo, isSlideLeft){
+  var imageHeight = $('#work .screenshots img').outerHeight(true);
+  var imageWidth = $('#work .screenshots img').outerWidth(true);
+  var maxPosition = $('#work .screenshots img').length - 1;
+  var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
+
+  //Rollover
+  if(slideTo < 0)
+    slideTo = maxPosition;
+  else if(slideTo > maxPosition)
+    slideTo = 0;
+
+  var firstLeft, secondLeft, firstAnimation, secondAnimation;
+  if(isSlideLeft){
+    firstLeft = -imageWidth;
+    secondLeft = $(window).width();
+    firstAnimation = 'easeOutCubic';
+    secondAnimation = 'easeOutCubic';
+  }
+  else{
+    firstLeft = $(window).width();
+    secondLeft = -imageWidth;
+    firstAnimation = 'easeOutCubic';
+    secondAnimation = 'easeOutCubic';
+  }
+
+
+  $('#work .screenshots .positioner').animate({
+    left: firstLeft
+  }, 300, firstAnimation, function(){
+    $('#work .screenshots .positioner').css({
+      left: secondLeft,
+      top: -slideTo*imageHeight
+    });
+    $('#work .screenshots .positioner').animate({
+      left: 300
+    }, 800, secondAnimation);
+  });
+
+  $('#work .work-text:visible').hide();
+  $($('#work .work-text').get(slideTo)).fadeIn(900);
 }
 
 
 function slideTeam(isSlideLeft){
-    var memberWidth = $('#team .member').outerWidth(true);
-    var currentPosition = -$('#team .team-container').position().left / memberWidth;
+  var memberWidth = $('#team .member').outerWidth(true);
+  var currentPosition = -$('#team .team-container').position().left / memberWidth;
 
-    //TODO on resize, hide arrows, resize container
+  //TODO on resize, hide arrows, resize container
 
-    if(isSlideLeft)
-      slideTeamTo(currentPosition - 1);
-    else
-      slideTeamTo(currentPosition + 1);
+  if(isSlideLeft)
+    slideTeamTo(currentPosition - 1);
+  else
+    slideTeamTo(currentPosition + 1);
 
 }
 
 function slideTeamTo(slideTo){
-    var memberWidth = $('#team .member').outerWidth(true);
-    var thumbWidth = $('#team .thumbs img').outerWidth(true);
-    var membersPerPage = $('#team .visible-container').width() / memberWidth;
-    var maxPosition = $('#team .member').length - membersPerPage;
-    var currentPosition = -$('#team .team-container').position().left / memberWidth;
+  var memberWidth = $('#team .member').outerWidth(true);
+  var thumbWidth = $('#team .thumbs img').outerWidth(true);
+  var membersPerPage = $('#team .visible-container').width() / memberWidth;
+  var maxPosition = $('#team .member').length - membersPerPage;
+  var currentPosition = -$('#team .team-container').position().left / memberWidth;
 
-    //Rollover
-    var speed = 600;
-    if(slideTo < 0){
-      slideTo = maxPosition;
-      speed = 200;
-    }
-    else if(slideTo > maxPosition){
-      slideTo = 0;
-      speed = 200;
-    }
+  //Rollover
+  var speed = 600;
+  if(slideTo < 0){
+    slideTo = maxPosition;
+    speed = 200;
+  }
+  else if(slideTo > maxPosition){
+    slideTo = 0;
+    speed = 200;
+  }
 
-    if(slideTo != currentPosition){
-      $('#team .team-container').animate({left: -slideTo * memberWidth}, speed);
-      $('#team .positioner .selector').animate({left: (slideTo * thumbWidth + 2.5)}, speed);
-    }
+  if(slideTo != currentPosition){
+    $('#team .team-container').animate({left: -slideTo * memberWidth}, speed);
+    $('#team .positioner .selector').animate({left: (slideTo * thumbWidth + 2.5)}, speed);
+  }
 }
 
 function setNavAlpha(w){
-    var navAlpha = 0.8 - 0.3 * (180 - $(w).scrollTop()) / 180;
-    navAlpha = navAlpha > 0.8 ? 0.8 : navAlpha;
+    var navAlpha = 0.9 - 0.3 * (180 - $(w).scrollTop()) / 180;
+    navAlpha = navAlpha > 0.9 ? 0.9 : navAlpha;
     $('#header .navbar-inner').css('background-color', 'rgba(228,25,16,' + navAlpha + ')');
 }
 
