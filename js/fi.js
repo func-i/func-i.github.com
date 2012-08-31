@@ -1,6 +1,11 @@
 $(function(){
+  scrollSpy();
+  setNavAlpha();
+
   $(window).scroll(function(){
     setNavAlpha(this);
+    setHeroAlpha(this);
+    scrollScientist(this);
     scrollSpy(this);
   });
 
@@ -43,7 +48,7 @@ $(function(){
 });
 
 function slideWork(isSlideLeft){
-  var imageHeight = $('#work .screenshots img').outerHeight(true);
+  var imageHeight = $('#work .screenshots .positioner div').outerHeight(true);
   var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
 
   if(isSlideLeft)
@@ -54,9 +59,9 @@ function slideWork(isSlideLeft){
 }
 
 function slideWorkTo(slideTo, isSlideLeft){
-  var imageHeight = $('#work .screenshots img').outerHeight(true);
-  var imageWidth = $('#work .screenshots img').outerWidth(true);
-  var maxPosition = $('#work .screenshots img').length - 1;
+  var imageHeight = $('#work .screenshots .positioner div').outerHeight(true);
+  var imageWidth = $('#work .screenshots .positioner div').outerWidth(true);
+  var maxPosition = $('#work .screenshots .positioner div').length - 1;
   var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
 
   //Rollover
@@ -135,9 +140,31 @@ function slideTeamTo(slideTo){
 }
 
 function setNavAlpha(w){
-    var navAlpha = 0.9 - 0.3 * (180 - $(w).scrollTop()) / 180;
+    var navAlpha = 0.9 - 0.6 * (700 - $(w).scrollTop()) / 700;
     navAlpha = navAlpha > 0.9 ? 0.9 : navAlpha;
     $('#header .navbar-inner').css('background-color', 'rgba(228,25,16,' + navAlpha + ')');
+}
+
+function setHeroAlpha(w){
+  var alpha = (400 - $(w).scrollTop())/400;
+  $('#splash_text .container').css('opacity', alpha);
+}
+
+function scrollScientist(w){
+  /*var top = $(w).scrollTop() - 350;
+  top = top < 0 ? 0 : top;
+  $('#scientist').css('top', -top);*/
+
+  if($(w).scrollTop() > 700)
+    $('#scientist').css({
+      'position': 'absolute',
+      'top': 700
+    });
+  else
+    $('#scientist').css({
+      'position': 'fixed',
+      'top': 0
+    });
 }
 
 //Assumes nav links are in order of content on page

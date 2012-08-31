@@ -127,55 +127,70 @@ h1{
 
 #splash{
   height: 700px;
-  background-color: rgba(228,25,16, 1);
-  background: url('../img/fi_header_orange.gif');
   z-index:1;
 }
-#splash #scientist{
+#splash_background{
   position: fixed;
-  top: 0;
-  right: 10px;
-}
-#splash > .container{
-  position: fixed;
+  background-color: rgba(228,25,16, 1);
+  background: url('../img/fi_header_orange.gif');
   top: 0px;
   left: 0px;
   z-index:1;
-  height: 750px;
+  height: 700px;
   width: 100%;
 }
-#splash > .container > .row {
+#splash_text{
+  position: fixed;
+  height: 700px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+#scientist{
+  position: fixed;
+  top: 0;
+  right: 0px;
+  z-index: 8;
+}
+
+#splash_text > .container{
+  height: 700px;
+  width: 100%;
+}
+#splash_text > .container > .row {
   margin: 0px;
 }
-#splash .centerer .positioner{
+#splash_text .centerer .positioner{
   position: relative;
   display: inline-block;
+  z-index: 9;
 }
-#splash h1 {
+#splash_text h1 {
   margin-top: 250px;
   margin-bottom: 0px;
   display: inline-block;
 }
-#splash h3{
+#splash_text h3{
     position: absolute;
     right: 0px;
     font-size: 16px;
 }
 @media (max-width: 979px) {
-  #splash h1{font-size: 36px;}
+  #splash_text h1{font-size: 36px;}
 }
 @media (max-width: 767px) {
-  #splash h1{font-size: 30px;}
-  #splash h3{
+  #splash_text h1{font-size: 30px;}
+  #splash_text h3{
     font-size: 14px;
     margin-top: 0px;
   }
 }
 @media (max-width: 650px) {
-  #splash h1{font-size: 24px;}
-  #splash h3{font-size: 12px;}
+  #splash_text h1{font-size: 24px;}
+  #splash_text h3{font-size: 12px;}
 }
-#splash .subheadline .contact-us-btn{
+#splash_text .subheadline .contact-us-btn{
   padding: 5px 10px;
   color: rgba(228,25,16, 1);
   background-color: rgba(255, 255, 255, 1);
@@ -194,20 +209,47 @@ h1{
   border-top: 1px solid rgba(228,25,16,1);
   background-color: white;
   background: url('../img/fi_header_white.jpeg');
+  z-index: 7;
 }
-#mission .text-container{
-  width: 350px;
-  margin-left: 80px;
+@media (max-width: 767px) {
+  #mission{
+    z-index: 10;
+  }
 }
-@media (max-width: 767px) { #mission .text-container{margin:auto;}}
-@media (min-width: 1200px) { #mission .text-container{width:450px;}}
 
-#mission h1{
-  margin-top: 150px;
+#mission_text{
+  width: 350px;
+  position: absolute;
+  top: 850px;
+  left: 80px;
+  z-index: 11;
+}
+@media (min-width: 1000px){
+  #mission_text{
+    width: 450px;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  #mission_text{
+    width: 250px;
+    left: 20px;
+    top: 770px;
+  }
+}
+@media (max-width: 767px) {
+  #mission_text{
+    width: 400px;
+    left: 50px;
+    top: 820px
+  }
+}
+
+
+#mission_text h1{
   margin-bottom: 50px;
   color: rgba(228,25,16, 1);
 }
-#mission .text{
+#mission_text .text{
   color: #555;
   font-size: 16px;
 }
@@ -220,7 +262,6 @@ h1{
   background-image: -o-linear-gradient(top, #232224, #000000);
   background-image: linear-gradient(to bottom, #232224, #000000);
   border-top: 1px solid rgba(228,25,16,1);
-  z-index: 1;
 }
 #work .screenshots{
   height: 700px;
@@ -235,7 +276,7 @@ h1{
   position: absolute;
   left: 300px;
 }
-#work .screenshots img{
+#work .screenshots div{
   width: 1280px;
   height: 700px;
 }
