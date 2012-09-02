@@ -150,8 +150,23 @@ h1{
 #scientist{
   position: fixed;
   top: 30px;
-  right: -50px;
+  right: 0px;
   z-index: 8;
+}
+@media (min-width: 1000px){
+  #scientist{
+    right: 50px;
+  }
+}
+@media (min-width: 768px) and (max-width: 999px) {
+  #scientist{
+    right: 0px;
+  }
+}
+@media (max-width: 767px) {
+  #scientist{
+    right: 50px;
+  }
 }
 
 #splash_text > .container{

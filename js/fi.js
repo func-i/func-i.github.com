@@ -158,14 +158,14 @@ function scrollScientist(w){
     $('#scientist').css({
       'position': 'absolute',
       'top': 554,
-      'right':0
+      'right': ''
 
     });
   else
     $('#scientist').css({
       'position': 'fixed',
       'top': 30,
-      'right':0
+      'right':''
     });
 }
 
