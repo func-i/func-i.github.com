@@ -63,6 +63,7 @@ function slideWorkTo(slideTo, isSlideLeft){
   var imageWidth = $('#work .screenshots .positioner div').outerWidth(true);
   var maxPosition = $('#work .screenshots .positioner div').length - 1;
   var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
+  var currentLeft = $('#work .screenshots .positioner').position().left;
 
   //Rollover
   if(slideTo < 0)
@@ -83,18 +84,20 @@ function slideWorkTo(slideTo, isSlideLeft){
     firstAnimation = 'easeOutCubic';
     secondAnimation = 'easeOutCubic';
   }
-
+  firstAnimation = secondAnimation = 'linear';//TEMP
 
   $('#work .screenshots .positioner').animate({
     left: firstLeft
   }, 300, firstAnimation, function(){
-    $('#work .screenshots .positioner').css({
-      left: secondLeft,
-      top: -slideTo*imageHeight
-    });
+    $('#work .screenshots .positioner').css({left: secondLeft});
+    $('#work .screenshots .positioner').removeClass('work-0 work-1 work-2 work-3');
+    $('#work .screenshots .positioner').addClass('work-' + slideTo);
+
     $('#work .screenshots .positioner').animate({
-      left: 300
-    }, 800, secondAnimation);
+      left: currentLeft
+    }, 800, secondAnimation, function(){
+        $('#work .screenshots .positioner').css('left', '');
+    });
   });
 
   $('#work .work-text:visible').hide();
@@ -146,24 +149,23 @@ function setNavAlpha(w){
 }
 
 function setHeroAlpha(w){
-  var alpha = (400 - $(w).scrollTop())/400;
+  var alpha = (300 - $(w).scrollTop())/300;
   $('#splash_text .container').css('opacity', alpha);
 }
 
 function scrollScientist(w){
-  /*var top = $(w).scrollTop() - 350;
-  top = top < 0 ? 0 : top;
-  $('#scientist').css('top', -top);*/
-
-  if($(w).scrollTop() > 700)
+  if($(w).scrollTop() > 524)
     $('#scientist').css({
       'position': 'absolute',
-      'top': 700
+      'top': 554,
+      'right':0
+
     });
   else
     $('#scientist').css({
       'position': 'fixed',
-      'top': 0
+      'top': 30,
+      'right':0
     });
 }
 
