@@ -535,12 +535,12 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 }
 
 #footer{
-  height: 370px;
+  height: 250px;
   background-color: black;
   border-top: 1px solid rgba(228,25,16,1);
 }
 #footer .headline{
-  margin-top: 80px;
+  margin-top: 40px;
   padding-bottom: 15px;
   margin-bottom: 20px;
   color: white;
@@ -564,7 +564,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   background: url('../img/footer_two.png') no-repeat;
 }
 #footer .navbar{
-  margin-top: 90px;
+  margin-top: 0px;
   margin-bottom: 0px;
 }
 #footer .navbar .navbar-inner{
