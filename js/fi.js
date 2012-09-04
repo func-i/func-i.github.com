@@ -84,7 +84,7 @@ function slideWorkTo(slideTo, isSlideLeft){
     firstAnimation = 'easeOutCubic';
     secondAnimation = 'easeOutCubic';
   }
-  firstAnimation = secondAnimation = 'linear';//TEMP
+  //firstAnimation = secondAnimation = 'linear';//TEMP
 
   $('#work .screenshots .positioner').animate({
     left: firstLeft
@@ -150,7 +150,11 @@ function setNavAlpha(w){
 
 function setHeroAlpha(w){
   var alpha = (300 - $(w).scrollTop())/300;
-  $('#splash_text .container').css('opacity', alpha);
+  $('#splash_text .container').fadeTo(0, alpha);
+  if(alpha <= 0)
+    $('#splash_text .container').hide();
+  else
+    $('#splash_text .container').show();
 }
 
 function scrollScientist(w){
@@ -191,6 +195,6 @@ function scrollSpy(w){
 
 function setNavToActive(a){
   $('.navbar ul.nav > li.active').removeClass('active');
-  $(a).closest('li').addClass('active');
+  $('#header .navbar ul.nav > li > a[href="' + $(a).attr('href') + '"]').closest('li').addClass('active');
   $('#footer .navbar ul.nav > li > a[href="' + $(a).attr('href') + '"]').closest('li').addClass('active');
 }
