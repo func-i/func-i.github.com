@@ -581,6 +581,11 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 #footer .definition{
   width: 470px;
 }
+@media (max-width: 475px){
+  #footer .definition{
+    width: 375px;
+  }
+}
 #footer .definition > ol {
   list-style-type: none;
 }
