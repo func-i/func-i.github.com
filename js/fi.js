@@ -18,10 +18,10 @@ $(function(){
 
   //Work slider
   $('#work .left-arrow').click(function(){
-    slideWork(true);
+    slideWork(false);
   });
   $('#work .right-arrow').click(function(){
-    slideWork(false);
+    slideWork(true);
   });
 
 
