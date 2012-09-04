@@ -2,7 +2,17 @@ $(function(){
   scrollSpy();
   setNavAlpha();
 
-  document.addEventListener("touchmove", scrolling, false);
+  $(document).bind('touchmove', function(){
+    e.preventDefault();
+    console.log('doc touch move');
+    scrolling();
+  });
+  $(window).bind('touchmove', function(){
+    e.preventDefault();
+    console.log('window touch move');
+    scrolling();
+  });
+
   $(window).scroll(function(){
     scrolling();
   });
