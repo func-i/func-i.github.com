@@ -2,11 +2,9 @@ $(function(){
   scrollSpy();
   setNavAlpha();
 
+  document.addEventListener("touchmove", scrolling, false);
   $(window).scroll(function(){
-    setNavAlpha(this);
-    setHeroAlpha(this);
-    scrollScientist(this);
-    scrollSpy(this);
+    scrolling();
   });
 
   //Make nav links scroll so the whole section is visible (include header height)
@@ -46,6 +44,13 @@ $(function(){
 
   });
 });
+
+function scrolling(){
+    setNavAlpha(window);
+    setHeroAlpha(window);
+    scrollScientist(window);
+    scrollSpy(window);
+}
 
 function slideWork(isSlideLeft){
   var imageHeight = $('#work .screenshots .positioner div').outerHeight(true);
