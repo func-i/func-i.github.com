@@ -2,19 +2,38 @@ $(function(){
   scrollSpy();
   setNavAlpha();
 
-  $(document).bind('touchmove', function(){
-    e.preventDefault();
-    console.log('doc touch move');
-    scrolling();
+  var lastTouchY;
+  var lastScrollTop = $(window).scrollTop();
+  /*window.addEventListener("touchstart", function(e){
+    lastTouchY = e.changedTouches[0].pageY;
+    console.log('touchStart ' + lastTouchY);
   });
-  $(window).bind('touchmove', function(){
-    e.preventDefault();
-    console.log('window touch move');
-    scrolling();
+  window.addEventListener('touchmove', function(e){
+    if(undefined == e.changedTouches[0])
+      return;
+    console.log('touchMove ' + e.changedTouches[0].pageY);
+    var move  = lastTouchY - e.changedTouches[0].pageY;
+    console.log('Move ' + move);
+    //if(move < 0) move = -move;
+    lastScrollTop = lastScrollTop + move;
+    console.log('MoveScrollTop ' + lastScrollTop);
+    lastTouchY = e.changedTouches[0].pageY;
+    scrolling(lastScrollTop);
+  });*/
+  $(window).bind('touchstart', function(e){
+    console.log('touchstart ' + e.originalEvent.targetTouches[0].pageY);
+  });
+  var endCoords = {};
+  $(document.body).bind("touchmove", function(event) {
+    endCoords = event.originalEvent.targetTouches[0];
+  });
+  $(window).bind('touchend', function(e){
+    console.log('touchend ' + endCoords.pageY);
   });
 
   $(window).scroll(function(){
-    scrolling();
+    console.log("ScrollTop " + $(window).scrollTop());
+    scrolling($(window).scrollTop());
   });
 
   //Make nav links scroll so the whole section is visible (include header height)
@@ -55,11 +74,11 @@ $(function(){
   });
 });
 
-function scrolling(){
-    setNavAlpha(window);
-    setHeroAlpha(window);
-    scrollScientist(window);
-    scrollSpy(window);
+function scrolling(scrollTop){
+    setNavAlpha(scrollTop);
+    setHeroAlpha(scrollTop);
+    scrollScientist(scrollTop);
+    scrollSpy(scrollTop);
 }
 
 function slideWork(isSlideLeft){
@@ -157,14 +176,14 @@ function slideTeamTo(slideTo){
   }
 }
 
-function setNavAlpha(w){
-    var navAlpha = 0.9 - 0.6 * (700 - $(w).scrollTop()) / 700;
+function setNavAlpha(scrollTop){
+    var navAlpha = 0.9 - 0.6 * (700 - scrollTop) / 700;
     navAlpha = navAlpha > 0.9 ? 0.9 : navAlpha;
     $('#header .navbar-inner').css('background-color', 'rgba(228,25,16,' + navAlpha + ')');
 }
 
-function setHeroAlpha(w){
-  var alpha = (300 - $(w).scrollTop())/300;
+function setHeroAlpha(scrollTop){
+  var alpha = (300 - scrollTop)/300;
   $('#splash_text .container').fadeTo(0, alpha);
   if(alpha <= 0)
     $('#splash_text .container').hide();
@@ -172,8 +191,8 @@ function setHeroAlpha(w){
     $('#splash_text .container').show();
 }
 
-function scrollScientist(w){
-  if($(w).scrollTop() > 524)
+function scrollScientist(scrollTop){
+  if(scrollTop > 584)
     $('#scientist').css({
       'position': 'absolute',
       'top': 554,
@@ -183,14 +202,14 @@ function scrollScientist(w){
   else
     $('#scientist').css({
       'position': 'fixed',
-      'top': 30,
+      'top': -30,
       'right':''
     });
 }
 
 //Assumes nav links are in order of content on page
-function scrollSpy(w){
-  var halfwayPoint = $(this).scrollTop() + $(window).height() / 2;
+function scrollSpy(scrollTop){
+  var halfwayPoint = scrollTop + $(window).height() / 2;
   var lastLink = null;
   var set = false;
 

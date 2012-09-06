@@ -43,7 +43,7 @@ h1{
   min-height:50px;
   background-image: none;
   background-color: rgb(228,25,16);
-  background-color: rgba(228,25,16,0.7);
+  background-color: rgba(228,25,16,0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7FE41910,endColorstr=#7FE41910);
   border:0px;
   -webkit-border-radius: 0px;
@@ -90,7 +90,7 @@ h1{
   text-shadow: none;
   padding: 5px 10px;
   margin: 5px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .navbar .nav > li.active > a{
   background-color: rgb(193, 16, 25);
@@ -159,7 +159,7 @@ h1{
 }
 #scientist{
   position: fixed;
-  top: 30px;
+  top: -30px;
   right: 0px;
   z-index: 8;
 }
@@ -200,6 +200,7 @@ h1{
     position: absolute;
     right: 0px;
     font-size: 16px;
+    font-weight: normal;
 }
 @media (max-width: 979px) {
   #splash_text h1{font-size: 36px;}
@@ -277,8 +278,6 @@ h1{
   }
 
 }
-
-
 #mission_text h1{
   margin-bottom: 50px;
   color: rgb(228,25,16);
@@ -286,6 +285,7 @@ h1{
 #mission_text .text{
   color: #555;
   font-size: 16px;
+  line-height: 30px;
 }
 
 #work{
@@ -308,7 +308,7 @@ h1{
 #work .screenshots .positioner{
   width: 1114px;
   position: absolute;
-  left: 150px;
+  left: 290px;
 }
 #work .screenshots .positioner.work-0{ top: 0px; }
 #work .screenshots .positioner.work-1{ top: -700px; }
@@ -351,10 +351,12 @@ h1{
   color: black;
   font-size: 26px;
   margin-top: 0px;
+  font-weight: normal;
 }
 #work .text-holder .text{
   color: #555;
   font-size: 14px;
+  line-height: 21px;
 }
 #work .text-holder .url{
   color: rgb(228,25,16);
@@ -499,7 +501,8 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 
 #contact_us{
   height: 634px;
-  background: url("http://maps.google.com/maps/api/staticmap?center=43.644479,-79.412279&zoom=16&markers=color:red|label:F|43.644479,-79.412279&size=1000x500&sensor=false&scale=2") no-repeat center;
+/*  background: url("http://maps.google.com/maps/api/staticmap?center=43.644479,-79.  412279&zoom=16&markers=color:red|label:F|43.644479,-79.412279&size=1000x500&sensor=false&scale=2") no-repeat center;*/
+  background: url("../img/contact_map.jpeg") no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -519,17 +522,18 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   -webkit-box-shadow: 3px 3px 10px 3px rgba(255,255,255,0.7);
   box-shadow:         3px 3px 10px 3px rgb(255,255,255);
   box-shadow:         3px 3px 10px 3px rgba(255,255,255,0.7);
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 21px;
   color: rgb(255,255,255);
   color: rgba(255,255,255,0.8);
 }
-@media (max-width: 979px){#contact_us .text-holder{margin-left: 70px;}}
+/*@media (max-width: 979px){#contact_us .text-holder{margin-left: 70px;}}
 @media (max-width: 767px){
   #contact_us .text-holder{
     margin-left: 10px;
     width: 190px;
   }
-}
+}*/
 #contact_us .bookmark{
   width:75px;
   height: 60px;
@@ -562,14 +566,30 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   font-weight: 600;
   color: rgb(255,255,255);
 }
+@media (max-width: 767px) {
+  #contact_us .text-holder{ margin-left: 50px;}
+}
+@media (max-width: 670px) {
+  #contact_us .text-holder{
+    margin: 60px auto;
+    height: 150px;
+  }
+  #contact_us .headline{
+    margin-top: 0;
+  }
+  #contact_us .bookmark, #contact_us .text{
+    display: none;
+  }
+}
+
 
 #footer{
-  height: 250px;
+  height: 290px;
+  padding-top:80px;
   background-color: black;
   border-top: 1px solid rgb(228,25,16);
 }
 #footer .headline{
-  margin-top: 40px;
   padding-bottom: 15px;
   margin-bottom: 20px;
   color: white;
@@ -599,7 +619,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   background: url('../img/footer_one.png') no-repeat;
 }
 #footer .navbar{
-  margin-top: 0px;
+  margin-top: 50px;
   margin-bottom: 0px;
 }
 #footer .navbar .navbar-inner{
