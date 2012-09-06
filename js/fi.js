@@ -170,20 +170,21 @@ function setHeroAlpha(scrollTop){
 }
 
 function scrollScientist(scrollTop){
-/*  if(scrollTop > 584){
-    $('#scientist').css({
-      'position': 'absolute',
-      'top': 554,
-      'right': ''
-
-    });
+  if($(window).width() > 480){
+    if(scrollTop > 584){
+      $('#scientist').css({
+        'position': 'absolute',
+        'top': 554,
+        'right': ''
+      });
+    }
+    else
+      $('#scientist').css({
+        'position': 'fixed',
+        'top': -30,
+        'right':''
+      });
   }
-  else
-    $('#scientist').css({
-      'position': 'fixed',
-      'top': -30,
-      'right':''
-    });*/
 }
 
 //Assumes nav links are in order of content on page
