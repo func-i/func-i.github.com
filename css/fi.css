@@ -119,19 +119,25 @@ h1{
     margin-right: 0px;
     margin-left: 0px;
   }
+}
+@media (max-width: 480px) {
   .navbar .nav > li > a,
   .navbar .nav > li.active > a{
-/*    margin-left: 0;
+    margin-left: 0;
     margin-right: 0;
     padding-left: 7px;
-    padding-right: 7px;*/
+    padding-right: 7px;
   }
-
 }
+
 
 #splash{
   height: 580px;
   z-index:1;
+}
+body{
+  background-color: rgb(228,25,16);
+  background: url('../img/fi_header_orange.gif');
 }
 #splash_background{
   position: fixed;
@@ -178,6 +184,14 @@ h1{
     right: 50px;
   }
 }
+@media (max-width: 480px) {
+  #scientist{
+    position: absolute;
+    left: 150px;
+    top: 0px;
+   /* display: none;*/
+  }
+}
 
 #splash_text > .container{
   height: 700px;
@@ -216,6 +230,13 @@ h1{
   #splash_text h1{font-size: 24px;}
   #splash_text h3{font-size: 12px;}
 }
+@media (max-width: 480px) {
+  #splash_text h1{
+    margin-top: 150px;
+    font-size: 18px;
+  }
+  #splash_text h3{font-size: 12px;}
+}
 #splash_text .subheadline .contact-us-btn{
   padding: 5px 10px;
   color: rgb(228,25,16);
@@ -234,12 +255,21 @@ h1{
   height: 462px;
   border-top: 1px solid rgb(228,25,16);
   background-color: white;
-  background: url('../img/fi_header_white.jpeg');
+  background: url('../img/fi_header_white.jpeg') no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   z-index: 7;
 }
 @media (max-width: 767px) {
   #mission{
     z-index: 10;
+  }
+}
+@media (max-width: 480px) {
+  #mission{
+    width: 480px;
   }
 }
 
@@ -276,11 +306,15 @@ h1{
     margin: 0 50px;
     text-align: center;
   }
-
 }
 #mission_text h1{
   margin-bottom: 50px;
   color: rgb(228,25,16);
+}
+@media (max-width: 480px) {
+  #mission_text{
+    width: 480px;
+  }
 }
 #mission_text .text{
   color: #555;
@@ -392,6 +426,12 @@ h1{
     top: 250px;
   }
 }
+@media (max-width: 480px) {
+  #work{
+    width: 480px;
+  }
+}
+
 
 #team{
   height: 900px;
@@ -509,6 +549,12 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   background-size: cover;
   border-top: 1px solid rgb(228,25,16);
 }
+@media (max-width: 480px) {
+  #contact_us{
+    width: 480px;
+  }
+}
+
 #contact_us .text-holder{
   height:350px;
   width: 230px;
@@ -589,6 +635,12 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   background-color: black;
   border-top: 1px solid rgb(228,25,16);
 }
+@media (max-width: 480px) {
+  #footer{
+    width: 480px;
+  }
+}
+
 #footer .headline{
   padding-bottom: 15px;
   margin-bottom: 20px;

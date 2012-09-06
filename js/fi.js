@@ -2,37 +2,15 @@ $(function(){
   scrollSpy();
   setNavAlpha();
 
+  console.log($('#mission_text').width());
+
   var lastTouchY;
   var lastScrollTop = $(window).scrollTop();
-  /*window.addEventListener("touchstart", function(e){
-    lastTouchY = e.changedTouches[0].pageY;
-    console.log('touchStart ' + lastTouchY);
-  });
-  window.addEventListener('touchmove', function(e){
-    if(undefined == e.changedTouches[0])
-      return;
-    console.log('touchMove ' + e.changedTouches[0].pageY);
-    var move  = lastTouchY - e.changedTouches[0].pageY;
-    console.log('Move ' + move);
-    //if(move < 0) move = -move;
-    lastScrollTop = lastScrollTop + move;
-    console.log('MoveScrollTop ' + lastScrollTop);
-    lastTouchY = e.changedTouches[0].pageY;
-    scrolling(lastScrollTop);
-  });*/
-  $(window).bind('touchstart', function(e){
-    console.log('touchstart ' + e.originalEvent.targetTouches[0].pageY);
-  });
-  var endCoords = {};
-  $(document.body).bind("touchmove", function(event) {
-    endCoords = event.originalEvent.targetTouches[0];
-  });
-  $(window).bind('touchend', function(e){
-    console.log('touchend ' + endCoords.pageY);
-  });
 
+  $(window).bind("touchmove", function(event) {
+    scrolling(window.scrollY);
+  });
   $(window).scroll(function(){
-    console.log("ScrollTop " + $(window).scrollTop());
     scrolling($(window).scrollTop());
   });
 
@@ -192,19 +170,20 @@ function setHeroAlpha(scrollTop){
 }
 
 function scrollScientist(scrollTop){
-  if(scrollTop > 584)
+/*  if(scrollTop > 584){
     $('#scientist').css({
       'position': 'absolute',
       'top': 554,
       'right': ''
 
     });
+  }
   else
     $('#scientist').css({
       'position': 'fixed',
       'top': -30,
       'right':''
-    });
+    });*/
 }
 
 //Assumes nav links are in order of content on page
