@@ -2,17 +2,13 @@ $(function(){
   scrollSpy();
   setNavAlpha();
 
-  console.log($('#mission_text').width());
-
-  var lastTouchY;
-  var lastScrollTop = $(window).scrollTop();
-
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
   });
   $(window).scroll(function(){
     scrolling($(window).scrollTop());
   });
+  scrolling($(window).scrollTop());
 
   //Make nav links scroll so the whole section is visible (include header height)
   $('.inline-link').click(function(e){
