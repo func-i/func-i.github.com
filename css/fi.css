@@ -479,7 +479,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 @media (min-width: 1550px) {#team .thumbs .selector{width: 188px;}}
 #team .slider-container{
   margin: 50px auto 0 auto;
-  height: 600px;
+  height: 750px;
   position: relative;
 }
 /*350 per image. Media query to adjust this*/
@@ -489,7 +489,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 @media (min-width: 1550px) {#team .slider-container{width: 1400px;}}
 
 #team .visible-container{
-  height: 600px;
+  height: 750px;
   overflow: hidden;
   position: relative;
 }
@@ -505,14 +505,14 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   top: 300px;
 }
 #team .team-container{
-  height: 600px;
+  height: 750px;
   width: 3000px;/*Large number to fit all the members*/
   position:absolute;
   left: 0;
 }
 #team .team-container .member{
   width: 300px;
-  height: 600px;
+  height: 750px;
   margin: 0 25px;
   float: left;
 }

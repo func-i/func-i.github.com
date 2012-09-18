@@ -1,6 +1,7 @@
 $(function(){
   scrollSpy();
   setNavAlpha();
+  checkTeamArrows();
 
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
@@ -9,6 +10,10 @@ $(function(){
     scrolling($(window).scrollTop());
   });
   scrolling($(window).scrollTop());
+
+  $(window).resize(function(){
+    slideTeamTo(0);
+  });
 
   //Make nav links scroll so the whole section is visible (include header height)
   $('.inline-link').click(function(e){
@@ -117,13 +122,26 @@ function slideTeam(isSlideLeft){
   var memberWidth = $('#team .member').outerWidth(true);
   var currentPosition = -$('#team .team-container').position().left / memberWidth;
 
-  //TODO on resize, hide arrows, resize container
-
   if(isSlideLeft)
     slideTeamTo(currentPosition - 1);
   else
     slideTeamTo(currentPosition + 1);
 
+}
+
+function checkTeamArrows(){
+  var memberWidth = $('#team .member').outerWidth(true);
+  var membersPerPage = $('#team .visible-container').width() / memberWidth;
+  var maxPosition = $('#team .member').length - membersPerPage;
+
+  if(0 == maxPosition){
+    $('#team .left-arrow').hide();
+    $('#team .right-arrow').hide();
+  }
+  else{
+    $('#team .left-arrow').show();
+    $('#team .right-arrow').show();
+  }
 }
 
 function slideTeamTo(slideTo){
@@ -132,6 +150,8 @@ function slideTeamTo(slideTo){
   var membersPerPage = $('#team .visible-container').width() / memberWidth;
   var maxPosition = $('#team .member').length - membersPerPage;
   var currentPosition = -$('#team .team-container').position().left / memberWidth;
+
+  checkTeamArrows();
 
   //Rollover
   var speed = 600;
