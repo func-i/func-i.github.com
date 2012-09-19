@@ -1,7 +1,7 @@
 $(function(){
   scrollSpy();
   setNavAlpha();
-  checkTeamArrows();
+  checkTeamOnResize();
 
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
@@ -12,7 +12,7 @@ $(function(){
   scrolling($(window).scrollTop());
 
   $(window).resize(function(){
-    slideTeamTo(0);
+    checkTeamOnResize();
   });
 
   //Make nav links scroll so the whole section is visible (include header height)
@@ -129,10 +129,14 @@ function slideTeam(isSlideLeft){
 
 }
 
-function checkTeamArrows(){
+function checkTeamOnResize(){
   var memberWidth = $('#team .member').outerWidth(true);
   var membersPerPage = $('#team .visible-container').width() / memberWidth;
   var maxPosition = $('#team .member').length - membersPerPage;
+  var currentPosition = -$('#team .team-container').position().left / memberWidth;
+
+  if(currentPosition > maxPosition)
+    slideTeamTo(maxPosition);
 
   if(0 == maxPosition){
     $('#team .left-arrow').hide();
@@ -146,12 +150,18 @@ function checkTeamArrows(){
 
 function slideTeamTo(slideTo){
   var memberWidth = $('#team .member').outerWidth(true);
+  var currentPosition = -Math.ceil($('#team .team-container').position().left / memberWidth);
+
+  console.log(slideTo, currentPosition);
+
+  if(slideTo == currentPosition)
+    return;
+
+  console.log('Sliding');
+
   var thumbWidth = $('#team .thumbs img').outerWidth(true);
   var membersPerPage = $('#team .visible-container').width() / memberWidth;
-  var maxPosition = $('#team .member').length - membersPerPage;
-  var currentPosition = -$('#team .team-container').position().left / memberWidth;
-
-  checkTeamArrows();
+  var maxPosition = Math.floor($('#team .member').length - membersPerPage);
 
   //Rollover
   var speed = 600;
@@ -164,10 +174,8 @@ function slideTeamTo(slideTo){
     speed = 200;
   }
 
-  if(slideTo != currentPosition){
-    $('#team .team-container').animate({left: -slideTo * memberWidth}, speed);
-    $('#team .positioner .selector').animate({left: (slideTo * thumbWidth + 2.5)}, speed);
-  }
+  $('#team .team-container').stop().animate({left: -slideTo * memberWidth}, speed);
+  $('#team .positioner .selector').stop().animate({left: (slideTo * thumbWidth + 2.5)}, speed);
 }
 
 function setNavAlpha(scrollTop){
