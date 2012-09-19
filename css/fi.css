@@ -58,6 +58,11 @@ h1{
   padding-top: 10px;
   padding-bottom: 5px;
 }
+@media (min-width: 1200px){
+  .navbar .navbar-inner .container{
+    width: 1024px;
+  }
+}
 .navbar .brand{
   background: url('../img/logo_title_notext.png') no-repeat;
 }
@@ -231,7 +236,7 @@ body{
   #splash_text h1{font-size: 24px;}
   #splash_text h3{font-size: 12px;}
 }
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   #splash_text h1{
     margin-top: 150px;
     font-size: 18px;
