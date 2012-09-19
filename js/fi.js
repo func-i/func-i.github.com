@@ -152,12 +152,8 @@ function slideTeamTo(slideTo){
   var memberWidth = $('#team .member').outerWidth(true);
   var currentPosition = -Math.ceil($('#team .team-container').position().left / memberWidth);
 
-  console.log(slideTo, currentPosition);
-
   if(slideTo == currentPosition)
     return;
-
-  console.log('Sliding');
 
   var thumbWidth = $('#team .thumbs img').outerWidth(true);
   var membersPerPage = $('#team .visible-container').width() / memberWidth;
