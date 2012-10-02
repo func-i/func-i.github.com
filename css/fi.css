@@ -209,6 +209,7 @@ body{
 #splash_text h1 {
   margin-top: 250px;
   margin-bottom: 0px;
+  font-size: 39px;
   display: inline-block;
 }
 #splash_text h3{
@@ -219,29 +220,36 @@ body{
 }
 @media (min-width: 1200px){
   #splash_text h1{
-    font-size: 49px;
+    font-size: 38px;
   }
 }
-@media (max-width: 979px) {
-  #splash_text h1{font-size: 36px;}
+@media (max-width: 1005px) {
+  #splash_text h1{font-size: 34px;}
+}
+@media (max-width: 890px) {
+  #splash_text h1{font-size: 30px;}
 }
 @media (max-width: 767px) {
-  #splash_text h1{font-size: 30px;}
+  #splash_text h1{font-size: 25px;}
   #splash_text h3{
     font-size: 14px;
     margin-top: 0px;
   }
 }
 @media (max-width: 650px) {
-  #splash_text h1{font-size: 24px;}
+  #splash_text h1{font-size: 19px;}
   #splash_text h3{font-size: 12px;}
 }
 @media (max-width: 500px) {
   #splash_text h1{
     margin-top: 150px;
-    font-size: 18px;
+    font-size: 32px;
   }
-  #splash_text h3{font-size: 12px;}
+  #splash_text h3{
+    font-size: 12px;
+    position: static;
+    text-align: center;
+  }
 }
 #splash_text .subheadline .contact-us-btn{
   padding: 5px 10px;
