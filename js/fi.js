@@ -97,7 +97,7 @@ function slideWorkTo(slideTo, isSlideLeft){
     firstAnimation = 'easeOutCubic';
     secondAnimation = 'easeOutCubic';
   }
-  firstAnimation = secondAnimation = 'linear';//TEMP
+  //firstAnimation = secondAnimation = 'linear';//TEMP
 
   $('#work .screenshots .positioner').animate({
     left: firstLeft
