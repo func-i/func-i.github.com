@@ -51,11 +51,11 @@ $(function(){
       slideTeamTo(slideTo);
 
   });
-  $('#team .team-container .member').mouseenter(function(){
-    $(this).find('.member-top').addClass('open');
+  $('#team .team-container .member img').mouseenter(function(){
+    $(this).parent().find('.member-top').addClass('open');
   });
   $('#team .team-container .member').mouseleave(function(){
-    $(this).find('.member-top').removeClass('open');
+    $(this).parent().find('.member-top').removeClass('open');
   });
 });
 

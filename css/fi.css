@@ -143,6 +143,7 @@ h1{
 body{
   background-color: rgb(228,25,16);
   background: url('../img/fi_header_orange.gif');
+  background-attachment: fixed;
 }
 #scientist{
   position: fixed;
