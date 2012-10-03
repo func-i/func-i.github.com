@@ -51,6 +51,12 @@ $(function(){
       slideTeamTo(slideTo);
 
   });
+  $('#team .team-container .member').mouseenter(function(){
+    $(this).find('.member-top').addClass('open');
+  });
+  $('#team .team-container .member').mouseleave(function(){
+    $(this).find('.member-top').removeClass('open');
+  });
 });
 
 function scrolling(scrollTop){

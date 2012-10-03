@@ -478,6 +478,8 @@ body{
   margin: 0 auto;
   text-align: center;
   margin-top: 50px;
+  position:absolute;
+  width: 100%;
 }
 #team .thumbs img{
   margin-left: 10px;
@@ -514,8 +516,8 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 @media (min-width: 1200px) {#team .thumbs .selector{width: 141px;}}
 @media (min-width: 1550px) {#team .thumbs .selector{width: 188px;}}
 #team .slider-container{
-  margin: 50px auto 0 auto;
-  height: 750px;
+  margin: 0 auto;
+  height: 900px;
   position: relative;
 }
 /*350 per image. Media query to adjust this*/
@@ -525,7 +527,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 @media (min-width: 1550px) {#team .slider-container{width: 1400px;}}
 
 #team .visible-container{
-  height: 750px;
+  height: 900px;
   overflow: hidden;
   position: relative;
 }
@@ -545,17 +547,28 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   width: 3000px;/*Large number to fit all the members*/
   position:absolute;
   left: 0;
+  margin-top:150px;
 }
 #team .team-container .member{
   width: 300px;
   height: 750px;
   margin: 0 25px;
   float: left;
+  position: relative;
 }
 #team .team-container .member img{
   margin: 0 auto;
   text-align: center;
   display: block;
+  position:relative;
+  z-index: 1;
+}
+#team .team-container .member img.member-top{
+  z-index:10;
+  -webkit-transition: all 1s ease-in-out;
+}
+#team .team-container .member img.member-top.open{
+  -webkit-transform: rotate(-50deg);
 }
 #team .team-container .member h3{
   text-align: center;
