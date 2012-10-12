@@ -188,28 +188,32 @@ function setNavAlpha(scrollTop){
 
 function setHeroAlpha(scrollTop){
   var alpha = (300 - scrollTop)/300;
-  $('#splash_text .container').fadeTo(0, alpha);
   if(alpha <= 0)
     $('#splash_text .container').hide();
-  else
+  else{
+    $('#splash_text .container').fadeTo(0, alpha);
     $('#splash_text .container').show();
+  }
 }
 
 function scrollScientist(scrollTop){
   if($(window).width() > 480){
     if(scrollTop > 584){
-      $('#scientist').css({
-        'position': 'absolute',
-        'top': 554,
-        'right': ''
-      });
+      if($('#scientist').css('position') != 'absolute'){
+        $('#scientist').css({
+          'position': 'absolute',
+          'top': 604,
+          'right': ''
+        });
+      }
     }
-    else
+    else if($('#scientist').css('position') != 'fixed'){
       $('#scientist').css({
         'position': 'fixed',
-        'top': -30,
+        'top': 20,
         'right':''
       });
+    }
   }
 }
 
