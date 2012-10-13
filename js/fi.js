@@ -190,7 +190,7 @@ function slideTeamTo(slideTo){
       'transform': translateString,
       '-webkit-transition': transitionString,
       '-moz-transition': transitionString,
-      '-o-transition': transitionString
+      '-o-transition': transitionString,
       'transition': transitionString
     });
     translateString = 'translateX(' + (slideTo * thumbWidth + 2.5) + 'px)';
@@ -201,7 +201,7 @@ function slideTeamTo(slideTo){
       'transform': translateString,
       '-webkit-transition': transitionString,
       '-moz-transition': transitionString,
-      '-o-transition': transitionString
+      '-o-transition': transitionString,
       'transition': transitionString
     });
   }
