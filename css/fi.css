@@ -577,9 +577,14 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 #team .team-container .member img.member-top{
   z-index:10;
   -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
 }
 #team .team-container .member img.member-top.open{
   -webkit-transform: rotate(-50deg);
+  -moz-transform: rotate(-50deg);
+  -o-transform: rotate(-50deg);
+  transform: rotate(-50deg);
 }
 #team .team-container .member h3{
   text-align: center;

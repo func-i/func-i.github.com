@@ -105,19 +105,23 @@ function slideWorkTo(slideTo, isSlideLeft){
   }
   //firstAnimation = secondAnimation = 'linear';//TEMP
 
-  $('#work .screenshots .positioner').animate({
-    left: firstLeft
-  }, 300, firstAnimation, function(){
-    $('#work .screenshots .positioner').css({left: secondLeft});
-    $('#work .screenshots .positioner').removeClass('work-0 work-1 work-2 work-3');
-    $('#work .screenshots .positioner').addClass('work-' + slideTo);
-
+  if(false && Modernizr.csstransitions){
+  }
+  else{
     $('#work .screenshots .positioner').animate({
-      left: currentLeft
-    }, 800, secondAnimation, function(){
-        $('#work .screenshots .positioner').css('left', '');
+      left: firstLeft
+    }, 300, firstAnimation, function(){
+      $('#work .screenshots .positioner').css({left: secondLeft});
+      $('#work .screenshots .positioner').removeClass('work-0 work-1 work-2 work-3');
+      $('#work .screenshots .positioner').addClass('work-' + slideTo);
+
+      $('#work .screenshots .positioner').animate({
+        left: currentLeft
+      }, 800, secondAnimation, function(){
+          $('#work .screenshots .positioner').css('left', '');
+      });
     });
-  });
+  }
 
   $('#work .work-text:visible').hide();
   $($('#work .work-text').get(slideTo)).fadeIn(900);
@@ -176,8 +180,35 @@ function slideTeamTo(slideTo){
     speed = 200;
   }
 
-  $('#team .team-container').stop().animate({left: -slideTo * memberWidth}, speed);
-  $('#team .positioner .selector').stop().animate({left: (slideTo * thumbWidth + 2.5)}, speed);
+  if(Modernizr.csstransitions){
+    var translateString = 'translateX(' + -slideTo * memberWidth + 'px)';
+    var transitionString = 'all ' + speed + 'ms linear';
+    $('#team .team-container').css({
+      '-webkit-transform': translateString,
+      '-moz-transform': translateString,
+      '-o-transform': translateString,
+      'transform': translateString,
+      '-webkit-transition': transitionString,
+      '-moz-transition': transitionString,
+      '-o-transition': transitionString
+      'transition': transitionString
+    });
+    translateString = 'translateX(' + (slideTo * thumbWidth + 2.5) + 'px)';
+    $('#team .positioner .selector').css({
+      '-webkit-transform': translateString,
+      '-moz-transform': translateString,
+      '-o-transform': translateString,
+      'transform': translateString,
+      '-webkit-transition': transitionString,
+      '-moz-transition': transitionString,
+      '-o-transition': transitionString
+      'transition': transitionString
+    });
+  }
+  else{
+    $('#team .team-container').stop().animate({left: -slideTo * memberWidth}, speed);
+    $('#team .positioner .selector').stop().animate({left: (slideTo * thumbWidth + 2.5)}, speed);
+  }
 }
 
 function setNavAlpha(scrollTop){
@@ -238,7 +269,11 @@ function scrollSpy(scrollTop){
 }
 
 function setNavToActive(a){
+  var href = $(a).attr('href');
+  var header = $('#header .navbar ul.nav > li > a[href="' + href + '"]').closest('li');
+  var footer = $('#footer .navbar ul.nav > li > a[href="' + href + '"]').closest('li');
+
   $('.navbar ul.nav > li.active').removeClass('active');
-  $('#header .navbar ul.nav > li > a[href="' + $(a).attr('href') + '"]').closest('li').addClass('active');
-  $('#footer .navbar ul.nav > li > a[href="' + $(a).attr('href') + '"]').closest('li').addClass('active');
+  header.addClass('active');
+  footer.addClass('active');
 }
