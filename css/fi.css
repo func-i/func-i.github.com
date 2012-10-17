@@ -375,6 +375,7 @@ body{
   background-image: -o-linear-gradient(top, #232224, #000000);
   background-image: linear-gradient(to bottom, #232224, #000000);
   border-top: 1px solid rgb(228,25,16);
+  overflow: hidden;
 }
 #work .screenshots{
   height: 700px;
@@ -383,19 +384,21 @@ body{
   display: inline-block;
   position: absolute;
   z-index: 10;
+  max-width: 3632px; /* ImgWidth*3 (margin each side) + plus the amount we move it left*/
 }
-#work .screenshots .positioner{
-  width: 1114px;
+#work .screenshots .offset{
   position: absolute;
   left: 290px;
+  width: 100%;
 }
-#work .screenshots .positioner.work-0{ top: 0px; }
-#work .screenshots .positioner.work-1{ top: -700px; }
-#work .screenshots .positioner.work-2{ top: -1400px; }
-#work .screenshots .positioner.work-3{ top: -2100px; }
-#work .screenshots div{
+#work .screenshots .positioner{
+  width: 11140px; /* 1114*5 */
+  position: absolute;
+}
+#work .screenshots img{
   width: 1114px;
   height: 700px;
+  margin-right: 1114px;
 }
 #work .text-container{
   position: absolute;
@@ -443,28 +446,22 @@ body{
   font-weight: 600;
   text-decoration: none;
 }
+
 @media (max-width: 767px) {
-  #work .screenshots div img{
-    width: 835px;
-    height: 525px;
-  }
-  #work .screenshots div{
-    width: 835px;
-    height: 525px;
-  }
-  #work .screenshots .positioner{
-    width: 835px;
-    left: 0px;
+  #work{
+    height: 600px;
   }
   #work .screenshots{
     height: 525px;
+    max-width: 2505px; /* ImgWidth*3 (margin each side) + plus the amount we move it left*/
   }
-  #work .screenshots .positioner.work-0{ top: 0px; }
-  #work .screenshots .positioner.work-1{ top: -525px; }
-  #work .screenshots .positioner.work-2{ top: -1050px; }
-  #work .screenshots .positioner.work-3{ top: -1575px; }
-  #work{
-    height: 600px;
+  #work .screenshots .offset{
+    left: 0px;
+  }
+  #work .screenshots img{
+    width: 835px;
+    height: 525px;
+    margin-right: 835px;
   }
   #work .text-container{
     left: -20px;

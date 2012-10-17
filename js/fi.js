@@ -2,6 +2,7 @@ $(function(){
   scrollSpy();
   setNavAlpha();
   checkTeamOnResize();
+  checkWorkOnResize();
 
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
@@ -13,6 +14,7 @@ $(function(){
 
   $(window).resize(function(){
     checkTeamOnResize();
+    checkWorkOnResize();
   });
 
   //Make nav links scroll so the whole section is visible (include header height)
@@ -69,22 +71,18 @@ function scrolling(scrollTop){
 }
 
 function slideWork(isSlideLeft){
-  var imageHeight = $('#work .screenshots .positioner div').outerHeight(true);
-  var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
+  var currentPosition = $('#work .screenshots .positioner').data('currentposition') || 0;
 
   if(isSlideLeft)
-    slideWorkTo(currentPosition - 1, isSlideLeft);
-  else
     slideWorkTo(currentPosition + 1, isSlideLeft);
+  else
+    slideWorkTo(currentPosition - 1, isSlideLeft);
 
 }
 
 function slideWorkTo(slideTo, isSlideLeft){
-  var imageHeight = $('#work .screenshots .positioner div').outerHeight(true);
-  var imageWidth = $('#work .screenshots .positioner div').outerWidth(true);
-  var maxPosition = $('#work .screenshots .positioner div').length - 1;
-  var currentPosition = -$('#work .screenshots .positioner').position().top / imageHeight;
-  var currentLeft = $('#work .screenshots .positioner').position().left;
+  var imageWidth = $('#work .screenshots .positioner img').outerWidth(true) / 2;
+  var maxPosition = $('#work .screenshots .positioner img').length - 1;
 
   //Rollover
   if(slideTo < 0)
@@ -92,41 +90,60 @@ function slideWorkTo(slideTo, isSlideLeft){
   else if(slideTo > maxPosition)
     slideTo = 0;
 
-  var firstLeft, secondLeft, firstAnimation, secondAnimation;
-  if(isSlideLeft){
-    firstLeft = -imageWidth;
-    secondLeft = $(window).width();
-    firstAnimation = 'easeOutCubic';
-    secondAnimation = 'easeOutCubic';
-  }
-  else{
-    firstLeft = $(window).width();
-    secondLeft = -imageWidth;
-    firstAnimation = 'easeOutCubic';
-    secondAnimation = 'easeOutCubic';
-  }
-  //firstAnimation = secondAnimation = 'linear';//TEMP
+  $('#work .screenshots .positioner').data('currentposition', slideTo);
 
-  if(false && Modernizr.csstransitions){
+  var slideLeftAmount = slideTo * imageWidth * 2;
+
+  if(Modernizr.csstransitions){
+    var translateString = 'translateX(' + -slideLeftAmount + 'px)';
+    var transitionString = 'transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000)';
+    $('#work .screenshots .positioner').css({
+      '-webkit-transform': translateString,
+      '-moz-transform': translateString,
+      '-o-transform': translateString,
+      'transform': translateString,
+      '-webkit-transition': '-webkit-' + transitionString,
+      '-moz-transition': '-moz-' + transitionString,
+      '-o-transition': '-o-' + transitionString,
+      'transition': transitionString
+    });
   }
   else{
     $('#work .screenshots .positioner').animate({
-      left: firstLeft
-    }, 300, firstAnimation, function(){
-      $('#work .screenshots .positioner').css({left: secondLeft});
-      $('#work .screenshots .positioner').removeClass('work-0 work-1 work-2 work-3');
-      $('#work .screenshots .positioner').addClass('work-' + slideTo);
-
-      $('#work .screenshots .positioner').animate({
-        left: currentLeft
-      }, 800, secondAnimation, function(){
-          $('#work .screenshots .positioner').css('left', '');
-      });
-    });
+      left: -slideLeftAmount
+    }, 1000, 'easeOutCubic');
   }
 
   $('#work .work-text:visible').hide();
   $($('#work .work-text').get(slideTo)).fadeIn(900);
+
+}
+
+function checkWorkOnResize(){
+  var imageWidth = $('#work .screenshots .positioner img').outerWidth(true) / 2;
+  var currentPosition = $('#work .screenshots .positioner').data('currentposition') || 0;
+
+  var slideLeftAmount = currentPosition * imageWidth * 2;
+
+  if(Modernizr.csstransitions){
+    var translateString = 'translateX(' + -slideLeftAmount + 'px)';
+    var transitionString = 'transform 0s linear';
+    $('#work .screenshots .positioner').css({
+      '-webkit-transform': translateString,
+      '-moz-transform': translateString,
+      '-o-transform': translateString,
+      'transform': translateString,
+      '-webkit-transition': '-webkit-' + transitionString,
+      '-moz-transition': '-moz-' + transitionString,
+      '-o-transition': '-o-' + transitionString,
+      'transition': transitionString
+    });
+  }
+  else{
+    $('#work .screenshots .positioner').css({
+      left: -slideLeftAmount
+    });
+  }
 }
 
 
