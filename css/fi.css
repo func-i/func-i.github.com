@@ -170,9 +170,10 @@ body{
 @media (max-width: 480px) {
   #scientist{
     position: absolute;
-    left: 150px;
+    right: 0px;
+    left: -160px;
     top: 0px;
-   /* display: none;*/
+    /*display: none;*/
   }
 }
 #scientist img{
@@ -415,14 +416,20 @@ body{
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  position: relative;
 }
 #work .text-holder .work-text{
-  display: none;
+  /*display: none;*/
+  position: absolute;
+  opacity: 0;
 }
-#work .text-holder .work-text:first-child{
-  display: block;
+#work .text-holder .work-text.selected{
+  opacity: 1;
+  -webkit-transition: opacity 1.5s linear;
+  -moz-transition: opacity 1.5s linear;
+  -o-transition: opacity 1.5s linear;
+  transition: opacity 1.5s linear;
 }
-
 #work .left-arrow, #work .right-arrow{
   float: left;
   position: relative;

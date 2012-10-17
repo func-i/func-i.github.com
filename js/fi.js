@@ -107,15 +107,26 @@ function slideWorkTo(slideTo, isSlideLeft){
       '-o-transition': '-o-' + transitionString,
       'transition': transitionString
     });
+
+    $('#work .work-text:visible').removeClass('selected');
+    $($('#work .work-text').get(slideTo)).addClass('selected');
+/*    var transitionString = 'opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1.000)';
+    $($('#work .work-text').get(slideTo)).css({
+      '-webkit-transition': transitionString,
+      '-moz-transition': transitionString,
+      '-o-transition': transitionString,
+      'transition': transitionString
+    });*/
   }
   else{
     $('#work .screenshots .positioner').animate({
       left: -slideLeftAmount
     }, 1000, 'easeOutCubic');
+
+    $('#work .work-text:visible').hide();
+    $($('#work .work-text').get(slideTo)).fadeIn(900);
   }
 
-  $('#work .work-text:visible').hide();
-  $($('#work .work-text').get(slideTo)).fadeIn(900);
 
 }
 
