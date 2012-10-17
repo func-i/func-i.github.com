@@ -19,9 +19,11 @@ $(function(){
 
   //Make nav links scroll so the whole section is visible (include header height)
   $('.inline-link').click(function(e){
-    var scrollTo = $($(this).attr('href')).position().top - $('#header .navbar').height();
-    $("html, body").animate({ scrollTop: scrollTo }, 600);
-    e.preventDefault();
+    if(!/Mobile/.test(navigator.userAgent)){
+      var scrollTo = $($(this).attr('href')).position().top - $('#header .navbar').height();
+      $("html, body").animate({ scrollTop: scrollTo }, 600);
+      e.preventDefault();
+    }
   });
 
   //Work slider
@@ -110,13 +112,6 @@ function slideWorkTo(slideTo, isSlideLeft){
 
     $('#work .work-text:visible').removeClass('selected');
     $($('#work .work-text').get(slideTo)).addClass('selected');
-/*    var transitionString = 'opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1.000)';
-    $($('#work .work-text').get(slideTo)).css({
-      '-webkit-transition': transitionString,
-      '-moz-transition': transitionString,
-      '-o-transition': transitionString,
-      'transition': transitionString
-    });*/
   }
   else{
     $('#work .screenshots .positioner').animate({
