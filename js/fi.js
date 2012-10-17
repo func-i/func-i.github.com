@@ -52,10 +52,12 @@ $(function(){
 
   });
   $('#team .team-container .member img').mouseenter(function(){
-    $(this).parent().find('.member-top').addClass('open');
+    $('#team .team-container .member').addClass('fade');
+    $(this).parent().addClass('open');
   });
   $('#team .team-container .member').mouseleave(function(){
-    $(this).parent().find('.member-top').removeClass('open');
+    $('#team .team-container .member').removeClass('fade');
+    $(this).removeClass('open');
   });
 });
 

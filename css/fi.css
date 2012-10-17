@@ -567,6 +567,9 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   float: left;
   position: relative;
 }
+#team .team-container .member.fade{
+  opacity: 0.7;
+}
 #team .team-container .member img{
   margin: 0 auto;
   text-align: center;
@@ -580,7 +583,10 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
 }
-#team .team-container .member img.member-top.open{
+#team .team-container .member.open{
+  opacity: 1;
+}
+#team .team-container .member.open img.member-top{
   -webkit-transform: rotate(-50deg);
   -moz-transform: rotate(-50deg);
   -o-transform: rotate(-50deg);
