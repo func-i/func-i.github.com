@@ -26,6 +26,12 @@ $(function(){
     }
   });
 
+  //Manifesto link
+  $('#mission_text h4').click(function(){
+    $('#mission').addClass('manifesto');
+    $('#mission_text').addClass('manifesto');
+  });
+
   //Work slider
   $('#work .left-arrow').click(function(){
     slideWork(false);
@@ -68,6 +74,7 @@ $(function(){
 function scrolling(scrollTop){
     setNavAlpha(scrollTop);
     setHeroAlpha(scrollTop);
+    setMissionHighlight(scrollTop);
     scrollScientist(scrollTop);
     scrollSpy(scrollTop);
 }
@@ -250,6 +257,28 @@ function setHeroAlpha(scrollTop){
     $('#splash_text .container').fadeTo(0, alpha);
     $('#splash_text .container').show();
   }
+}
+
+function setMissionHighlight(scrollTop){
+  if(scrollTop < 200)
+    return;
+
+  var missionBlockSize = (650 - 200)/$('#mission_text p span').length;
+  var index = Math.floor((scrollTop - 200)/missionBlockSize);
+
+  var $currentElem = $($('#mission_text p span').get(index));
+  if(!$currentElem.hasClass('active')){
+    $('#mission_text p span').removeClass('active');
+    $currentElem.addClass('active');
+  }
+
+/*  if($currentElem.length == 0){
+    $('#mission_text h4').show();
+  }
+  else{
+    $('#mission_text h4').hide();
+  }*/
+
 }
 
 function scrollScientist(scrollTop){
