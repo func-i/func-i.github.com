@@ -90,7 +90,7 @@ h1{
 .navbar .nav > li > a,
 .navbar .nav > li.active > a
 {
-  color: rgb(255, 224, 223);
+  color: white;
   /*color: rgba(255, 255, 255, 0.9);*/
   text-shadow: none;
   padding: 5px 10px;
