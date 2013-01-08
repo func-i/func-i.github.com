@@ -3,6 +3,7 @@ $(function(){
   setNavAlpha();
   checkTeamOnResize();
   checkWorkOnResize();
+  getTweets();
 
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
@@ -330,4 +331,33 @@ function setNavToActive(a){
   $('.navbar ul.nav > li.active').removeClass('active');
   header.addClass('active');
   footer.addClass('active');
+}
+
+function getTweets(){
+  $("#tweet_box").tweet(
+    {
+      username: "func_i",
+      count: 10
+    }
+  );
+
+  animateTweets();
+
+}
+
+function animateTweets(){
+  if($("#tweet_box .tweet_list").height() <= 0){
+    setTimeout(function(){animateTweets()}, 500);
+  }
+  else{
+    $("#tweet_box .tweet_list").animate(
+      {
+        top:-$("#tweet_box .tweet_list").height()
+      },
+      30000, 'linear', function(){
+        $("#tweet_box .tweet_list").css('top', $('#tweet_box').height());
+        animateTweets();
+      }
+    );
+  }
 }

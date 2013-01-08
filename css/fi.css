@@ -181,6 +181,36 @@ body{
   z-index:1;
 }
 
+#tweet_box{
+  width: 400px;
+  height: 70px;
+  overflow: hidden;
+  margin-top: 150px;
+}
+@media (max-width: 767px) {
+  #tweet_box{
+    display: none;
+  }
+}
+
+#tweet_box .tweet_list{
+  position: relative;
+}
+#tweet_box li {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5em;
+  list-style-type: none;
+}
+#tweet_box .tweet_time{
+  display: none;
+}
+#tweet_box .tweet_text a{
+  color: white;
+  text-decoration: underline;
+}
+
+
 #splash_text{
   position: fixed;
   height: 700px;
