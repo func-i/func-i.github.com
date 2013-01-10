@@ -27,6 +27,13 @@ $(function(){
     }
   });
 
+  $("#tweet_box").mouseenter(function(){
+    stopTweetAnimation();
+  });
+  $("#tweet_box").mouseleave(function(){
+    animateTweets();
+  });
+
   //Manifesto link
   $('#mission_text h4').click(function(){
     $('#mission').addClass('manifesto');
@@ -345,16 +352,23 @@ function getTweets(){
 
 }
 
+function stopTweetAnimation(){
+  $("#tweet_box .tweet_list").stop();
+}
+
 function animateTweets(){
   if($("#tweet_box .tweet_list").height() <= 0){
     setTimeout(function(){animateTweets()}, 500);
   }
   else{
+    var pixelsPerSecond = 18;
+    var timeToFinish = ($("#tweet_box .tweet_list").height() + parseInt($("#tweet_box .tweet_list").css('top'),10))/(pixelsPerSecond/1000);
+
     $("#tweet_box .tweet_list").animate(
       {
         top:-$("#tweet_box .tweet_list").height()
       },
-      30000, 'linear', function(){
+      timeToFinish, 'linear', function(){
         $("#tweet_box .tweet_list").css('top', $('#tweet_box').height());
         animateTweets();
       }

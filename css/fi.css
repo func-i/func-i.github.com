@@ -195,6 +195,7 @@ body{
 
 #tweet_box .tweet_list{
   position: relative;
+  top: 0;
 }
 #tweet_box li {
   overflow-y: auto;
