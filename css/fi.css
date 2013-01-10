@@ -75,7 +75,7 @@ h1{
 }
 .navbar .brand.small-brand{
   padding: 14px 18px;
-  margin: 7px 10px 0 40px;
+  margin: 7px 10px 0 20px;
   display: none;
 }
 @media (max-width: 650px) {
@@ -125,7 +125,7 @@ h1{
     margin-left: 0px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 688px) {
   .navbar .nav > li > a,
   .navbar .nav > li.active > a{
     margin-left: 0;
