@@ -87,6 +87,12 @@ h1{
   }
 
 }
+@media (max-width: 400px) {
+  .navbar .brand.small-brand{
+    display:none;
+  }
+}
+
 .navbar .nav > li > a,
 .navbar .nav > li.active > a
 {
@@ -132,6 +138,16 @@ h1{
     margin-right: 0;
     padding-left: 7px;
     padding-right: 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar .nav > li > a,
+  .navbar .nav > li.active > a{
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
