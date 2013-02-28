@@ -497,7 +497,7 @@ body{
   width: 100%;
 }
 #work .screenshots .positioner{
-  width: 11140px; /* 1114*5 */
+  width: 25140px; /* 1114*5 */
   position: absolute;
 }
 #work .screenshots img{
@@ -513,7 +513,7 @@ body{
 }
 #work .text-holder{
   padding: 20px;
-  height: 300px;
+  height: 320px;
   width:250px;
   float: left;
   background-color: white;
@@ -550,6 +550,7 @@ body{
   color: #555;
   font-size: 14px;
   line-height: 21px;
+  margin-right: 20px;
 }
 #work .text-holder .url{
   color: rgb(228,25,16);
