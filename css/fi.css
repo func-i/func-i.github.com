@@ -533,6 +533,7 @@ body{
   -moz-transition: opacity 1.5s linear;
   -o-transition: opacity 1.5s linear;
   transition: opacity 1.5s linear;
+  z-index: 1;
 }
 #work .left-arrow, #work .right-arrow{
   float: left;
