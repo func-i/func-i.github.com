@@ -723,7 +723,7 @@ Arrows are each 50 width. Each image requires 350px. plus extra 50, not sure why
 #contact_us{
   height: 634px;
 /*  background: url("http://maps.google.com/maps/api/staticmap?center=43.644479,-79.  412279&zoom=16&markers=color:red|label:F|43.644479,-79.412279&size=1000x500&sensor=false&scale=2") no-repeat center;*/
-  background: url("../img/contact_map.jpeg") no-repeat center;
+  background: url("../img/contact_map.jpg") no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
