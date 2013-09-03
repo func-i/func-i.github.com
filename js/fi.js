@@ -3,7 +3,7 @@ $(function(){
   setNavAlpha();
   checkTeamOnResize();
   checkWorkOnResize();
-  getTweets();
+  //getTweets();
 
   $(window).bind("touchmove", function(event) {
     scrolling(window.scrollY);
@@ -27,12 +27,12 @@ $(function(){
     }
   });
 
-  $("#tweet_box").mouseenter(function(){
+/*  $("#tweet_box").mouseenter(function(){
     stopTweetAnimation();
   });
   $("#tweet_box").mouseleave(function(){
     animateTweets();
-  });
+  });*/
 
   //Manifesto link
   $('#mission_text h4').click(function(){
