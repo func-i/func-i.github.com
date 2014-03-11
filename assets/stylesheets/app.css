@@ -3642,10 +3642,10 @@ a {
   background-size: 100% 210%;
   background-position: 0 -105%;
   background-repeat: repeat-x; }
-  .no-touch .square.text[data-type="outlined"][data-color="blue"].half-image .text-content:hover {
-    background-position: 0 0; }
-    .no-touch .square.text[data-type="outlined"][data-color="blue"].half-image .text-content:hover a {
-      color: #2d2d2d; }
+.no-touch .square.text[data-type="outlined"][data-color="blue"].half-image:hover .text-content {
+  background-position: 0 0 !important; }
+.no-touch .square.text[data-type="outlined"][data-color="blue"].half-image:hover a {
+  color: #2d2d2d !important; }
 .no-touch .square.text[data-type="outlined"][data-color="yellow"]:not(.half-image) {
   -webkit-transition: background-position .3s linear;
   -moz-transition: background-position .3s linear;
@@ -3680,10 +3680,10 @@ a {
   background-size: 100% 210%;
   background-position: 0 -105%;
   background-repeat: repeat-x; }
-  .no-touch .square.text[data-type="outlined"][data-color="yellow"].half-image .text-content:hover {
-    background-position: 0 0; }
-    .no-touch .square.text[data-type="outlined"][data-color="yellow"].half-image .text-content:hover a {
-      color: #2d2d2d; }
+.no-touch .square.text[data-type="outlined"][data-color="yellow"].half-image:hover .text-content {
+  background-position: 0 0 !important; }
+.no-touch .square.text[data-type="outlined"][data-color="yellow"].half-image:hover a {
+  color: #2d2d2d !important; }
 .no-touch .square.text[data-type="outlined"].half-image:hover .text-content {
   background-position: 0 0 !important; }
 

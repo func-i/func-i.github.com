@@ -55,7 +55,7 @@
         context: logoContext,
         screenWidth: $(window).width()
       });
-      if (onHome()) {
+      if (onHome() && Modernizr.touch) {
         LogoHelper.startAnimation(logo);
         logo.popLetters();
         logo.isPoppin = true;
