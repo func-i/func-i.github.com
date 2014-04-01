@@ -3739,7 +3739,7 @@ a {
   left: 0;
   height: 100%;
   width: 100%; }
-.square.icon object {
+.square.icon object, .square.icon img {
   position: absolute;
   margin: auto;
   top: 0;
@@ -3792,6 +3792,10 @@ a {
     width: 90%; }
   #social-icons .lighthouse object, #business-logos .lighthouse object {
     width: 80%; }
+  #social-icons .ooda img, #business-logos .ooda img {
+    width: 70%; }
+  #social-icons .uhn img, #business-logos .uhn img {
+    width: 50%; }
 
 .clearfix:before, .clearfix:after {
   content: " ";
@@ -4134,6 +4138,9 @@ header {
 @media screen and (max-width: 640px) {
   #individual-responses h2, #server-response h2 {
     margin-top: 1.5em; } }
+#client-list ul li {
+  margin-bottom: 1em; }
+
 #about #digital-platforms {
   font-size: 80%; }
 #about #jha {

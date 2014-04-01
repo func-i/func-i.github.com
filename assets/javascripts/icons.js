@@ -27,9 +27,9 @@
 
   if (!Modernizr.touch) {
     $(window).load(function() {
-      var $icons;
-      $icons = $('.icon').not('.no-hover');
-      return $icons.each(function() {
+      var $icons, $logos;
+      $icons = $('.icon').not('.no-hover').not('.logo');
+      $icons.each(function() {
         var $icon, $object, $paths, $svg, $svgContext;
         $icon = $(this);
         $object = $icon.find('object');
@@ -45,13 +45,27 @@
             });
           }
         }, function() {
-          $paths.css('fill', "");
+          $paths.css('fill', '');
           if (!Modernizr.csstransitions) {
             return $icon.css({
               backgroundColor: ""
             });
           }
         });
+      });
+      $logos = $('#business-logos .logo');
+      return $logos.hover(function(ev) {
+        if (!Modernizr.csstransitions) {
+          return $(this).css({
+            backgroundColor: BASE_COLORS.green
+          });
+        }
+      }, function() {
+        if (!Modernizr.csstransitions) {
+          return $(this).css({
+            backgroundColor: ""
+          });
+        }
       });
     });
   }
