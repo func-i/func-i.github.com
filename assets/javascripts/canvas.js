@@ -1,15 +1,51 @@
 (function() {
+  var onHome;
+
   window.canvases = [];
 
   window.logo = {};
 
   this.blendingSupported = Modernizr.canvasblending;
 
+  onHome = function() {
+    return window.location.pathname === "/";
+  };
+
+  $(document).ready(function() {
+    var $logo, $logoAnchor, anchorHtml, imgFullHtml, imgFullSrc, imgSmallHtml, imgSmallSrc, logoCanvas, logoContext;
+    if (blendingSupported) {
+      logoCanvas = new LogoCanvas({
+        elem: $('#logo-canvas')
+      });
+      logoContext = new Context(logoCanvas);
+      window.logo = new Logo({
+        elem: $('#logo'),
+        canvas: logoCanvas,
+        context: logoContext,
+        screenWidth: $(window).width()
+      });
+      if (onHome() && Modernizr.touch) {
+        LogoHelper.startAnimation(logo);
+        logo.popLetters();
+        return logo.isPoppin = true;
+      }
+    } else {
+      $logo = $('#logo');
+      anchorHtml = "<a href='http://functionalimperative.com' alt='Functional Imperative'></a>";
+      $logo.append(anchorHtml);
+      $logoAnchor = $logo.find('a');
+      imgFullSrc = $logo.data('imgFull');
+      imgFullHtml = "<img class='full' src='" + imgFullSrc + "' alt='Functional Imperative' />";
+      $logoAnchor.append(imgFullHtml);
+      imgSmallSrc = $logo.data('imgSmall');
+      imgSmallHtml = "<img class='small' src='" + imgSmallSrc + "' alt='Functional Imperative' />";
+      $logoAnchor.append(imgSmallHtml);
+      return $('#logo-canvas').remove();
+    }
+  });
+
   $(window).load(function() {
-    var $body, $loading, $logo, $logoAnchor, $noTouchIcons, $noTouchLogo, $touchLogo, anchorHtml, currentHold, currentPinch, holding, imgFullHtml, imgFullSrc, imgSmallHtml, imgSmallSrc, logoCanvas, logoContext, onHome, pinchStarted;
-    onHome = function() {
-      return window.location.pathname === "/";
-    };
+    var $body, $loading, $noTouchIcons, $noTouchLogo, $touchLogo, currentHold, currentPinch, holding, pinchStarted;
     $('.square').each(function() {
       var $square, roundedWidth;
       $square = $(this);
@@ -44,35 +80,6 @@
       }
       return _results;
     });
-    if (blendingSupported) {
-      logoCanvas = new LogoCanvas({
-        elem: $('#logo-canvas')
-      });
-      logoContext = new Context(logoCanvas);
-      window.logo = new Logo({
-        elem: $('#logo'),
-        canvas: logoCanvas,
-        context: logoContext,
-        screenWidth: $(window).width()
-      });
-      if (onHome() && Modernizr.touch) {
-        LogoHelper.startAnimation(logo);
-        logo.popLetters();
-        logo.isPoppin = true;
-      }
-    } else {
-      $logo = $('#logo');
-      anchorHtml = "<a href='http://functionalimperative.com' alt='Functional Imperative'></a>";
-      $logo.append(anchorHtml);
-      $logoAnchor = $logo.find('a');
-      imgFullSrc = $logo.data('imgFull');
-      imgFullHtml = "<img class='full' src='" + imgFullSrc + "' alt='Functional Imperative' />";
-      $logoAnchor.append(imgFullHtml);
-      imgSmallSrc = $logo.data('imgSmall');
-      imgSmallHtml = "<img class='small' src='" + imgSmallSrc + "' alt='Functional Imperative' />";
-      $logoAnchor.append(imgSmallHtml);
-      $('#logo-canvas').remove();
-    }
     $loading = $('#loading');
     $body = $('#body');
     $loading.css('opacity', '0');
