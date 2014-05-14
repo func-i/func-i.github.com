@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Rubies on Elephants in Space</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2012/09/16/ruby-schemaverse.html">Rubies on Elephants in Space</a>
+                      </h2>
+                      <small>A ruby wrapper to play Schemaverse</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://github.com/sailias">Jon Salis</a> on 16 Sep 2012
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p><a href="http://schemaverse.com">Schemaverse</a> is a MMO written entirely in Postgres and promotes my favourite play style when it comes to gaming; botting. It&#39;s cheating, I&#39;m a horrible person and I should be banned from every game I play (I mean that). As a programmer and a gamer (who hates to lose), I can&#39;t resist combining my two passions. I was reading a <a href="http://news.ycombinator.com/item?id=3969108">HackerNews article</a> about Schemaverse and it peaked my interest. A game meant to be played by programmers in SQL where scripting is the norm. My bot vs yours? Do we play for keeps?</p>
+
+<p>As a rubyist I wanted to play the game but writing scripts in PL/pgSQL wasn&#39;t exactly my first choice and it might not be yours either. So after contacting <a href="https://github.com/Abstrct">Abstrct</a> the creator of Schemaverse, I set out to write a ruby wrapper to play the game. Together we created a public github project which players can fork and deploy for free to <a href="http://heroku.com">Heroku</a>.</p>
+
+<h3>Getting Started</h3>
+
+<p>In order to play you must register at <a href="https://schemaverse.com/">Schemaverse.com</a>. You do not need to give an email address, just a username and password.</p>
+
+<p><a href="https://help.github.com/articles/fork-a-repo">Fork</a> <a href="https://github.com/func-i/ruby-schemaverse">ruby-schemaverse</a> and begin modifying the strategy inside <a href="https://github.com/func-i/ruby-schemaverse/blob/master/lib/schemaverse.rb">schemaverse.rb</a>.</p>
+
+<p>The current code contains basic game play which will do the following:
+* Build miners on your conquered planets to gather fuel
+* Upgrade the mining abilities of your ships
+* Build new ships to travel to other planets and conquer them
+* Attack any ships that enters your range</p>
+
+<h3>Heroku</h3>
+
+<p>Once you have your strategy ready to do battle, you can deploy it to Heroku. If you do not have an account, visit <a href="http://www.heroku.com/">Heroku.com</a> and sign up. It&#39;s free and your sign up comes with one free worker.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
+<span class="nv">$&gt;</span> heroku create
+<span class="nv">$&gt;</span> heroku config:add <span class="nv">SCHEMAVERSE_USERNAME</span><span class="o">=</span>YOUR_USERNAME
+<span class="nv">$&gt;</span> heroku config:add <span class="nv">DATABASE_URL</span><span class="o">=</span>postgres://YOUR_USERNAME:YOUR_PASSWORD@db.schemaverse.com/schemaverse
+<span class="nv">$&gt;</span> git push heroku master
+<span class="nv">$&gt;</span> heroku ps:scale <span class="nv">worker</span><span class="o">=</span>1
+</code></pre></div>
+
+<h3>It&#39;s on!</h3>
+
+<p>I will be perfecting my script on an ongoing basis. Feel free to pit your gaming and ruby expertise against mine!</p>
+
+<h3>Additional Documentation</h3>
+
+<ul>
+<li><a href="http://www.rubydoc.info/github/func-i/ruby-schemaverse/master/frames">RDoc</a></li>
+<li><a href="https://schemaverse.com/tutorial/tutorial.php">Schemaverse tutorial</a></li>
+</ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>

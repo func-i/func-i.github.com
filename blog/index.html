@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Functional Imperative | Blog</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          
+            class="selected"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="blog" class="row collapse main-content">
+  <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
+                    <a href="/2014/02/14/web-apps-v-balkanized-net.html">Web Applications Versus a Balkanized Internet</a>
+                  </h2>
+                  <small></small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://twitter.com/jakehirschallen">Jake Hirsch-Allen</a> on 14 Feb 2014
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p>//update: Chris Dixon similarly recently mourned &quot;<a href="//www.cdixon.org/2014/04/07/the-decline-of-the-mobile-web/">The decline of the mobile web</a>.&quot;</p>
+
+<p>//update: This is a great infographic on responsive design by <a href="http://www.functionalimperative.com/">Functional Imperative</a> design partner <a href="http://www.objectivesubject.com/">Objective Subject</a>: [http://t.co/t7UDPEUSyA]</p>
+
+<p>//update: <a href="http://blog.codinghorror.com/app-pocalypse-now/">This great recent piece</a> by the indomitable <a href="http://twitter.com/codinghorror">@codinghorror</a> <a href="http://en.wikipedia.org/wiki/Jeff_Atwood">Jeff Atwood</a> - founder of <a href="http://stackoverflow.com/">Stack Overflow</a> does a fantastic job of advocating in favor of the web over native apps.</p>
+
+<h2></h2>
+
+<p>// The debate between native and responsive mobile applications is amongst the most common and important practical questions that software developers currently face. It comes up in almost every discussion I have with potential clients of Functional Imperative, my digital innovation and software development company. Hundreds if not thousands of articles have already been written on the subject (e.g. <a href="http://alistapart.com/article/responsive-web-design">1</a>,<a href="http://alistapart.com/topic/responsive-design">2</a>,<a href="http://coding.smashingmagazine.com/2011/01/12/guidelines-for-responsive-web-design/">3</a>,<a href="http://mediaqueri.es/">4</a>,<a href="http://johnpolacek.github.io/scrolldeck.js/decks/responsive/">5</a>) but most miss the bigger picture.</p>
+
+<p>Instead of addressing the practical question whether a native or web app is better for a given client (which in general I believe it is), I examine whether the internet and therefore people in general, will be better-off as a result of native software. This more general, moral and arguably more important argument raises the potential balkanization of the internet as well as issues surrounding innovation and accessibility, standards wars and technology anti-trust. Despite my continuing emotional inclination towards slick, fast, native apps, the internet and our lives are better connected by a responsive, mobile web.</p>
+
+<p>My thesis is that, in its current form, despite potentially offering better UI and more features, native software development limits the accessibility and openness of the internet and particularly the web and therefore should be avoided whenever possible. This is all aside from the more practical downsides of iOS or Java Android apps being more expensive to build, harder to update and less future-proof. Native software balkanizes the internet by creating or reinforcing corporate dominated fiefdoms that do not speak to each other or the web. The rules of these gated software communities are controlled by shareholders rather than their residents or users. Their structure is dictated by the short and longterm ambitions of their corporate creators.</p>
+
+<p>// iOS apps, perhaps the most notorious example, often don’t even communicate with each other let alone allow for access via a world wide web (hereon &quot;web&quot;) search or links to and from the web. If I add content to an app, very frequently this content will remain exclusively within this app or its isolated network. While the same is true of many networks and websites – for example most major social networks curate which content is accessible without signing-in, and many of the most authoritative news sources now limit access and openness through paywalls – there are few more widespread or impenetrable barriers between one software ecosystem and the internet than native mobile applications.</p>
+
+<p>Much writing on the balkanization of the internet and software relates to <a href="http://www.mckinseyquarterly.com/The_balkanization_of_the_Internet_202">hardware</a> or <a href="http://en.wikipedia.org/wiki/Splinternet">political censorship</a>. Here, however, I focus on a software specific phenomena that has massive implications for the future of the internet: Apple versus Google versus Microsoft’s oligarchies populated by third party apps that prevent linking to the web writ large let alone other software ecosystems. Often, once an app becomes extremely widespread, its ubiquity forces a degree of integration (as an example, see Instragram’s progression from an iOS application with an internal network of content inaccessible except via the Instragram app). Nevertheless a significant disconnection is true of the vast majority of native apps that have not attained massive scale and even many that have.</p>
+
+<p>The oligarchs argue their communities benefit from greater integration with their operating systems or hardware and guarantee this by limiting access to many software and hardware features to only native apps. For example, see <a href="http://www.baekdal.com/opinion/apple-is-limiting-the-new-google-chrome-for-ios">Baekdal’s extensive explanation</a> of why Apple does not give third party apps access to the latest version of webkit on iOS, thereby ensuring that Safari remains the dominant app to browse on the device. Such constraints exist on almost all mobile devices and are now appearing on desktops as the corporations that are coming to dominate the web create gatekeepers for their software. These &quot;stores&quot;, whether iTunes or Google Play, impose barriers to interconnectivity that are antithetical to many of the best aspects of the world wide web and which could stunt the internet’s growth and accessibility.</p>
+
+<p>// <a href="http://www.theguardian.com/technology/2012/apr/15/web-freedom-threat-google-brin">Google’s Sergey Brin claims</a> these &quot;walled gardens&quot; pose a threat to the freedom of the internet. These gated communities are reminiscent of a time when Microsoft beat Apple by opening its hardware and software to third party manufacturers except now the closed systems are winning. Users are opting for ease over freedom and thoughtlessness over connectivity and complexity.</p>
+
+<p><a href="http://www.birminghambusinesslaw.com/2012/09/the-coming-standards-war-google-vs-apple/">Tripp Watson describes the current predicament</a> as a Google v. Apple standards war and likens it to past standards wars such as those over railroad gauges, 8-Track vs. Compact Cassette VHS vs. Betamax and Apple vs. Microsoft. Trip bets on Google, describing Apple’s current iOS only app focused approach as censorship and arguing that the same close-mindedness resulted in their losing the earlier war to Microsoft. While I don’t disagree with his condemnation of Apple, Google too has an interest in a less open web. Its curation of search results and growing ecosystem of web, mobile and desktop apps and operating systems may be doing more evil than their motto would suggest.</p>
+
+<p>Each oligarch criticizes the other. Sergey Brin states &quot;the rise of Facebook and Apple, which have their own proprietary platforms and control access to their users, risks stifling innovation and balkanising the web.&quot; He justifiably criticizes Apple’s sequestration of the massive amount of content contained in the iOS community from his greatest asset, Google’s search. Yet his reasoning is too limited. The problem is not just that this content is not searchable, it is that it is often not accessible via the web at all.</p>
+
+<p>Not only is &quot;<a href="http://battellemedia.com/archives/2012/08/what-is-search-now-disjoined.php">Google’s core model – built on the open, linked world of the web…under threat from the advance of the iPhone and the app, the Facebook and the Path, the automobile console, the Xbox, the cable box, and countless other ‘unlinked’ digital artifacts</a>&quot;; not only, should Google &quot;be worried as hell as people turn to apps at the expense of search&quot; but we should all be more worried that native applications are limiting the connectivity, the breadth and the openness of the web.</p>
+
+<p>// Moving beyond search, another parallel to the native vs. web app debate is the e-book standard war. As an intellectual property lawyer, I am constantly frustrated by the limitations that copyright and patent laws have imposed on creativity. These constraints are knowingly being reinforced by technology to the detriment of access to knowledge.</p>
+
+<p>On principle, it is hard to argue that the world would not be better off if access to (e)books increased. However, <a href="http://gyrovague.com/2012/04/30/why-e-books-will-soon-be-obsolete-and-no-its-not-just-because-of-drm/">Jani Patokallio’s description of the balkanization of e-publishing</a> shows e-books moving in the opposite direction. Thankfully Patokallio bets on the open web rather than locked down epub standards despite the skyrocketing sales of e-books in a format that locks down their content into a silo, limits their purchasing choices based on where their credit card happens to have been registered, is designed to work best on devices that are rapidly becoming obsolete, and support only a tiny subset of the functionality available on any modern website.</p>
+
+<p>Yet I remain worried. I agree with the benefits Patokallio ascribes to an open web but I worry that these merits will be outweighed by the power of the established oligarchs, whether they are publishing houses or tech companies.</p>
+
+<p>Patokallio states:</p>
+
+<blockquote>
+<p>On the Web, the very idea that the right to read a website would vary from country to country seems patently absurd. Cyberspace is flat, after all, just computers talking to computers. You, the reader, do not need to concern yourself with where these electrons on your screen are coming from, and neither do I, their publisher, need to care where they are going. And when somebody attempts to artificially block those electrons — say, China and its Great Firewall — it’s the kind of the thing that the US Congress and the World Trade Organization get worked up about.</p>
+</blockquote>
+
+<p>Yet such organizations don’t care about app stores and network interconnectivity. When was the last time the WTO did anything about China’s Great Firewall? And even if they were to, what are the chances of them acting in reaction to differing editions of an ebook or Apple’s app store?</p>
+
+<p>// <a href="http://www.wired.com/business/2013/04/marc-andreessen-and-rockmelt-betting-on-desktop/">Michael Copeland, writing for Wired</a>, presents a compelling argument in support of the mobile web based on a Marc Andreessen thought exercise:</p>
+
+<blockquote>
+<p>Let’s say we all grew up in tech world where we only used tablets and smartphones. Then one day, someone comes up to you with a 27-inch display hooked up to a notebook. You could have everything you have on your tablets and smartphones, and then some. Except you don’t have to download anything or update it. Everything is the latest and greatest, and just one click away. If you are a software developer, there are no gatekeepers telling you if your latest creation is approved, or when you can add the latest flourish.</p>
+</blockquote>
+
+<p>Andreessen’s conclusions is that this is</p>
+
+<blockquote>
+<p>why in the long run the mobile web is going to dominate native apps, and for the same reason that on the desktop the web dominates apps. When the web works for something, it works way better in a whole lot of ways than a downloadable app.</p>
+</blockquote>
+
+<p>But Copeland is actually arguing the opposite of Andreessen and I. He’s right that Andreessen is conflating two different debates because &quot;you can choose between either type of app (native or web) on either type of computer (desktop or mobile).&quot; And he’s also correct that claiming &quot;the web&quot; is the solution is overly simplistic:</p>
+
+<blockquote>
+<p>Facebook, bless them, has it right. What’s great about the web is ubiquitous network availability, not running within a browser tab. Websites are just services, and what you see in a browser tab is merely one possible interface to that service. The best possible interface to that service is often, if not usually, going to be a native app, not a web app.</p>
+</blockquote>
+
+<p>The hard part is that Copeland is correct in claiming that &quot;the dynamic remains unchanged. Web apps are the best way to reach the most possible people with the least effort; native apps are the best way to create the best possible experience.&quot;</p>
+
+<p>Emotionally, I agree with Copeland. Native does offer more functionality and I prefer it. I like the feeling of owning an app and of running an app better than having everything exist in my browser. And native apps often run better in one way or another. I have yet to see the frictionless UI and subtly captivating aesthetics of <a href="https://path.com/">Path</a> or <a href="http://500px.com/">500px</a>&#39;s native apps in a web app.</p>
+
+<p>// But the gap is closing (e.g. see <a href="http://forecast.io/">forecast.io</a> or <a href="http://www.nimbletank.com/">nimbletank</a> on iOS) and developers should not always make strategic decisions exclusively based on their client’s short-term satisfaction. The wonder of the internet is its complete interoperability – everything can link to everything – and with that ability comes great hope for an open source world in which open APIs and software will tear down the proprietary software walls that parallel the legal and physical walls created by so many corporations. In order to sustain this hope, developers need to build apps that are not just beautiful and have amazing functionality, but are also ethical, accessible, connected and open. In other words, they need to build web apps.</p>
+
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
+                    <a href="/2013/12/23/sorting-posts.html">Sorting Posts by User Engagement Level</a>
+                  </h2>
+                  <small></small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://twitter.com/clusterfoo">Noam Gagliardi</a> on 23 Dec 2013
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p>At Functional Imperative we&#39;re building the new <em>CanLII Connects</em> website (a social portal for Canada&#39;s largest database of legal cases), and this week I was given the task of figuring out a sensible way of sorting posts.</p>
+
+<p>Figuring out how to sort user-generated content is a common problem that many social websites face.</p>
+
+<p>Here&#39;s Reddit&#39;s scoring equation for &#39;Best&#39; <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">(source and explanation)</a>:</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/reddit_best.png" alt="Reddit&#39;s &#39;best&#39; scoring equation"></p>
+
+<p>Not all scoring equations are that hairy, <a href="http://moz.com/blog/reddit-stumbleupon-delicious-and-hacker-news-algorithms-exposed">here are a few more</a>.</p>
+
+<p>Interestingly enough, Reddit&#39;s &#39;Hot&#39; scoring function (explained in link above):</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/reddit_hot_algo.png" alt="Reddit&#39;s scoring equation"></p>
+
+<p>is <a href="http://technotes.iangreenleaf.com/posts/2013-12-09-reddits-empire-is-built-on-a-flawed-algorithm.html">quite flawed</a>.</p>
+
+<blockquote>
+<p><strong>Sidenote</strong>: One observation not mentioned in that first article is that, while all other equations use some form of <code>time_now - time_posted</code> to calculate how old a post is, the clever guys at Reddit use <code>time_posted - some_old_date</code>.</p>
+
+<p>The advantage of this is that the post&#39;s score need only be calculated once, whereas the value of scores calculated with <code>time_now</code> will change on every request.</p>
+</blockquote>
+
+<p>Anyway, while all those scoring functions work pretty well, they didn&#39;t quite
+fit the requirements for <em>CanLII Connects</em>.</p>
+
+<p>In this post, I&#39;ll walk through the decision process of creating a scoring
+function. Hopefully this will be useful if you encounter a similar feature to
+implement.</p>
+
+<h3>Requirements:</h3>
+
+<p><em>CanLII Connects</em> links to a database of legal cases, and users can post opinions on those cases:</p>
+
+<ol>
+<li>A user can post.</li>
+<li>A user can upvote a post.</li>
+<li>A user can comment on a post.</li>
+<li>A user can comment on a comment on a post.</li>
+</ol>
+
+<p>So what&#39;s a sensible way of sorting posts?</p>
+
+<p>Right away, we&#39;re dealing with a different problem than Reddit or HN: while it makes sense to slowly degrade the score of a post on those sites over time, the same does not make sense for CanLII. Old cases might be cited at any time, no matter how old they are, so what matters is not how old a discussion is, but rather how actively engaged users are within a given discussion.</p>
+
+<h3>Initial Score</h3>
+
+<p>Ok, so first we have to give each post an initial score. I like Reddit&#39;s approach of taking the base-10 log of its upvotes. This makes sense because, the more popular a post already is, the more likely people are to see it, and therefore upvote it, which gives it an unfair advantage. </p>
+
+<p>In our case, we&#39;re not only trying to measure how much people &quot;like&quot; a post, but rather how engaged they are with it. It makes sense that, while an upvote is a fine indicator of &quot;engagedness&quot;, a user actually bothering to comment on a post is even more of an indicator. I&#39;ll count that as equivalent to two upvotes, and a user commenting on a comment will count as three upvotes (the 2 is so we don&#39;t take the log of 1 or 0): </p>
+
+<script type="math/tex; mode=display">
+    log_{10}(2 + u + 2c + 3cc)
+</script>
+
+<h3>Frequency</h3>
+
+<p>Next, we need the post&#39;s position to degrade as it becomes less active. It makes
+sense to divide the intial score by some factor of time:</p>
+
+<script type="math/tex; mode=display">
+    \cfrac{ log_{10} (2+u+2c+3cc) }{ \bar{t} }
+</script>
+
+<p>Now we need a reasonable value for <span class="mj"><code>t_ave</code></span>$$ \bar{ t } $$. A good start is the average time, in seconds, between the three most recent user interactions with a post. </p>
+
+<p>We define a user interaction to be: a user creates a post, a user comments on a post, or a user upvotes a post.</p>
+
+<p>Also, we want the most recent interactions to weigh more than older interactions. So let&#39;s say each <code>t</code> weighs twice as much as the previous:</p>
+
+<script type="math/tex; mode=display">
+    \bar{ t } = \cfrac{\sum\_{i=1}^3 \left(\frac{1}{2}\right)^{i-1} * (t_i - t\_{i-1}) }{ \sum\_{i=1}^3  \left(\frac{1}{2}\right)^{i-1}}
+</script>
+
+<p>Where</p>
+
+<p>$$ t_0 $$ = <a href="http://en.wikipedia.org/wiki/Unix_time">UNIX timestamp</a>, at now, in seconds.</p>
+
+<p>$$ t_n $$ = UNIX timestamp of n<sup>th</sup> interaction.</p>
+
+<h3>One Final Detail</h3>
+
+<p>There is one last property we want this function to have, which is the following: if interactions are very frequent right now (within a timeframe of, say, 10 days), then clearly the post is &quot;hot&quot;, and its score should be boosted. But as time passes, it really doesn&#39;t matter as much how much distance there is between interactions. If a post has already gone a full year without anyone commenting on it, does it really make that much difference if it goes another month without a comment?</p>
+
+<p>To accomplish the first property, all we do is divide $$ \bar{ t }$$ by the number of seconds in 10 days: <code>60*60*24*10</code>.</p>
+
+<p>To accomplish the second property, what we are looking for is some sort of always-increasing, concave function (positive derivative, negative second derivative). The first thing that comes to mind is the square-root function, which is good enough.</p>
+
+<h3>Result</h3>
+
+<p>And thus we have our final scoring function:</p>
+
+<script type="math/tex; mode=display">
+    \cfrac{ log_{10} (2 + u + 2c + 3cc) }{ \sqrt{ \bar{t}/60 * 60 * 24 * 10 }}
+</script>
+
+<p>If we plot this equation for <code>x = number of points</code> and <code>y = time</code>, we can see the shape of this function and check for different values if they make sense:</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/scoring_function_shape_2.jpg" alt="Scoring function 3D plot"></p>
+
+<p>As expected, there is a steep 10-day &quot;boost&quot; period, followed by an increasingly  slower decline in the value as more and more time passes.</p>
+
+<blockquote>
+<p>The function is also heavily biased toward very new posts, which will always come
+out on top, giving them a chance. This might be a bad idea if posting becomes 
+frequent, but user interaction is low (many summaries a day, few votes or comments), 
+and might have to be changed.</p>
+
+<p>There are many ways to tweak this equation (changing the boost period, for example)
+to make it more or less biased towards either time or user interaction.</p>
+</blockquote>
+
+<h3>Bonus Round: Implementing in ElasticSearch</h3>
+
+<p>Implementing a custom scoring function in Elasticsearch, though easy once it&#39;s all set up, was rather frustrating because of the poor documentation.</p>
+
+<p>For our implementation, we&#39;re using the <code>tire</code> gem (a wrapper around the Elasticsearch API). This is where we call the custom scoring script:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">query</span> <span class="k">do</span>
+  <span class="n">custom_score</span> <span class="ss">script</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span> <span class="ss">lang</span><span class="p">:</span> <span class="s1">&#39;javascript&#39;</span> <span class="k">do</span>
+    <span class="n">string</span> <span class="n">query</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; OR &quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Where <code>script</code> is simply a variable holding the contents of a javascript file as a string. Note the option <code>lang: &#39;javascript&#39;</code>. This lets us use javascript as our language of choice, as opposed to <a href="http://mvel.codehaus.org/">mvel</a>, the most poorly documented scripting language on the face of the earth. To enable this option, we&#39;ll also require the <a href="https://github.com/elasticsearch/elasticsearch-lang-javascript">elasticsearch-lang-javascript</a> plugin.</p>
+
+<p>Here is our script:</p>
+
+<blockquote>
+<p><strong>Sidenote:</strong> Notice the logger function. This enables us to implement a sort of &quot;console.log&quot;
+which we can read using the following shell command <code>tail -f /var/log/elasticsearch/elasticsearch.log</code>.</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Logger function:</span>
+<span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">org</span><span class="p">.</span><span class="nx">elasticsearch</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">logging</span><span class="p">.</span><span class="nx">Loggers</span><span class="p">.</span><span class="nx">getLogger</span><span class="p">(</span><span class="s2">&quot;rails_logger&quot;</span><span class="p">);</span>
+<span class="c1">// Example usage:</span>
+<span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">&quot;========= NEW CALC ===========&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">points_log</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">points_log</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
+
+<span class="cm">/**</span>
+<span class="cm">* NOTE: doc.ts.values is not actually an array,</span>
+<span class="cm">* here I create an array out of it:</span>
+<span class="cm">**/</span>
+<span class="kd">var</span> <span class="nx">ts</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="nx">ts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+<span class="c1">// Newest first</span>
+<span class="nx">ts</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Boost period.</span>
+<span class="cm">**/</span>
+<span class="kd">var</span> <span class="nx">ten_days</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* The scoring function</span>
+<span class="cm">**/</span>
+<span class="kd">function</span> <span class="nx">score</span><span class="p">()</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">  * Weighed average numerator</span>
+<span class="cm">  **/</span>
+  <span class="kd">var</span> <span class="nx">times_num</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">)</span> <span class="o">*</span> 
+             <span class="p">(</span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">-</span>
+             <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+  <span class="p">})();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Weighed average denominator</span>
+<span class="cm">  **/</span>
+  <span class="kd">var</span> <span class="nx">times_denom</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+  <span class="p">})();</span>
+
+  <span class="kd">var</span> <span class="nx">t_ave</span> <span class="o">=</span> <span class="p">(</span><span class="nx">times_num</span><span class="o">/</span><span class="nx">times_denom</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">points_log</span><span class="o">/</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">t_ave</span><span class="o">/</span><span class="nx">ten_days</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">score</span><span class="p">();</span>
+</code></pre></div>
+
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
+                    <a href="/2012/09/16/ruby-schemaverse.html">Rubies on Elephants in Space</a>
+                  </h2>
+                  <small>A ruby wrapper to play Schemaverse</small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://github.com/sailias">Jon Salis</a> on 16 Sep 2012
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p><a href="http://schemaverse.com">Schemaverse</a> is a MMO written entirely in Postgres and promotes my favourite play style when it comes to gaming; botting. It&#39;s cheating, I&#39;m a horrible person and I should be banned from every game I play (I mean that). As a programmer and a gamer (who hates to lose), I can&#39;t resist combining my two passions. I was reading a <a href="http://news.ycombinator.com/item?id=3969108">HackerNews article</a> about Schemaverse and it peaked my interest. A game meant to be played by programmers in SQL where scripting is the norm. My bot vs yours? Do we play for keeps?</p>
+
+<p>As a rubyist I wanted to play the game but writing scripts in PL/pgSQL wasn&#39;t exactly my first choice and it might not be yours either. So after contacting <a href="https://github.com/Abstrct">Abstrct</a> the creator of Schemaverse, I set out to write a ruby wrapper to play the game. Together we created a public github project which players can fork and deploy for free to <a href="http://heroku.com">Heroku</a>.</p>
+
+<h3>Getting Started</h3>
+
+<p>In order to play you must register at <a href="https://schemaverse.com/">Schemaverse.com</a>. You do not need to give an email address, just a username and password.</p>
+
+<p><a href="https://help.github.com/articles/fork-a-repo">Fork</a> <a href="https://github.com/func-i/ruby-schemaverse">ruby-schemaverse</a> and begin modifying the strategy inside <a href="https://github.com/func-i/ruby-schemaverse/blob/master/lib/schemaverse.rb">schemaverse.rb</a>.</p>
+
+<p>The current code contains basic game play which will do the following:
+* Build miners on your conquered planets to gather fuel
+* Upgrade the mining abilities of your ships
+* Build new ships to travel to other planets and conquer them
+* Attack any ships that enters your range</p>
+
+<h3>Heroku</h3>
+
+<p>Once you have your strategy ready to do battle, you can deploy it to Heroku. If you do not have an account, visit <a href="http://www.heroku.com/">Heroku.com</a> and sign up. It&#39;s free and your sign up comes with one free worker.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
+<span class="nv">$&gt;</span> heroku create
+<span class="nv">$&gt;</span> heroku config:add <span class="nv">SCHEMAVERSE_USERNAME</span><span class="o">=</span>YOUR_USERNAME
+<span class="nv">$&gt;</span> heroku config:add <span class="nv">DATABASE_URL</span><span class="o">=</span>postgres://YOUR_USERNAME:YOUR_PASSWORD@db.schemaverse.com/schemaverse
+<span class="nv">$&gt;</span> git push heroku master
+<span class="nv">$&gt;</span> heroku ps:scale <span class="nv">worker</span><span class="o">=</span>1
+</code></pre></div>
+
+<h3>It&#39;s on!</h3>
+
+<p>I will be perfecting my script on an ongoing basis. Feel free to pit your gaming and ruby expertise against mine!</p>
+
+<h3>Additional Documentation</h3>
+
+<ul>
+<li><a href="http://www.rubydoc.info/github/func-i/ruby-schemaverse/master/frames">RDoc</a></li>
+<li><a href="https://schemaverse.com/tutorial/tutorial.php">Schemaverse tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
+                    <a href="/2012/09/01/better-bundler.html">Better Bundler</a>
+                  </h2>
+                  <small>Bundler gets better local gem support</small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://github.com/sailias">Jon Salis</a> on 01 Sep 2012
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p>There are times when developing that we need to tweak a gem to better suit our needs.   Consider the following Gemfile:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span>
+</code></pre></div>
+
+<p>This will fetch the latest Nokogiri tag from RubyGems and install it in your $GEM_PATH.  What if you want to modify the nokogiri gem and submit a pull request?</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git@github.com:Sailias/nokogiri.git&#39;</span>
+</code></pre></div>
+
+<p>This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork, then bundle update. If I commit some bad code, I will end up cluttering my commit log with garbage, so this approach is not even a real option.
+What we really need to do is include a local version of our gem in our project.</p>
+
+<h3>Here comes :path</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/nokogiri&#39;</span>
+</code></pre></div>
+
+<p>Up until now, using the path option was the recommended approach. This will use a local repository where I can freely modify it as I see fit.  From there I can commit and push my changes up.</p>
+
+<p>This approach does come with some drawbacks, though.</p>
+
+<p>Once included in your Gemfile, all developers will now have to install a local version of this gem in the path specified, even if they don&#39;t plan on modifying the gem like you do. This means the Gemfile is no longer production ready, the app can break and you now have a file that cannot be committed.  You could also run into path problems depending on your platform. What if we could still use a local gem <em>if we wanted to</em> and also allow the user to specify the location? A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a>, which resulted in...</p>
+
+<h3>Bundler&#39;s latest answer</h3>
+
+<p>Recent <a href="https://github.com/carlhuda/bundler/pull/1779">commits</a> from <a href="https://github.com/josevalim">José Valim</a> to bundler have added functionality to configure local paths for each gem.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
+<span class="nv">$&gt;</span> bundle config local.nokogiri /path/to/local/nokogiri
+</code></pre></div>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git@github.com:Sailias/nokogiri.git&#39;</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span>
+</code></pre></div>
+
+<p>That&#39;s it! Bundler has now been configured to use the version of nokogiri at the specified location! This feature only works for git dependencies and the branch option is required because it will match up with the branch in the local path to ensure your local gem isn&#39;t on another branch. You can also switch between branches of this gem using this functionality.</p>
+
+<p>Bundler will work just like path and will still load your local changes, but will also keep track of the current revision in your Gemfile.lock in order to stay in sync with remote changes. This is a much more dynamic approach than :path, which allows each user to control their config, yet still keeps the simplicity that makes bundler <em>amazing</em>.</p>
+
+        </div>
+      </div>
+    </div>
+  
+  <div class="text-center">
+    <ul class="pagination">
+      
+
+      
+    </ul>
+  </div>
+</div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Web Applications Versus a Balkanized Internet</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2014/02/14/web-apps-v-balkanized-net.html">Web Applications Versus a Balkanized Internet</a>
+                      </h2>
+                      <small></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://twitter.com/jakehirschallen">Jake Hirsch-Allen</a> on 14 Feb 2014
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>//update: Chris Dixon similarly recently mourned &quot;<a href="//www.cdixon.org/2014/04/07/the-decline-of-the-mobile-web/">The decline of the mobile web</a>.&quot;</p>
+
+<p>//update: This is a great infographic on responsive design by <a href="http://www.functionalimperative.com/">Functional Imperative</a> design partner <a href="http://www.objectivesubject.com/">Objective Subject</a>: [http://t.co/t7UDPEUSyA]</p>
+
+<p>//update: <a href="http://blog.codinghorror.com/app-pocalypse-now/">This great recent piece</a> by the indomitable <a href="http://twitter.com/codinghorror">@codinghorror</a> <a href="http://en.wikipedia.org/wiki/Jeff_Atwood">Jeff Atwood</a> - founder of <a href="http://stackoverflow.com/">Stack Overflow</a> does a fantastic job of advocating in favor of the web over native apps.</p>
+
+<h2></h2>
+
+<p>// The debate between native and responsive mobile applications is amongst the most common and important practical questions that software developers currently face. It comes up in almost every discussion I have with potential clients of Functional Imperative, my digital innovation and software development company. Hundreds if not thousands of articles have already been written on the subject (e.g. <a href="http://alistapart.com/article/responsive-web-design">1</a>,<a href="http://alistapart.com/topic/responsive-design">2</a>,<a href="http://coding.smashingmagazine.com/2011/01/12/guidelines-for-responsive-web-design/">3</a>,<a href="http://mediaqueri.es/">4</a>,<a href="http://johnpolacek.github.io/scrolldeck.js/decks/responsive/">5</a>) but most miss the bigger picture.</p>
+
+<p>Instead of addressing the practical question whether a native or web app is better for a given client (which in general I believe it is), I examine whether the internet and therefore people in general, will be better-off as a result of native software. This more general, moral and arguably more important argument raises the potential balkanization of the internet as well as issues surrounding innovation and accessibility, standards wars and technology anti-trust. Despite my continuing emotional inclination towards slick, fast, native apps, the internet and our lives are better connected by a responsive, mobile web.</p>
+
+<p>My thesis is that, in its current form, despite potentially offering better UI and more features, native software development limits the accessibility and openness of the internet and particularly the web and therefore should be avoided whenever possible. This is all aside from the more practical downsides of iOS or Java Android apps being more expensive to build, harder to update and less future-proof. Native software balkanizes the internet by creating or reinforcing corporate dominated fiefdoms that do not speak to each other or the web. The rules of these gated software communities are controlled by shareholders rather than their residents or users. Their structure is dictated by the short and longterm ambitions of their corporate creators.</p>
+
+<p>// iOS apps, perhaps the most notorious example, often don’t even communicate with each other let alone allow for access via a world wide web (hereon &quot;web&quot;) search or links to and from the web. If I add content to an app, very frequently this content will remain exclusively within this app or its isolated network. While the same is true of many networks and websites – for example most major social networks curate which content is accessible without signing-in, and many of the most authoritative news sources now limit access and openness through paywalls – there are few more widespread or impenetrable barriers between one software ecosystem and the internet than native mobile applications.</p>
+
+<p>Much writing on the balkanization of the internet and software relates to <a href="http://www.mckinseyquarterly.com/The_balkanization_of_the_Internet_202">hardware</a> or <a href="http://en.wikipedia.org/wiki/Splinternet">political censorship</a>. Here, however, I focus on a software specific phenomena that has massive implications for the future of the internet: Apple versus Google versus Microsoft’s oligarchies populated by third party apps that prevent linking to the web writ large let alone other software ecosystems. Often, once an app becomes extremely widespread, its ubiquity forces a degree of integration (as an example, see Instragram’s progression from an iOS application with an internal network of content inaccessible except via the Instragram app). Nevertheless a significant disconnection is true of the vast majority of native apps that have not attained massive scale and even many that have.</p>
+
+<p>The oligarchs argue their communities benefit from greater integration with their operating systems or hardware and guarantee this by limiting access to many software and hardware features to only native apps. For example, see <a href="http://www.baekdal.com/opinion/apple-is-limiting-the-new-google-chrome-for-ios">Baekdal’s extensive explanation</a> of why Apple does not give third party apps access to the latest version of webkit on iOS, thereby ensuring that Safari remains the dominant app to browse on the device. Such constraints exist on almost all mobile devices and are now appearing on desktops as the corporations that are coming to dominate the web create gatekeepers for their software. These &quot;stores&quot;, whether iTunes or Google Play, impose barriers to interconnectivity that are antithetical to many of the best aspects of the world wide web and which could stunt the internet’s growth and accessibility.</p>
+
+<p>// <a href="http://www.theguardian.com/technology/2012/apr/15/web-freedom-threat-google-brin">Google’s Sergey Brin claims</a> these &quot;walled gardens&quot; pose a threat to the freedom of the internet. These gated communities are reminiscent of a time when Microsoft beat Apple by opening its hardware and software to third party manufacturers except now the closed systems are winning. Users are opting for ease over freedom and thoughtlessness over connectivity and complexity.</p>
+
+<p><a href="http://www.birminghambusinesslaw.com/2012/09/the-coming-standards-war-google-vs-apple/">Tripp Watson describes the current predicament</a> as a Google v. Apple standards war and likens it to past standards wars such as those over railroad gauges, 8-Track vs. Compact Cassette VHS vs. Betamax and Apple vs. Microsoft. Trip bets on Google, describing Apple’s current iOS only app focused approach as censorship and arguing that the same close-mindedness resulted in their losing the earlier war to Microsoft. While I don’t disagree with his condemnation of Apple, Google too has an interest in a less open web. Its curation of search results and growing ecosystem of web, mobile and desktop apps and operating systems may be doing more evil than their motto would suggest.</p>
+
+<p>Each oligarch criticizes the other. Sergey Brin states &quot;the rise of Facebook and Apple, which have their own proprietary platforms and control access to their users, risks stifling innovation and balkanising the web.&quot; He justifiably criticizes Apple’s sequestration of the massive amount of content contained in the iOS community from his greatest asset, Google’s search. Yet his reasoning is too limited. The problem is not just that this content is not searchable, it is that it is often not accessible via the web at all.</p>
+
+<p>Not only is &quot;<a href="http://battellemedia.com/archives/2012/08/what-is-search-now-disjoined.php">Google’s core model – built on the open, linked world of the web…under threat from the advance of the iPhone and the app, the Facebook and the Path, the automobile console, the Xbox, the cable box, and countless other ‘unlinked’ digital artifacts</a>&quot;; not only, should Google &quot;be worried as hell as people turn to apps at the expense of search&quot; but we should all be more worried that native applications are limiting the connectivity, the breadth and the openness of the web.</p>
+
+<p>// Moving beyond search, another parallel to the native vs. web app debate is the e-book standard war. As an intellectual property lawyer, I am constantly frustrated by the limitations that copyright and patent laws have imposed on creativity. These constraints are knowingly being reinforced by technology to the detriment of access to knowledge.</p>
+
+<p>On principle, it is hard to argue that the world would not be better off if access to (e)books increased. However, <a href="http://gyrovague.com/2012/04/30/why-e-books-will-soon-be-obsolete-and-no-its-not-just-because-of-drm/">Jani Patokallio’s description of the balkanization of e-publishing</a> shows e-books moving in the opposite direction. Thankfully Patokallio bets on the open web rather than locked down epub standards despite the skyrocketing sales of e-books in a format that locks down their content into a silo, limits their purchasing choices based on where their credit card happens to have been registered, is designed to work best on devices that are rapidly becoming obsolete, and support only a tiny subset of the functionality available on any modern website.</p>
+
+<p>Yet I remain worried. I agree with the benefits Patokallio ascribes to an open web but I worry that these merits will be outweighed by the power of the established oligarchs, whether they are publishing houses or tech companies.</p>
+
+<p>Patokallio states:</p>
+
+<blockquote>
+<p>On the Web, the very idea that the right to read a website would vary from country to country seems patently absurd. Cyberspace is flat, after all, just computers talking to computers. You, the reader, do not need to concern yourself with where these electrons on your screen are coming from, and neither do I, their publisher, need to care where they are going. And when somebody attempts to artificially block those electrons — say, China and its Great Firewall — it’s the kind of the thing that the US Congress and the World Trade Organization get worked up about.</p>
+</blockquote>
+
+<p>Yet such organizations don’t care about app stores and network interconnectivity. When was the last time the WTO did anything about China’s Great Firewall? And even if they were to, what are the chances of them acting in reaction to differing editions of an ebook or Apple’s app store?</p>
+
+<p>// <a href="http://www.wired.com/business/2013/04/marc-andreessen-and-rockmelt-betting-on-desktop/">Michael Copeland, writing for Wired</a>, presents a compelling argument in support of the mobile web based on a Marc Andreessen thought exercise:</p>
+
+<blockquote>
+<p>Let’s say we all grew up in tech world where we only used tablets and smartphones. Then one day, someone comes up to you with a 27-inch display hooked up to a notebook. You could have everything you have on your tablets and smartphones, and then some. Except you don’t have to download anything or update it. Everything is the latest and greatest, and just one click away. If you are a software developer, there are no gatekeepers telling you if your latest creation is approved, or when you can add the latest flourish.</p>
+</blockquote>
+
+<p>Andreessen’s conclusions is that this is</p>
+
+<blockquote>
+<p>why in the long run the mobile web is going to dominate native apps, and for the same reason that on the desktop the web dominates apps. When the web works for something, it works way better in a whole lot of ways than a downloadable app.</p>
+</blockquote>
+
+<p>But Copeland is actually arguing the opposite of Andreessen and I. He’s right that Andreessen is conflating two different debates because &quot;you can choose between either type of app (native or web) on either type of computer (desktop or mobile).&quot; And he’s also correct that claiming &quot;the web&quot; is the solution is overly simplistic:</p>
+
+<blockquote>
+<p>Facebook, bless them, has it right. What’s great about the web is ubiquitous network availability, not running within a browser tab. Websites are just services, and what you see in a browser tab is merely one possible interface to that service. The best possible interface to that service is often, if not usually, going to be a native app, not a web app.</p>
+</blockquote>
+
+<p>The hard part is that Copeland is correct in claiming that &quot;the dynamic remains unchanged. Web apps are the best way to reach the most possible people with the least effort; native apps are the best way to create the best possible experience.&quot;</p>
+
+<p>Emotionally, I agree with Copeland. Native does offer more functionality and I prefer it. I like the feeling of owning an app and of running an app better than having everything exist in my browser. And native apps often run better in one way or another. I have yet to see the frictionless UI and subtly captivating aesthetics of <a href="https://path.com/">Path</a> or <a href="http://500px.com/">500px</a>&#39;s native apps in a web app.</p>
+
+<p>// But the gap is closing (e.g. see <a href="http://forecast.io/">forecast.io</a> or <a href="http://www.nimbletank.com/">nimbletank</a> on iOS) and developers should not always make strategic decisions exclusively based on their client’s short-term satisfaction. The wonder of the internet is its complete interoperability – everything can link to everything – and with that ability comes great hope for an open source world in which open APIs and software will tear down the proprietary software walls that parallel the legal and physical walls created by so many corporations. In order to sustain this hope, developers need to build apps that are not just beautiful and have amazing functionality, but are also ethical, accessible, connected and open. In other words, they need to build web apps.</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>

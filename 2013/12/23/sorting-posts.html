@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Sorting Posts by User Engagement Level</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2013/12/23/sorting-posts.html">Sorting Posts by User Engagement Level</a>
+                      </h2>
+                      <small></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://twitter.com/clusterfoo">Noam Gagliardi</a> on 23 Dec 2013
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>At Functional Imperative we&#39;re building the new <em>CanLII Connects</em> website (a social portal for Canada&#39;s largest database of legal cases), and this week I was given the task of figuring out a sensible way of sorting posts.</p>
+
+<p>Figuring out how to sort user-generated content is a common problem that many social websites face.</p>
+
+<p>Here&#39;s Reddit&#39;s scoring equation for &#39;Best&#39; <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">(source and explanation)</a>:</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/reddit_best.png" alt="Reddit&#39;s &#39;best&#39; scoring equation"></p>
+
+<p>Not all scoring equations are that hairy, <a href="http://moz.com/blog/reddit-stumbleupon-delicious-and-hacker-news-algorithms-exposed">here are a few more</a>.</p>
+
+<p>Interestingly enough, Reddit&#39;s &#39;Hot&#39; scoring function (explained in link above):</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/reddit_hot_algo.png" alt="Reddit&#39;s scoring equation"></p>
+
+<p>is <a href="http://technotes.iangreenleaf.com/posts/2013-12-09-reddits-empire-is-built-on-a-flawed-algorithm.html">quite flawed</a>.</p>
+
+<blockquote>
+<p><strong>Sidenote</strong>: One observation not mentioned in that first article is that, while all other equations use some form of <code>time_now - time_posted</code> to calculate how old a post is, the clever guys at Reddit use <code>time_posted - some_old_date</code>.</p>
+
+<p>The advantage of this is that the post&#39;s score need only be calculated once, whereas the value of scores calculated with <code>time_now</code> will change on every request.</p>
+</blockquote>
+
+<p>Anyway, while all those scoring functions work pretty well, they didn&#39;t quite
+fit the requirements for <em>CanLII Connects</em>.</p>
+
+<p>In this post, I&#39;ll walk through the decision process of creating a scoring
+function. Hopefully this will be useful if you encounter a similar feature to
+implement.</p>
+
+<h3>Requirements:</h3>
+
+<p><em>CanLII Connects</em> links to a database of legal cases, and users can post opinions on those cases:</p>
+
+<ol>
+<li>A user can post.</li>
+<li>A user can upvote a post.</li>
+<li>A user can comment on a post.</li>
+<li>A user can comment on a comment on a post.</li>
+</ol>
+
+<p>So what&#39;s a sensible way of sorting posts?</p>
+
+<p>Right away, we&#39;re dealing with a different problem than Reddit or HN: while it makes sense to slowly degrade the score of a post on those sites over time, the same does not make sense for CanLII. Old cases might be cited at any time, no matter how old they are, so what matters is not how old a discussion is, but rather how actively engaged users are within a given discussion.</p>
+
+<h3>Initial Score</h3>
+
+<p>Ok, so first we have to give each post an initial score. I like Reddit&#39;s approach of taking the base-10 log of its upvotes. This makes sense because, the more popular a post already is, the more likely people are to see it, and therefore upvote it, which gives it an unfair advantage. </p>
+
+<p>In our case, we&#39;re not only trying to measure how much people &quot;like&quot; a post, but rather how engaged they are with it. It makes sense that, while an upvote is a fine indicator of &quot;engagedness&quot;, a user actually bothering to comment on a post is even more of an indicator. I&#39;ll count that as equivalent to two upvotes, and a user commenting on a comment will count as three upvotes (the 2 is so we don&#39;t take the log of 1 or 0): </p>
+
+<script type="math/tex; mode=display">
+    log_{10}(2 + u + 2c + 3cc)
+</script>
+
+<h3>Frequency</h3>
+
+<p>Next, we need the post&#39;s position to degrade as it becomes less active. It makes
+sense to divide the intial score by some factor of time:</p>
+
+<script type="math/tex; mode=display">
+    \cfrac{ log_{10} (2+u+2c+3cc) }{ \bar{t} }
+</script>
+
+<p>Now we need a reasonable value for <span class="mj"><code>t_ave</code></span>$$ \bar{ t } $$. A good start is the average time, in seconds, between the three most recent user interactions with a post. </p>
+
+<p>We define a user interaction to be: a user creates a post, a user comments on a post, or a user upvotes a post.</p>
+
+<p>Also, we want the most recent interactions to weigh more than older interactions. So let&#39;s say each <code>t</code> weighs twice as much as the previous:</p>
+
+<script type="math/tex; mode=display">
+    \bar{ t } = \cfrac{\sum\_{i=1}^3 \left(\frac{1}{2}\right)^{i-1} * (t_i - t\_{i-1}) }{ \sum\_{i=1}^3  \left(\frac{1}{2}\right)^{i-1}}
+</script>
+
+<p>Where</p>
+
+<p>$$ t_0 $$ = <a href="http://en.wikipedia.org/wiki/Unix_time">UNIX timestamp</a>, at now, in seconds.</p>
+
+<p>$$ t_n $$ = UNIX timestamp of n<sup>th</sup> interaction.</p>
+
+<h3>One Final Detail</h3>
+
+<p>There is one last property we want this function to have, which is the following: if interactions are very frequent right now (within a timeframe of, say, 10 days), then clearly the post is &quot;hot&quot;, and its score should be boosted. But as time passes, it really doesn&#39;t matter as much how much distance there is between interactions. If a post has already gone a full year without anyone commenting on it, does it really make that much difference if it goes another month without a comment?</p>
+
+<p>To accomplish the first property, all we do is divide $$ \bar{ t }$$ by the number of seconds in 10 days: <code>60*60*24*10</code>.</p>
+
+<p>To accomplish the second property, what we are looking for is some sort of always-increasing, concave function (positive derivative, negative second derivative). The first thing that comes to mind is the square-root function, which is good enough.</p>
+
+<h3>Result</h3>
+
+<p>And thus we have our final scoring function:</p>
+
+<script type="math/tex; mode=display">
+    \cfrac{ log_{10} (2 + u + 2c + 3cc) }{ \sqrt{ \bar{t}/60 * 60 * 24 * 10 }}
+</script>
+
+<p>If we plot this equation for <code>x = number of points</code> and <code>y = time</code>, we can see the shape of this function and check for different values if they make sense:</p>
+
+<p><img src="http://clusterfoo.com/assets/images/2014/scoring_function_shape_2.jpg" alt="Scoring function 3D plot"></p>
+
+<p>As expected, there is a steep 10-day &quot;boost&quot; period, followed by an increasingly  slower decline in the value as more and more time passes.</p>
+
+<blockquote>
+<p>The function is also heavily biased toward very new posts, which will always come
+out on top, giving them a chance. This might be a bad idea if posting becomes 
+frequent, but user interaction is low (many summaries a day, few votes or comments), 
+and might have to be changed.</p>
+
+<p>There are many ways to tweak this equation (changing the boost period, for example)
+to make it more or less biased towards either time or user interaction.</p>
+</blockquote>
+
+<h3>Bonus Round: Implementing in ElasticSearch</h3>
+
+<p>Implementing a custom scoring function in Elasticsearch, though easy once it&#39;s all set up, was rather frustrating because of the poor documentation.</p>
+
+<p>For our implementation, we&#39;re using the <code>tire</code> gem (a wrapper around the Elasticsearch API). This is where we call the custom scoring script:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">query</span> <span class="k">do</span>
+  <span class="n">custom_score</span> <span class="ss">script</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span> <span class="ss">lang</span><span class="p">:</span> <span class="s1">&#39;javascript&#39;</span> <span class="k">do</span>
+    <span class="n">string</span> <span class="n">query</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; OR &quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Where <code>script</code> is simply a variable holding the contents of a javascript file as a string. Note the option <code>lang: &#39;javascript&#39;</code>. This lets us use javascript as our language of choice, as opposed to <a href="http://mvel.codehaus.org/">mvel</a>, the most poorly documented scripting language on the face of the earth. To enable this option, we&#39;ll also require the <a href="https://github.com/elasticsearch/elasticsearch-lang-javascript">elasticsearch-lang-javascript</a> plugin.</p>
+
+<p>Here is our script:</p>
+
+<blockquote>
+<p><strong>Sidenote:</strong> Notice the logger function. This enables us to implement a sort of &quot;console.log&quot;
+which we can read using the following shell command <code>tail -f /var/log/elasticsearch/elasticsearch.log</code>.</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Logger function:</span>
+<span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">org</span><span class="p">.</span><span class="nx">elasticsearch</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">logging</span><span class="p">.</span><span class="nx">Loggers</span><span class="p">.</span><span class="nx">getLogger</span><span class="p">(</span><span class="s2">&quot;rails_logger&quot;</span><span class="p">);</span>
+<span class="c1">// Example usage:</span>
+<span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">&quot;========= NEW CALC ===========&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">points_log</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">points_log</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
+
+<span class="cm">/**</span>
+<span class="cm">* NOTE: doc.ts.values is not actually an array,</span>
+<span class="cm">* here I create an array out of it:</span>
+<span class="cm">**/</span>
+<span class="kd">var</span> <span class="nx">ts</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="nx">ts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+<span class="c1">// Newest first</span>
+<span class="nx">ts</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Boost period.</span>
+<span class="cm">**/</span>
+<span class="kd">var</span> <span class="nx">ten_days</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">* The scoring function</span>
+<span class="cm">**/</span>
+<span class="kd">function</span> <span class="nx">score</span><span class="p">()</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">  * Weighed average numerator</span>
+<span class="cm">  **/</span>
+  <span class="kd">var</span> <span class="nx">times_num</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">)</span> <span class="o">*</span> 
+             <span class="p">(</span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">-</span>
+             <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+  <span class="p">})();</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Weighed average denominator</span>
+<span class="cm">  **/</span>
+  <span class="kd">var</span> <span class="nx">times_denom</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+  <span class="p">})();</span>
+
+  <span class="kd">var</span> <span class="nx">t_ave</span> <span class="o">=</span> <span class="p">(</span><span class="nx">times_num</span><span class="o">/</span><span class="nx">times_denom</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">points_log</span><span class="o">/</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">t_ave</span><span class="o">/</span><span class="nx">ten_days</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">score</span><span class="p">();</span>
+</code></pre></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>
