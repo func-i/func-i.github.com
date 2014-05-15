@@ -132,6 +132,250 @@
               <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
                 <div class="text-content">
                   <h2>
+                    <a href="/2014/05/10/namespacing-your-crap.html">A Namespacing Function for Client-Side Javascripts</a>
+                  </h2>
+                  <small></small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://twitter.com/clusterfoo">Noam Gagliardi</a> on 10 May 2014
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p>Here&#39;s a simple method you can use to namespace your client-side scripts.
+There&#39;s many ways to do this, probably better ones. The point is to do it at
+all.</p>
+
+<p>Suppose we&#39;ve two scripts, <code>foo.js</code> and <code>bar.js</code>.</p>
+
+<h3>foo.js:</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+</code></pre></div>
+
+<h3>bar.js:</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Bar!&quot;</span><span class="p">)</span> <span class="p">};</span>
+</code></pre></div>
+
+<p>This is what most javascripts look like. This is why puppies die, the
+bad guys always win, and we can never have anything nice.</p>
+
+<p>So, before we even worry about namespacing, let&#39;s start with the
+essentials: always wrap it.
+We don&#39;t want to muddy up our global namespace. Ever. Except when we do.</p>
+
+<blockquote>
+<p><strong>First rule of Javascript:</strong> Always wrap everything.</p>
+</blockquote>
+
+<p>Just like they taught you
+in school. (Unless you went to one of those schools down south where they
+teach that the only
+sure-fire way to prevent name collisions is to never write code in the first
+place -- yet here you are, so how&#39;d that work out?)</p>
+
+<h3>foo.js</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="c1">// semicolon to avoid concatenation errors</span>
+    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+    <span class="p">})();</span> <span class="c1">// &lt;-- function calls itself.</span>
+
+    <span class="c1">// Nice and clean global context.</span>
+</code></pre></div>
+
+<p>Ok, now we&#39;re ready for our namespacing function. This function creates a
+function that initiates a namespace:</p>
+
+<h3>appendToNamespace()</h3>
+
+<div class="highlight"><pre><code class="javascript">     <span class="kd">function</span> <span class="nx">appendToNamespace</span><span class="p">(</span><span class="nx">namespace</span><span class="p">,</span> <span class="nx">elementName</span><span class="p">,</span> <span class="nx">elementValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// If namespace has already been initialized, simply append new</span>
+        <span class="c1">// element.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// If namespace has not been initialized, but an initialization function</span>
+        <span class="c1">// exists, copy its old value so that new initialization function may</span>
+        <span class="c1">// call it.</span>
+        <span class="kd">var</span> <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Create function that intializes namespace.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">!==</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="c1">// Call old initialization function too.</span>
+            <span class="nx">oldNamespaceFunction</span><span class="p">();</span>
+            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+</code></pre></div>
+
+<p>Now foo.js becomes:</p>
+
+<h3>foo.js</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">appendToNamespace</span><span class="p">(</span><span class="s2">&quot;YourNameSpace&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="nx">foo</span><span class="p">)</span>
+        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+    <span class="p">})();</span>
+</code></pre></div>
+
+<p>Ditto for bar.js.</p>
+
+<h3>index.html</h3>
+
+<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// initialize YourNameSpace</span>
+                <span class="nx">YourNameSpace</span><span class="p">();</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// Now your scripts are available under the YourNameSpace</span>
+                <span class="c1">// object.</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+
+<p>Note that it doesn&#39;t matter in what order initialization happens:</p>
+
+<h3>index.html</h3>
+
+<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// initialize YourNameSpace beofre second script is loaded.</span>
+                <span class="nx">YourNameSpace</span><span class="p">();</span>
+            <span class="nt">&lt;/script&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+
+<p>Of course, it&#39;s possible to do this in such a way that initialization is not
+necessary at all. The reason I choose to it this way is because explicitly
+requiring the script to initialize the namespace makes it easier to write
+scripts that play nice across platforms (say, when using libraries
+like browserify.</p>
+
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
+                    <a href="/2014/04/23/hiring-from-bootcamps.html">Why I Hire From Lighthouse Labs</a>
+                  </h2>
+                  <small></small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="/about/jb.html">Josh Borts</a> on 23 Apr 2014
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p>Note: This is a cross-post from the <a href="http://www.lighthouselabs.ca/blog/">Lighthouse Labs blog</a>.</p>
+
+<p>As co-owner of <a href="http://lighthouselabs.ca">Lighthouse Labs</a> and Functional Imperative, I am in the unique position to understand the realities of hiring students from developer bootcamps like ours. Therefore, one of the questions I get asked most often is what we look for when hiring. To us, hiring a good developer comes down to culture and certain, critical characteristics that we value at FI. In the paragraphs below, I’ll take you through Functional Imperative’s decision to invest in talent emanating from bootcamps.</p>
+
+<p>Over the past year, Functional Imperative has grown from a small team of senior developers to a larger more diverse group, with different backgrounds, skills levels and interests. This growth, fueled by our investment in the bootcamp model, has had a drastic impact on our company’s culture and processes, mostly for the better. In fact, some of Functional Imperative’s best talent has come from bootcamps.</p>
+
+<p>Though I would deem the changes successful, it has not always been easy. One of the hardest problems we have faced has been the balance between speed, code quality and the freedom to learn; things that are often at odds in the fast paced consulting world, where deadlines are often tight and clients fickle. While my responsibility used to sit solely with the client, it has now become split between the short-term requirements of my projects and the longer-term development of my employees. A classic management problem; but one that has particular ramifications for a small company, where cash flow is always an important consideration. I have also remained cognizant that Functional Imperative is considered a top quality agency specifically because of the innovative thinking my team possesses, something that can easily be bogged down in too much process.</p>
+
+<p>So how have we balanced these competing interests? We:</p>
+
+<ul>
+<li> Introduced code reviews. When our team was small, it was easy to get away without (bad practice, I know). But with more junior developers onboard, this became a must have and allows me to control what gets released to the client.</li>
+<li> Promoted a senior dev to act as a roving problem solver / teacher / mentor / ass kicker. Basically a team lead, his responsibility is to make sure all projects are moving forward technically</li>
+<li> Instituted the “20-MINUTE RULE”. All devs have had it beaten into them that they (slash google) are to spend 20 minutes trying to solve their own problem. At that point, they must reach out to our roving problem solver</li>
+<li> Each Friday afternoon, each developer gives a short talk on something they learnt that week</li>
+<li> Once a month, we have “InnoFri”, a day for everyone to play with whatever technology they want. Followed by a group activity, dinner and drinks</li>
+<li> These changes have provided us a framework where our developers have the freedom to learn and innovate while at the same time providing levels of guarantees around code quality and deliverables.</li>
+</ul>
+
+<p>Not just any developer, however, will work well within our company. Some of Functional Imperative’s best assets, flexibility and individual responsibility, may not be right for those that seek a structured environment, with more, for lack of a better word, hand holding.</p>
+
+<p>This of course is not the only model. For many students, the best course of action is to find a position where they can grow slowly, with layers of resources set up for them to succeed. For those students, larger teams inside of bigger organizations may be the best bet.</p>
+
+<p>For teams like mine (read startups), however, I require self-starters who want to thrive in fast-paced environments. I give every person on my team a lot of responsibility and the expectations is that they will figure out a way to deliver, come hell or high water. In fact, it is not uncommon for a junior developer on my team to own an entire client project; from the decision of what technology, to the architecture, testing and deployment. We are of course there to guide them, but they are the ones who will be answering client calls at 3AM if something in production breaks.</p>
+
+<p>This is one of the advantages of hiring from Lighthouse Labs. Having taken the leap and decided to own the direction of their career by enrolling in a program like ours, I already know that these candidates have the thirst for knowledge, the motivation and the initiative to succeed in any workplace.</p>
+
+<p>With these traits in place, I know I am investing in a junior developer, but I am confident they will quickly gain the knowledge needed to make me look great! I have been so enamoured by the quality of individuals in these programs that it was a no-brainer to help found Lighthouse Labs and I couldn’t be happier so far with the results.</p>
+
+<p>While these soft skills are essential, the final skill I look for when hiring is easily the most important. To be a great developer, you need to be an amazing debugger. I can’t stress enough how important good debugging skills are. Often, the main difference between a junior and advanced developer is simply their comfort level with Chrome dev tools or Pry. Code does break, whether it’s your own or someone else’s, it’s really just a matter of when. Being able to quickly determine what parts of the code are responsible will save you hours upon hours of trouble.</p>
+
+<p>This is why when we started Lighthouse Labs, we made a concerted effort to put the focus on debugging. Throughout the course students spend time reading each other’s code and becoming familiar with the tools available to track down bugs. There is even an entire week spent fixing issues within open source projects. My motto, if you can fix it you can build it.</p>
+
+<p>Want to work at Functional Imperative but don’t know how to code? Apply to Lighthouse Labs and you will already be showing the initiative we look for. We can take it from there.</p>
+
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
                     <a href="/2014/02/14/web-apps-v-balkanized-net.html">Web Applications Versus a Balkanized Internet</a>
                   </h2>
                   <small></small>
@@ -527,85 +771,12 @@ which we can read using the following shell command <code>tail -f /var/log/elast
       </div>
     </div>
   
-
-    <!-- liquid assignments -->
-    
-
-    <div class="row collapse post">
-      <div class="large-3 medium-4 columns">
-        <div class="canvas">
-          <div class="row collapse post-info">
-            <div class="small-12 columns">
-              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
-                <div class="text-content">
-                  <h2>
-                    <a href="/2012/09/01/better-bundler.html">Better Bundler</a>
-                  </h2>
-                  <small>Bundler gets better local gem support</small>
-                </div>
-              </div>
-            </div>
-            <div class="large-8 medium-7 small-6 columns">
-              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
-                <div class="text-content">
-                  <small>
-                    by <a href="http://github.com/sailias">Jon Salis</a> on 01 Sep 2012
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="large-9 medium-8 columns">
-        <div class="post-content">
-          <p>There are times when developing that we need to tweak a gem to better suit our needs.   Consider the following Gemfile:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span>
-</code></pre></div>
-
-<p>This will fetch the latest Nokogiri tag from RubyGems and install it in your $GEM_PATH.  What if you want to modify the nokogiri gem and submit a pull request?</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git@github.com:Sailias/nokogiri.git&#39;</span>
-</code></pre></div>
-
-<p>This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork, then bundle update. If I commit some bad code, I will end up cluttering my commit log with garbage, so this approach is not even a real option.
-What we really need to do is include a local version of our gem in our project.</p>
-
-<h3>Here comes :path</h3>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/nokogiri&#39;</span>
-</code></pre></div>
-
-<p>Up until now, using the path option was the recommended approach. This will use a local repository where I can freely modify it as I see fit.  From there I can commit and push my changes up.</p>
-
-<p>This approach does come with some drawbacks, though.</p>
-
-<p>Once included in your Gemfile, all developers will now have to install a local version of this gem in the path specified, even if they don&#39;t plan on modifying the gem like you do. This means the Gemfile is no longer production ready, the app can break and you now have a file that cannot be committed.  You could also run into path problems depending on your platform. What if we could still use a local gem <em>if we wanted to</em> and also allow the user to specify the location? A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a>, which resulted in...</p>
-
-<h3>Bundler&#39;s latest answer</h3>
-
-<p>Recent <a href="https://github.com/carlhuda/bundler/pull/1779">commits</a> from <a href="https://github.com/josevalim">José Valim</a> to bundler have added functionality to configure local paths for each gem.</p>
-
-<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
-<span class="nv">$&gt;</span> bundle config local.nokogiri /path/to/local/nokogiri
-</code></pre></div>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git@github.com:Sailias/nokogiri.git&#39;</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span>
-</code></pre></div>
-
-<p>That&#39;s it! Bundler has now been configured to use the version of nokogiri at the specified location! This feature only works for git dependencies and the branch option is required because it will match up with the branch in the local path to ensure your local gem isn&#39;t on another branch. You can also switch between branches of this gem using this functionality.</p>
-
-<p>Bundler will work just like path and will still load your local changes, but will also keep track of the current revision in your Gemfile.lock in order to stay in sync with remote changes. This is a much more dynamic approach than :path, which allows each user to control their config, yet still keeps the simplicity that makes bundler <em>amazing</em>.</p>
-
-        </div>
-      </div>
-    </div>
-  
   <div class="text-center">
     <ul class="pagination">
       
 
+      
+        <li><a href="/blog/page2">Older &raquo;</a></li>
       
     </ul>
   </div>

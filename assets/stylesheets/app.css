@@ -3950,7 +3950,7 @@ a {
   .highlight .nn {
     color: #555555; }
   .highlight .nt {
-    color: navy; }
+    color: #03a8ab; }
   .highlight .nv {
     color: #ffbd1b; }
   .highlight .ow {
@@ -4181,8 +4181,9 @@ header {
   .post-content a {
     color: #ffbd1b; }
   .post-content li {
-    line-height: 1.4rem;
-    margin-left: 2rem; }
+    line-height: 1.6;
+    margin-left: 2rem;
+    margin-bottom: 2rem; }
   .post-content ol {
     margin-bottom: 1.4rem; }
   .post-content img {

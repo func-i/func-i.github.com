@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>A Namespacing Function for Client-Side Javascripts</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2014/05/10/namespacing-your-crap.html">A Namespacing Function for Client-Side Javascripts</a>
+                      </h2>
+                      <small></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://twitter.com/clusterfoo">Noam Gagliardi</a> on 10 May 2014
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>Here&#39;s a simple method you can use to namespace your client-side scripts.
+There&#39;s many ways to do this, probably better ones. The point is to do it at
+all.</p>
+
+<p>Suppose we&#39;ve two scripts, <code>foo.js</code> and <code>bar.js</code>.</p>
+
+<h3>foo.js:</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+</code></pre></div>
+
+<h3>bar.js:</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Bar!&quot;</span><span class="p">)</span> <span class="p">};</span>
+</code></pre></div>
+
+<p>This is what most javascripts look like. This is why puppies die, the
+bad guys always win, and we can never have anything nice.</p>
+
+<p>So, before we even worry about namespacing, let&#39;s start with the
+essentials: always wrap it.
+We don&#39;t want to muddy up our global namespace. Ever. Except when we do.</p>
+
+<blockquote>
+<p><strong>First rule of Javascript:</strong> Always wrap everything.</p>
+</blockquote>
+
+<p>Just like they taught you
+in school. (Unless you went to one of those schools down south where they
+teach that the only
+sure-fire way to prevent name collisions is to never write code in the first
+place -- yet here you are, so how&#39;d that work out?)</p>
+
+<h3>foo.js</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="c1">// semicolon to avoid concatenation errors</span>
+    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+    <span class="p">})();</span> <span class="c1">// &lt;-- function calls itself.</span>
+
+    <span class="c1">// Nice and clean global context.</span>
+</code></pre></div>
+
+<p>Ok, now we&#39;re ready for our namespacing function. This function creates a
+function that initiates a namespace:</p>
+
+<h3>appendToNamespace()</h3>
+
+<div class="highlight"><pre><code class="javascript">     <span class="kd">function</span> <span class="nx">appendToNamespace</span><span class="p">(</span><span class="nx">namespace</span><span class="p">,</span> <span class="nx">elementName</span><span class="p">,</span> <span class="nx">elementValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// If namespace has already been initialized, simply append new</span>
+        <span class="c1">// element.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// If namespace has not been initialized, but an initialization function</span>
+        <span class="c1">// exists, copy its old value so that new initialization function may</span>
+        <span class="c1">// call it.</span>
+        <span class="kd">var</span> <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Create function that intializes namespace.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">!==</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+            <span class="c1">// Call old initialization function too.</span>
+            <span class="nx">oldNamespaceFunction</span><span class="p">();</span>
+            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+</code></pre></div>
+
+<p>Now foo.js becomes:</p>
+
+<h3>foo.js</h3>
+
+<div class="highlight"><pre><code class="javascript">    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">appendToNamespace</span><span class="p">(</span><span class="s2">&quot;YourNameSpace&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="nx">foo</span><span class="p">)</span>
+        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
+    <span class="p">})();</span>
+</code></pre></div>
+
+<p>Ditto for bar.js.</p>
+
+<h3>index.html</h3>
+
+<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// initialize YourNameSpace</span>
+                <span class="nx">YourNameSpace</span><span class="p">();</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// Now your scripts are available under the YourNameSpace</span>
+                <span class="c1">// object.</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+
+<p>Note that it doesn&#39;t matter in what order initialization happens:</p>
+
+<h3>index.html</h3>
+
+<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="c1">// initialize YourNameSpace beofre second script is loaded.</span>
+                <span class="nx">YourNameSpace</span><span class="p">();</span>
+            <span class="nt">&lt;/script&gt;</span>
+            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;script&gt;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
+                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
+            <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+
+<p>Of course, it&#39;s possible to do this in such a way that initialization is not
+necessary at all. The reason I choose to it this way is because explicitly
+requiring the script to initialize the namespace makes it easier to write
+scripts that play nice across platforms (say, when using libraries
+like browserify.</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>
