@@ -112,7 +112,7 @@
       <div class="medium-6 columns">
         <div class="square text spacer" data-type="outlined" data-rollover="true" data-color="blue">
           <div class="text-content">
-            <h2>
+            <h2 data-cms="work-head">
               Bespoke, agile, meticulous, creative
             </h2>
           </div>
@@ -121,7 +121,7 @@
 
       <div class="medium-6 columns">
         <div id="eventstream" class="square text half-image" data-type="outlined" data-rollover="true" data-color="blue">
-          <div class="text-content">
+          <div data-cms="work-eventstream-blurb" class="text-content">
             <h2>An immersive experience for broadcast viewers</h2>
             <p>
               <span class="supporting">
@@ -141,7 +141,7 @@
     <div class="row">
       <div class="small-8 small-offset-2 medium-4 large-3 columns">
         <div id="canlii" class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
-          <div class="text-content">
+          <div data-cms="work-canlii-blurb" class="text-content">
             <p>
               Social and public portal for sharing information about Canadian court decisions
               <br/>
@@ -155,7 +155,7 @@
     <div class="row">
       <div class="large-6 large-offset-3 medium-6 medium-offset-2 columns">
         <div id="votecompass" class="square text half-image" data-type="outlined" data-rollover="true" data-color="blue">
-          <div class="text-content">
+          <div data-cms="work-votecompass-blurb" class="text-content">
             <h2>Real-time voting analysis</h2>
             <p>
               <span class="supporting">
@@ -173,7 +173,7 @@
 
       <div class="large-3 medium-4 small-7 columns">
         <div id="myoscar" class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
-          <div class="text-content">
+          <div data-cms="work-myoscar-blurb" class="text-content">
             <h2>
               An online personal health record!
             </h2>
@@ -195,6 +195,8 @@
 <script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
 <script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
 <script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
 <script src="/assets/javascripts/base.js"></script>
 <script src="/assets/javascripts/header.js"></script>
 <script src="/assets/javascripts/contact.js"></script>
@@ -214,5 +216,9 @@
 <script src="/assets/javascripts/pages/index.js"></script>
 <script src="/assets/javascripts/canvas.js"></script>
 <script src="/assets/javascripts/app.js"></script>
+  <script>
+    new QuickChange("Qgj8iGq2C8eJh1PheCP6jbOJqOL6J8mKetmtrrw1", "YUv0AT10EawVQZEJpMiiua9vs8Q26FR86cEbRsyk");
+  </script>
+
   </body>
 </html>

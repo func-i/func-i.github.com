@@ -114,16 +114,16 @@
           <div class="large-8 medium-10 columns">
             <div id="address" class="square text" data-type="outlined" data-color="blue">
               <div class="text-content">
-                <h3>
+                <h3 data-cms="address">
                   67 Mowat Ave.<br/>
                   No. 402<br/>
                   Toronto, ON M6K 3E3<br/>
                   Canada
                 </h3>
-                <h3>
+                <h3 data-cms="phone-num">
                   <a href="tel:888-406-1989" target="_blank">888 406 1989</a>
                 </h3>
-                <p>
+                <p data-cms="site-email">
                   <a href="mailto:info@functionalimperative.com" target="_blank">info@functionalimperative.com</a>
                 </p>
               </div>
@@ -231,7 +231,7 @@
       </div>
       <div class="medium-3 medium-offset-2 small-9 small-offset-3 columns">
         <div id="jobs" class="square text" data-type="outlined" data-color="yellow">
-          <div class="text-content">
+          <div data-cms="contact-jobs" class="text-content">
             <h4>Working at FI</h4>
             <p>
               We’re hiring. Get in touch.<br/>
@@ -254,6 +254,8 @@
 <script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
 <script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
 <script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
 <script src="/assets/javascripts/base.js"></script>
 <script src="/assets/javascripts/header.js"></script>
 <script src="/assets/javascripts/contact.js"></script>
@@ -273,5 +275,9 @@
 <script src="/assets/javascripts/pages/index.js"></script>
 <script src="/assets/javascripts/canvas.js"></script>
 <script src="/assets/javascripts/app.js"></script>
+  <script>
+    new QuickChange("Qgj8iGq2C8eJh1PheCP6jbOJqOL6J8mKetmtrrw1", "YUv0AT10EawVQZEJpMiiua9vs8Q26FR86cEbRsyk");
+  </script>
+
   </body>
 </html>
