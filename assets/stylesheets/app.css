@@ -4297,6 +4297,17 @@ header {
   padding-top: 0;
   padding-left: .5em; }
 
+#loyalty-one .resource-section .section-content {
+  margin: 1.5rem 1.4rem 0; }
+  @media screen and (max-width: 640px) {
+    #loyalty-one .resource-section .section-content {
+      margin: 1.5rem 0; } }
+  #loyalty-one .resource-section .section-content ul li {
+    margin-bottom: 1em;
+    font-size: 1.5em; }
+  #loyalty-one .resource-section .section-content.right ul li {
+    text-align: right; }
+
 #work #eventstream {
   top: 8em; }
 #work #canlii {
