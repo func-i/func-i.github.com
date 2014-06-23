@@ -193,47 +193,51 @@ function QuickChange(appId, jsKey, options) {
 
     $style: function() {
       var styleTag = "<style> " +
-        "[data-cms] { outline: 0 solid transparent } " +
-        "[data-cms]:focus { outline: 0 solid transparent; background-color: #c4ffcc; } " +
+        "[data-cms] { outline: 0 solid transparent !important } " +
+        "[data-cms]:focus {" + 
+          "outline: 0 solid transparent !important;" +
+          "background-color: #c4ffcc !important;" +
+          "color: rgb(45,45,45) !important;" +
+        "}" +
         "div.cms-modal {" +
-          "position: fixed;" +
-          "left: 50%;" +
-          "top: 50%;" +
-          "height: 200px;" +
-          "width: 300px;" +
-          "margin-top: -100px;" +
-          "margin-left: -150px;" +
-          "background-color: rgb(45,45,45);" +
-          "padding: 1em;" +
-          "box-sizing: border-box;" +
-          "color: rgb(45,45,45);" +
-          "font-family: Helvetica, Arial;" +
-          "font-size: .75rem" +
+          "position: fixed !important;" +
+          "left: 50% !important;" +
+          "top: 50% !important;" +
+          "height: 200px !important;" +
+          "width: 300px !important;" +
+          "margin-top: -100px !important;" +
+          "margin-left: -150px !important;" +
+          "background-color: rgb(45,45,45) !important;" +
+          "padding: 1em !important;" +
+          "box-sizing: border-box !important;" +
+          "color: rgb(45,45,45) !important;" +
+          "font-family: Helvetica, Arial !important;" +
+          "font-size: .75rem !important" +
         "}" +
         "div.cms-modal input {" +
-          "width: 100%;" +
-          "display: block;" +
-          "padding: .75em;" +
-          "margin-bottom: 1em;" +
-          "box-sizing: border-box;" +
-          "outline: 0;" +
-          "border: 0;" +
+          "width: 100% !important;" +
+          "display: block !important;" +
+          "padding: .75em !important;" +
+          "margin-bottom: 1em !important;" +
+          "box-sizing: border-box !important;" +
+          "outline: 0 !important;" +
+          "border: 0 !important;" +
         "}" +
         "div.cms-modal input:focus {" +
-          "outline: 0;" +
-          "background-color: #c4ffcc;" +
+          "outline: 0 !important;" +
+          "background-color: #c4ffcc !important;" +
         "}" +
         "div.cms-modal a {" +
-          "display: inline-block;" +
-          "text-decoration: none;" +
-          "color: #c4ffcc;" +
-          "padding: .5em;" +
-          "border: solid 2px #c4ffcc;" +
-          "border-radius: 6px;" +
+          "display: inline-block !important;" +
+          "text-decoration: none !important;" +
+          "color: #c4ffcc !important;" +
+          "padding: .5em !important;" +
+          "border: solid 2px #c4ffcc !important;" +
+          "border-radius: 6px !important;" +
         "}" +
         "div.cms-modal a:hover {" +
-          "color: rgb(45,45,45);" +
-          "background-color: #c4ffcc;" +
+          "color: rgb(45,45,45) !important;" +
+          "background-color: #c4ffcc !important;" +
         "}" +
       "</style>";
 
