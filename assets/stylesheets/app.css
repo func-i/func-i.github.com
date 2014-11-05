@@ -4412,6 +4412,17 @@ header {
   #about #me {
     margin-top: 0; } }
 
+#join li {
+  margin-bottom: 20px; }
+
+.join .primary-duties {
+  margin-left: 35px; }
+.join ul {
+  margin-left: 35px;
+  list-style-type: disc; }
+  .join ul li {
+    margin-bottom: 15px; }
+
 #kv .name {
   color: #03a8ab; }
 #kv #social-icons {
