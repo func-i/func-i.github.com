@@ -3805,6 +3805,7 @@ a {
   clear: both; }
 
 .highlight {
+  font-size: 0.75em;
   /* Comment */
   /* Error */
   /* Keyword */
@@ -4383,21 +4384,21 @@ header {
 
 #about #digital-platforms {
   font-size: 80%; }
-#about #jha {
-  margin-top: 6em; }
+#about #jb {
+  margin-top: 3em; }
 #about .no-2 {
   position: relative;
   top: -3em; }
 #about .no-3 {
   position: relative;
   top: -6em; }
+#about #jha {
+  margin-top: 6em; }
 #about #an {
   margin-top: 10em; }
 #about .no-4 {
   position: relative;
   top: -8em; }
-#about #me {
-  margin-top: 5em; }
 @media screen and (max-width: 640px) {
   #about #jha {
     margin-top: 0; }
@@ -4408,9 +4409,7 @@ header {
   #about #an {
     margin-top: 0; }
   #about .no-4 {
-    top: 0; }
-  #about #me {
-    margin-top: 0; } }
+    top: 0; } }
 
 #join li {
   margin-bottom: 20px; }

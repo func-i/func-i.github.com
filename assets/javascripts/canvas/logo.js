@@ -126,6 +126,9 @@
 
     Logo.prototype.resize = function(screenWidth) {
       this.screenWidth = screenWidth;
+      this.canvas.orient();
+      this.context.clear(0, 0, logo.canvas.width, logo.canvas.height);
+      this.context.setMultiply();
       this.changeAnchor(this.elem.offset());
       this.setSize();
       this.setSideLengths();

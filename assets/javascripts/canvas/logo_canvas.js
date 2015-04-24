@@ -15,7 +15,7 @@
     };
 
     LogoCanvas.prototype.orient = function() {
-      this.width = this.elem.width();
+      this.width = $(window).width();
       this.height = this.elem.height();
       this.elem.css('width', this.width);
       this.elem.css('height', this.height);

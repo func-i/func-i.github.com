@@ -148,6 +148,60 @@
               <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
                 <div class="text-content">
                   <h2>
+                    <a href="/2015/04/22/protractor-socket-mocks.html">Protractor Socket Mocks</a>
+                  </h2>
+                  <small>Mock your socket functionality in Protractor</small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://github.com/sailias">Jon Salis</a> on 22 Apr 2015
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <h3>Problem</h3>
+
+<p>While testing I wanted to mock two types of external calls, API calls a Socket connection.
+Mocking http calls is fairly straightforward and well documented using <a href="https://docs.angularjs.org/api/ngMock/service/$httpBackend">$httpBackEnd</a>.
+There is a <a href="https://github.com/nullivex/angular-socket.io-mock">socket mock</a> for <a href="https://github.com/btford/angular-socket-io">angular-socket.io</a>,
+but as we&#39;re using sio-client, we can&#39;t leverage it.
+So we had to do it another way.</p>
+
+<h3>Stack</h3>
+
+<ul>
+<li>AngularJS ~1.3</li>
+<li>sio-client ~1.3.6</li>
+</ul>
+
+          <p>
+            <a href="/2015/04/22/protractor-socket-mocks.html">More...</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
                     <a href="/2014/05/10/namespacing-your-crap.html">A Namespacing Function for Client-Side Javascripts</a>
                   </h2>
                   <small></small>
@@ -184,127 +238,9 @@ all.</p>
 <div class="highlight"><pre><code class="javascript">    <span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Bar!&quot;</span><span class="p">)</span> <span class="p">};</span>
 </code></pre></div>
 
-<p>This is what most javascripts look like. This is why puppies die, the
-bad guys always win, and we can never have anything nice.</p>
-
-<p>So, before we even worry about namespacing, let&#39;s start with the
-essentials: always wrap it.
-We don&#39;t want to muddy up our global namespace. Ever. Except when we do.</p>
-
-<blockquote>
-<p><strong>First rule of Javascript:</strong> Always wrap everything.</p>
-</blockquote>
-
-<p>Just like they taught you
-in school. (Unless you went to one of those schools down south where they
-teach that the only
-sure-fire way to prevent name collisions is to never write code in the first
-place -- yet here you are, so how&#39;d that work out?)</p>
-
-<h3>foo.js</h3>
-
-<div class="highlight"><pre><code class="javascript">    <span class="c1">// semicolon to avoid concatenation errors</span>
-    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
-    <span class="p">})();</span> <span class="c1">// &lt;-- function calls itself.</span>
-
-    <span class="c1">// Nice and clean global context.</span>
-</code></pre></div>
-
-<p>Ok, now we&#39;re ready for our namespacing function. This function creates a
-function that initiates a namespace:</p>
-
-<h3>appendToNamespace()</h3>
-
-<div class="highlight"><pre><code class="javascript">     <span class="kd">function</span> <span class="nx">appendToNamespace</span><span class="p">(</span><span class="nx">namespace</span><span class="p">,</span> <span class="nx">elementName</span><span class="p">,</span> <span class="nx">elementValue</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// If namespace has already been initialized, simply append new</span>
-        <span class="c1">// element.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="c1">// If namespace has not been initialized, but an initialization function</span>
-        <span class="c1">// exists, copy its old value so that new initialization function may</span>
-        <span class="c1">// call it.</span>
-        <span class="kd">var</span> <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">oldNamespaceFunction</span> <span class="o">=</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">];</span>
-        <span class="p">}</span>
-
-        <span class="c1">// Create function that intializes namespace.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">!==</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
-            <span class="c1">// Call old initialization function too.</span>
-            <span class="nx">oldNamespaceFunction</span><span class="p">();</span>
-            <span class="nb">window</span><span class="p">[</span><span class="nx">namespace</span><span class="p">][</span><span class="nx">elementName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">elementValue</span><span class="p">;</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-</code></pre></div>
-
-<p>Now foo.js becomes:</p>
-
-<h3>foo.js</h3>
-
-<div class="highlight"><pre><code class="javascript">    <span class="p">;(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">appendToNamespace</span><span class="p">(</span><span class="s2">&quot;YourNameSpace&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="nx">foo</span><span class="p">)</span>
-        <span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Foo!&quot;</span><span class="p">)</span> <span class="p">};</span>
-    <span class="p">})();</span>
-</code></pre></div>
-
-<p>Ditto for bar.js.</p>
-
-<h3>index.html</h3>
-
-<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
-        <span class="nt">&lt;head&gt;</span>
-            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-            <span class="nt">&lt;script&gt;</span>
-                <span class="c1">// initialize YourNameSpace</span>
-                <span class="nx">YourNameSpace</span><span class="p">();</span>
-            <span class="nt">&lt;/script&gt;</span>
-        <span class="nt">&lt;/head&gt;</span>
-        <span class="nt">&lt;body&gt;</span>
-            <span class="nt">&lt;script&gt;</span>
-                <span class="c1">// Now your scripts are available under the YourNameSpace</span>
-                <span class="c1">// object.</span>
-                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
-                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
-            <span class="nt">&lt;/script&gt;</span>
-        <span class="nt">&lt;/body&gt;</span>
-    <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-
-<p>Note that it doesn&#39;t matter in what order initialization happens:</p>
-
-<h3>index.html</h3>
-
-<div class="highlight"><pre><code class="html">    <span class="nt">&lt;html&gt;</span>
-        <span class="nt">&lt;head&gt;</span>
-            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;foo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-            <span class="nt">&lt;script&gt;</span>
-                <span class="c1">// initialize YourNameSpace beofre second script is loaded.</span>
-                <span class="nx">YourNameSpace</span><span class="p">();</span>
-            <span class="nt">&lt;/script&gt;</span>
-            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-        <span class="nt">&lt;/head&gt;</span>
-        <span class="nt">&lt;body&gt;</span>
-            <span class="nt">&lt;script&gt;</span>
-                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Foo!&quot;</span>
-                <span class="nx">YourNamespace</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span> <span class="c1">// -&gt; &quot;Bar!&quot;</span>
-            <span class="nt">&lt;/script&gt;</span>
-        <span class="nt">&lt;/body&gt;</span>
-    <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-
-<p>Of course, it&#39;s possible to do this in such a way that initialization is not
-necessary at all. The reason I choose to it this way is because explicitly
-requiring the script to initialize the namespace makes it easier to write
-scripts that play nice across platforms (say, when using libraries
-like browserify.</p>
-
+          <p>
+            <a href="/2014/05/10/namespacing-your-crap.html">More...</a>
+          </p>
         </div>
       </div>
     </div>
@@ -347,35 +283,9 @@ like browserify.</p>
 
 <p>Over the past year, Functional Imperative has grown from a small team of senior developers to a larger more diverse group, with different backgrounds, skills levels and interests. This growth, fueled by our investment in the bootcamp model, has had a drastic impact on our company’s culture and processes, mostly for the better. In fact, some of Functional Imperative’s best talent has come from bootcamps.</p>
 
-<p>Though I would deem the changes successful, it has not always been easy. One of the hardest problems we have faced has been the balance between speed, code quality and the freedom to learn; things that are often at odds in the fast paced consulting world, where deadlines are often tight and clients fickle. While my responsibility used to sit solely with the client, it has now become split between the short-term requirements of my projects and the longer-term development of my employees. A classic management problem; but one that has particular ramifications for a small company, where cash flow is always an important consideration. I have also remained cognizant that Functional Imperative is considered a top quality agency specifically because of the innovative thinking my team possesses, something that can easily be bogged down in too much process.</p>
-
-<p>So how have we balanced these competing interests? We:</p>
-
-<ul>
-<li> Introduced code reviews. When our team was small, it was easy to get away without (bad practice, I know). But with more junior developers onboard, this became a must have and allows me to control what gets released to the client.</li>
-<li> Promoted a senior dev to act as a roving problem solver / teacher / mentor / ass kicker. Basically a team lead, his responsibility is to make sure all projects are moving forward technically</li>
-<li> Instituted the “20-MINUTE RULE”. All devs have had it beaten into them that they (slash google) are to spend 20 minutes trying to solve their own problem. At that point, they must reach out to our roving problem solver</li>
-<li> Each Friday afternoon, each developer gives a short talk on something they learnt that week</li>
-<li> Once a month, we have “InnoFri”, a day for everyone to play with whatever technology they want. Followed by a group activity, dinner and drinks</li>
-<li> These changes have provided us a framework where our developers have the freedom to learn and innovate while at the same time providing levels of guarantees around code quality and deliverables.</li>
-</ul>
-
-<p>Not just any developer, however, will work well within our company. Some of Functional Imperative’s best assets, flexibility and individual responsibility, may not be right for those that seek a structured environment, with more, for lack of a better word, hand holding.</p>
-
-<p>This of course is not the only model. For many students, the best course of action is to find a position where they can grow slowly, with layers of resources set up for them to succeed. For those students, larger teams inside of bigger organizations may be the best bet.</p>
-
-<p>For teams like mine (read startups), however, I require self-starters who want to thrive in fast-paced environments. I give every person on my team a lot of responsibility and the expectations is that they will figure out a way to deliver, come hell or high water. In fact, it is not uncommon for a junior developer on my team to own an entire client project; from the decision of what technology, to the architecture, testing and deployment. We are of course there to guide them, but they are the ones who will be answering client calls at 3AM if something in production breaks.</p>
-
-<p>This is one of the advantages of hiring from Lighthouse Labs. Having taken the leap and decided to own the direction of their career by enrolling in a program like ours, I already know that these candidates have the thirst for knowledge, the motivation and the initiative to succeed in any workplace.</p>
-
-<p>With these traits in place, I know I am investing in a junior developer, but I am confident they will quickly gain the knowledge needed to make me look great! I have been so enamoured by the quality of individuals in these programs that it was a no-brainer to help found Lighthouse Labs and I couldn’t be happier so far with the results.</p>
-
-<p>While these soft skills are essential, the final skill I look for when hiring is easily the most important. To be a great developer, you need to be an amazing debugger. I can’t stress enough how important good debugging skills are. Often, the main difference between a junior and advanced developer is simply their comfort level with Chrome dev tools or Pry. Code does break, whether it’s your own or someone else’s, it’s really just a matter of when. Being able to quickly determine what parts of the code are responsible will save you hours upon hours of trouble.</p>
-
-<p>This is why when we started Lighthouse Labs, we made a concerted effort to put the focus on debugging. Throughout the course students spend time reading each other’s code and becoming familiar with the tools available to track down bugs. There is even an entire week spent fixing issues within open source projects. My motto, if you can fix it you can build it.</p>
-
-<p>Want to work at Functional Imperative but don’t know how to code? Apply to Lighthouse Labs and you will already be showing the initiative we look for. We can take it from there.</p>
-
+          <p>
+            <a href="/2014/04/23/hiring-from-bootcamps.html">More...</a>
+          </p>
         </div>
       </div>
     </div>
@@ -422,62 +332,9 @@ like browserify.</p>
 
 <p>// The debate between native and responsive mobile applications is amongst the most common and important practical questions that software developers currently face. It comes up in almost every discussion I have with potential clients of Functional Imperative, my digital innovation and software development company. Hundreds if not thousands of articles have already been written on the subject (e.g. <a href="http://alistapart.com/article/responsive-web-design">1</a>,<a href="http://alistapart.com/topic/responsive-design">2</a>,<a href="http://coding.smashingmagazine.com/2011/01/12/guidelines-for-responsive-web-design/">3</a>,<a href="http://mediaqueri.es/">4</a>,<a href="http://johnpolacek.github.io/scrolldeck.js/decks/responsive/">5</a>) but most miss the bigger picture.</p>
 
-<p>Instead of addressing the practical question whether a native or web app is better for a given client (which in general I believe it is), I examine whether the internet and therefore people in general, will be better-off as a result of native software. This more general, moral and arguably more important argument raises the potential balkanization of the internet as well as issues surrounding innovation and accessibility, standards wars and technology anti-trust. Despite my continuing emotional inclination towards slick, fast, native apps, the internet and our lives are better connected by a responsive, mobile web.</p>
-
-<p>My thesis is that, in its current form, despite potentially offering better UI and more features, native software development limits the accessibility and openness of the internet and particularly the web and therefore should be avoided whenever possible. This is all aside from the more practical downsides of iOS or Java Android apps being more expensive to build, harder to update and less future-proof. Native software balkanizes the internet by creating or reinforcing corporate dominated fiefdoms that do not speak to each other or the web. The rules of these gated software communities are controlled by shareholders rather than their residents or users. Their structure is dictated by the short and longterm ambitions of their corporate creators.</p>
-
-<p>// iOS apps, perhaps the most notorious example, often don’t even communicate with each other let alone allow for access via a world wide web (hereon &quot;web&quot;) search or links to and from the web. If I add content to an app, very frequently this content will remain exclusively within this app or its isolated network. While the same is true of many networks and websites – for example most major social networks curate which content is accessible without signing-in, and many of the most authoritative news sources now limit access and openness through paywalls – there are few more widespread or impenetrable barriers between one software ecosystem and the internet than native mobile applications.</p>
-
-<p>Much writing on the balkanization of the internet and software relates to <a href="http://www.mckinseyquarterly.com/The_balkanization_of_the_Internet_202">hardware</a> or <a href="http://en.wikipedia.org/wiki/Splinternet">political censorship</a>. Here, however, I focus on a software specific phenomena that has massive implications for the future of the internet: Apple versus Google versus Microsoft’s oligarchies populated by third party apps that prevent linking to the web writ large let alone other software ecosystems. Often, once an app becomes extremely widespread, its ubiquity forces a degree of integration (as an example, see Instragram’s progression from an iOS application with an internal network of content inaccessible except via the Instragram app). Nevertheless a significant disconnection is true of the vast majority of native apps that have not attained massive scale and even many that have.</p>
-
-<p>The oligarchs argue their communities benefit from greater integration with their operating systems or hardware and guarantee this by limiting access to many software and hardware features to only native apps. For example, see <a href="http://www.baekdal.com/opinion/apple-is-limiting-the-new-google-chrome-for-ios">Baekdal’s extensive explanation</a> of why Apple does not give third party apps access to the latest version of webkit on iOS, thereby ensuring that Safari remains the dominant app to browse on the device. Such constraints exist on almost all mobile devices and are now appearing on desktops as the corporations that are coming to dominate the web create gatekeepers for their software. These &quot;stores&quot;, whether iTunes or Google Play, impose barriers to interconnectivity that are antithetical to many of the best aspects of the world wide web and which could stunt the internet’s growth and accessibility.</p>
-
-<p>// <a href="http://www.theguardian.com/technology/2012/apr/15/web-freedom-threat-google-brin">Google’s Sergey Brin claims</a> these &quot;walled gardens&quot; pose a threat to the freedom of the internet. These gated communities are reminiscent of a time when Microsoft beat Apple by opening its hardware and software to third party manufacturers except now the closed systems are winning. Users are opting for ease over freedom and thoughtlessness over connectivity and complexity.</p>
-
-<p><a href="http://www.birminghambusinesslaw.com/2012/09/the-coming-standards-war-google-vs-apple/">Tripp Watson describes the current predicament</a> as a Google v. Apple standards war and likens it to past standards wars such as those over railroad gauges, 8-Track vs. Compact Cassette VHS vs. Betamax and Apple vs. Microsoft. Trip bets on Google, describing Apple’s current iOS only app focused approach as censorship and arguing that the same close-mindedness resulted in their losing the earlier war to Microsoft. While I don’t disagree with his condemnation of Apple, Google too has an interest in a less open web. Its curation of search results and growing ecosystem of web, mobile and desktop apps and operating systems may be doing more evil than their motto would suggest.</p>
-
-<p>Each oligarch criticizes the other. Sergey Brin states &quot;the rise of Facebook and Apple, which have their own proprietary platforms and control access to their users, risks stifling innovation and balkanising the web.&quot; He justifiably criticizes Apple’s sequestration of the massive amount of content contained in the iOS community from his greatest asset, Google’s search. Yet his reasoning is too limited. The problem is not just that this content is not searchable, it is that it is often not accessible via the web at all.</p>
-
-<p>Not only is &quot;<a href="http://battellemedia.com/archives/2012/08/what-is-search-now-disjoined.php">Google’s core model – built on the open, linked world of the web…under threat from the advance of the iPhone and the app, the Facebook and the Path, the automobile console, the Xbox, the cable box, and countless other ‘unlinked’ digital artifacts</a>&quot;; not only, should Google &quot;be worried as hell as people turn to apps at the expense of search&quot; but we should all be more worried that native applications are limiting the connectivity, the breadth and the openness of the web.</p>
-
-<p>// Moving beyond search, another parallel to the native vs. web app debate is the e-book standard war. As an intellectual property lawyer, I am constantly frustrated by the limitations that copyright and patent laws have imposed on creativity. These constraints are knowingly being reinforced by technology to the detriment of access to knowledge.</p>
-
-<p>On principle, it is hard to argue that the world would not be better off if access to (e)books increased. However, <a href="http://gyrovague.com/2012/04/30/why-e-books-will-soon-be-obsolete-and-no-its-not-just-because-of-drm/">Jani Patokallio’s description of the balkanization of e-publishing</a> shows e-books moving in the opposite direction. Thankfully Patokallio bets on the open web rather than locked down epub standards despite the skyrocketing sales of e-books in a format that locks down their content into a silo, limits their purchasing choices based on where their credit card happens to have been registered, is designed to work best on devices that are rapidly becoming obsolete, and support only a tiny subset of the functionality available on any modern website.</p>
-
-<p>Yet I remain worried. I agree with the benefits Patokallio ascribes to an open web but I worry that these merits will be outweighed by the power of the established oligarchs, whether they are publishing houses or tech companies.</p>
-
-<p>Patokallio states:</p>
-
-<blockquote>
-<p>On the Web, the very idea that the right to read a website would vary from country to country seems patently absurd. Cyberspace is flat, after all, just computers talking to computers. You, the reader, do not need to concern yourself with where these electrons on your screen are coming from, and neither do I, their publisher, need to care where they are going. And when somebody attempts to artificially block those electrons — say, China and its Great Firewall — it’s the kind of the thing that the US Congress and the World Trade Organization get worked up about.</p>
-</blockquote>
-
-<p>Yet such organizations don’t care about app stores and network interconnectivity. When was the last time the WTO did anything about China’s Great Firewall? And even if they were to, what are the chances of them acting in reaction to differing editions of an ebook or Apple’s app store?</p>
-
-<p>// <a href="http://www.wired.com/business/2013/04/marc-andreessen-and-rockmelt-betting-on-desktop/">Michael Copeland, writing for Wired</a>, presents a compelling argument in support of the mobile web based on a Marc Andreessen thought exercise:</p>
-
-<blockquote>
-<p>Let’s say we all grew up in tech world where we only used tablets and smartphones. Then one day, someone comes up to you with a 27-inch display hooked up to a notebook. You could have everything you have on your tablets and smartphones, and then some. Except you don’t have to download anything or update it. Everything is the latest and greatest, and just one click away. If you are a software developer, there are no gatekeepers telling you if your latest creation is approved, or when you can add the latest flourish.</p>
-</blockquote>
-
-<p>Andreessen’s conclusions is that this is</p>
-
-<blockquote>
-<p>why in the long run the mobile web is going to dominate native apps, and for the same reason that on the desktop the web dominates apps. When the web works for something, it works way better in a whole lot of ways than a downloadable app.</p>
-</blockquote>
-
-<p>But Copeland is actually arguing the opposite of Andreessen and I. He’s right that Andreessen is conflating two different debates because &quot;you can choose between either type of app (native or web) on either type of computer (desktop or mobile).&quot; And he’s also correct that claiming &quot;the web&quot; is the solution is overly simplistic:</p>
-
-<blockquote>
-<p>Facebook, bless them, has it right. What’s great about the web is ubiquitous network availability, not running within a browser tab. Websites are just services, and what you see in a browser tab is merely one possible interface to that service. The best possible interface to that service is often, if not usually, going to be a native app, not a web app.</p>
-</blockquote>
-
-<p>The hard part is that Copeland is correct in claiming that &quot;the dynamic remains unchanged. Web apps are the best way to reach the most possible people with the least effort; native apps are the best way to create the best possible experience.&quot;</p>
-
-<p>Emotionally, I agree with Copeland. Native does offer more functionality and I prefer it. I like the feeling of owning an app and of running an app better than having everything exist in my browser. And native apps often run better in one way or another. I have yet to see the frictionless UI and subtly captivating aesthetics of <a href="https://path.com/">Path</a> or <a href="http://500px.com/">500px</a>&#39;s native apps in a web app.</p>
-
-<p>// But the gap is closing (e.g. see <a href="http://forecast.io/">forecast.io</a> or <a href="http://www.nimbletank.com/">nimbletank</a> on iOS) and developers should not always make strategic decisions exclusively based on their client’s short-term satisfaction. The wonder of the internet is its complete interoperability – everything can link to everything – and with that ability comes great hope for an open source world in which open APIs and software will tear down the proprietary software walls that parallel the legal and physical walls created by so many corporations. In order to sustain this hope, developers need to build apps that are not just beautiful and have amazing functionality, but are also ethical, accessible, connected and open. In other words, they need to build web apps.</p>
-
+          <p>
+            <a href="/2014/02/14/web-apps-v-balkanized-net.html">More...</a>
+          </p>
         </div>
       </div>
     </div>
@@ -530,259 +387,9 @@ like browserify.</p>
 
 <p>is <a href="http://technotes.iangreenleaf.com/posts/2013-12-09-reddits-empire-is-built-on-a-flawed-algorithm.html">quite flawed</a>.</p>
 
-<blockquote>
-<p><strong>Sidenote</strong>: One observation not mentioned in that first article is that, while all other equations use some form of <code>time_now - time_posted</code> to calculate how old a post is, the clever guys at Reddit use <code>time_posted - some_old_date</code>.</p>
-
-<p>The advantage of this is that the post&#39;s score need only be calculated once, whereas the value of scores calculated with <code>time_now</code> will change on every request.</p>
-</blockquote>
-
-<p>Anyway, while all those scoring functions work pretty well, they didn&#39;t quite
-fit the requirements for <em>CanLII Connects</em>.</p>
-
-<p>In this post, I&#39;ll walk through the decision process of creating a scoring
-function. Hopefully this will be useful if you encounter a similar feature to
-implement.</p>
-
-<h3>Requirements:</h3>
-
-<p><em>CanLII Connects</em> links to a database of legal cases, and users can post opinions on those cases:</p>
-
-<ol>
-<li>A user can post.</li>
-<li>A user can upvote a post.</li>
-<li>A user can comment on a post.</li>
-<li>A user can comment on a comment on a post.</li>
-</ol>
-
-<p>So what&#39;s a sensible way of sorting posts?</p>
-
-<p>Right away, we&#39;re dealing with a different problem than Reddit or HN: while it makes sense to slowly degrade the score of a post on those sites over time, the same does not make sense for CanLII. Old cases might be cited at any time, no matter how old they are, so what matters is not how old a discussion is, but rather how actively engaged users are within a given discussion.</p>
-
-<h3>Initial Score</h3>
-
-<p>Ok, so first we have to give each post an initial score. I like Reddit&#39;s approach of taking the base-10 log of its upvotes. This makes sense because, the more popular a post already is, the more likely people are to see it, and therefore upvote it, which gives it an unfair advantage. </p>
-
-<p>In our case, we&#39;re not only trying to measure how much people &quot;like&quot; a post, but rather how engaged they are with it. It makes sense that, while an upvote is a fine indicator of &quot;engagedness&quot;, a user actually bothering to comment on a post is even more of an indicator. I&#39;ll count that as equivalent to two upvotes, and a user commenting on a comment will count as three upvotes (the 2 is so we don&#39;t take the log of 1 or 0): </p>
-
-<script type="math/tex; mode=display">
-    log_{10}(2 + u + 2c + 3cc)
-</script>
-
-<h3>Frequency</h3>
-
-<p>Next, we need the post&#39;s position to degrade as it becomes less active. It makes
-sense to divide the intial score by some factor of time:</p>
-
-<script type="math/tex; mode=display">
-    \cfrac{ log_{10} (2+u+2c+3cc) }{ \bar{t} }
-</script>
-
-<p>Now we need a reasonable value for <span class="mj"><code>t_ave</code></span>$$ \bar{ t } $$. A good start is the average time, in seconds, between the three most recent user interactions with a post. </p>
-
-<p>We define a user interaction to be: a user creates a post, a user comments on a post, or a user upvotes a post.</p>
-
-<p>Also, we want the most recent interactions to weigh more than older interactions. So let&#39;s say each <code>t</code> weighs twice as much as the previous:</p>
-
-<script type="math/tex; mode=display">
-    \bar{ t } = \cfrac{\sum\_{i=1}^3 \left(\frac{1}{2}\right)^{i-1} * (t_i - t\_{i-1}) }{ \sum\_{i=1}^3  \left(\frac{1}{2}\right)^{i-1}}
-</script>
-
-<p>Where</p>
-
-<p>$$ t_0 $$ = <a href="http://en.wikipedia.org/wiki/Unix_time">UNIX timestamp</a>, at now, in seconds.</p>
-
-<p>$$ t_n $$ = UNIX timestamp of n<sup>th</sup> interaction.</p>
-
-<h3>One Final Detail</h3>
-
-<p>There is one last property we want this function to have, which is the following: if interactions are very frequent right now (within a timeframe of, say, 10 days), then clearly the post is &quot;hot&quot;, and its score should be boosted. But as time passes, it really doesn&#39;t matter as much how much distance there is between interactions. If a post has already gone a full year without anyone commenting on it, does it really make that much difference if it goes another month without a comment?</p>
-
-<p>To accomplish the first property, all we do is divide $$ \bar{ t }$$ by the number of seconds in 10 days: <code>60*60*24*10</code>.</p>
-
-<p>To accomplish the second property, what we are looking for is some sort of always-increasing, concave function (positive derivative, negative second derivative). The first thing that comes to mind is the square-root function, which is good enough.</p>
-
-<h3>Result</h3>
-
-<p>And thus we have our final scoring function:</p>
-
-<script type="math/tex; mode=display">
-    \cfrac{ log_{10} (2 + u + 2c + 3cc) }{ \sqrt{ \bar{t}/60 * 60 * 24 * 10 }}
-</script>
-
-<p>If we plot this equation for <code>x = number of points</code> and <code>y = time</code>, we can see the shape of this function and check for different values if they make sense:</p>
-
-<p><img src="http://clusterfoo.com/assets/images/2014/scoring_function_shape_2.jpg" alt="Scoring function 3D plot"></p>
-
-<p>As expected, there is a steep 10-day &quot;boost&quot; period, followed by an increasingly  slower decline in the value as more and more time passes.</p>
-
-<blockquote>
-<p>The function is also heavily biased toward very new posts, which will always come
-out on top, giving them a chance. This might be a bad idea if posting becomes 
-frequent, but user interaction is low (many summaries a day, few votes or comments), 
-and might have to be changed.</p>
-
-<p>There are many ways to tweak this equation (changing the boost period, for example)
-to make it more or less biased towards either time or user interaction.</p>
-</blockquote>
-
-<h3>Bonus Round: Implementing in ElasticSearch</h3>
-
-<p>Implementing a custom scoring function in Elasticsearch, though easy once it&#39;s all set up, was rather frustrating because of the poor documentation.</p>
-
-<p>For our implementation, we&#39;re using the <code>tire</code> gem (a wrapper around the Elasticsearch API). This is where we call the custom scoring script:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">query</span> <span class="k">do</span>
-  <span class="n">custom_score</span> <span class="ss">script</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span> <span class="ss">lang</span><span class="p">:</span> <span class="s1">&#39;javascript&#39;</span> <span class="k">do</span>
-    <span class="n">string</span> <span class="n">query</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot; OR &quot;</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>Where <code>script</code> is simply a variable holding the contents of a javascript file as a string. Note the option <code>lang: &#39;javascript&#39;</code>. This lets us use javascript as our language of choice, as opposed to <a href="http://mvel.codehaus.org/">mvel</a>, the most poorly documented scripting language on the face of the earth. To enable this option, we&#39;ll also require the <a href="https://github.com/elasticsearch/elasticsearch-lang-javascript">elasticsearch-lang-javascript</a> plugin.</p>
-
-<p>Here is our script:</p>
-
-<blockquote>
-<p><strong>Sidenote:</strong> Notice the logger function. This enables us to implement a sort of &quot;console.log&quot;
-which we can read using the following shell command <code>tail -f /var/log/elasticsearch/elasticsearch.log</code>.</p>
-</blockquote>
-
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Logger function:</span>
-<span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">org</span><span class="p">.</span><span class="nx">elasticsearch</span><span class="p">.</span><span class="nx">common</span><span class="p">.</span><span class="nx">logging</span><span class="p">.</span><span class="nx">Loggers</span><span class="p">.</span><span class="nx">getLogger</span><span class="p">(</span><span class="s2">&quot;rails_logger&quot;</span><span class="p">);</span>
-<span class="c1">// Example usage:</span>
-<span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">&quot;========= NEW CALC ===========&quot;</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">points_log</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">points_log</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
-
-<span class="cm">/**</span>
-<span class="cm">* NOTE: doc.ts.values is not actually an array,</span>
-<span class="cm">* here I create an array out of it:</span>
-<span class="cm">**/</span>
-<span class="kd">var</span> <span class="nx">ts</span> <span class="o">=</span> <span class="p">[];</span>
-<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">ts</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-<span class="nx">ts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="c1">// Newest first</span>
-<span class="nx">ts</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
-
-<span class="cm">/**</span>
-<span class="cm">* Boost period.</span>
-<span class="cm">**/</span>
-<span class="kd">var</span> <span class="nx">ten_days</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">10</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm">* The scoring function</span>
-<span class="cm">**/</span>
-<span class="kd">function</span> <span class="nx">score</span><span class="p">()</span> <span class="p">{</span>
-  <span class="cm">/**</span>
-<span class="cm">  * Weighed average numerator</span>
-<span class="cm">  **/</span>
-  <span class="kd">var</span> <span class="nx">times_num</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">)</span> <span class="o">*</span> 
-             <span class="p">(</span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="o">-</span>
-             <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">ts</span><span class="p">[</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]));</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
-  <span class="p">})();</span>
-
-  <span class="cm">/**</span>
-<span class="cm">  * Weighed average denominator</span>
-<span class="cm">  **/</span>
-  <span class="kd">var</span> <span class="nx">times_denom</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-      <span class="nx">val</span> <span class="o">+=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">exp</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
-  <span class="p">})();</span>
-
-  <span class="kd">var</span> <span class="nx">t_ave</span> <span class="o">=</span> <span class="p">(</span><span class="nx">times_num</span><span class="o">/</span><span class="nx">times_denom</span><span class="p">);</span>
-
-  <span class="k">return</span> <span class="nx">points_log</span><span class="o">/</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">t_ave</span><span class="o">/</span><span class="nx">ten_days</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="nx">score</span><span class="p">();</span>
-</code></pre></div>
-
-        </div>
-      </div>
-    </div>
-  
-
-    <!-- liquid assignments -->
-    
-
-    <div class="row collapse post">
-      <div class="large-3 medium-4 columns">
-        <div class="canvas">
-          <div class="row collapse post-info">
-            <div class="small-12 columns">
-              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
-                <div class="text-content">
-                  <h2>
-                    <a href="/2012/09/16/ruby-schemaverse.html">Rubies on Elephants in Space</a>
-                  </h2>
-                  <small>A ruby wrapper to play Schemaverse</small>
-                </div>
-              </div>
-            </div>
-            <div class="large-8 medium-7 small-6 columns">
-              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
-                <div class="text-content">
-                  <small>
-                    by <a href="http://github.com/sailias">Jon Salis</a> on 16 Sep 2012
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="large-9 medium-8 columns">
-        <div class="post-content">
-          <p><a href="http://schemaverse.com">Schemaverse</a> is a MMO written entirely in Postgres and promotes my favourite play style when it comes to gaming; botting. It&#39;s cheating, I&#39;m a horrible person and I should be banned from every game I play (I mean that). As a programmer and a gamer (who hates to lose), I can&#39;t resist combining my two passions. I was reading a <a href="http://news.ycombinator.com/item?id=3969108">HackerNews article</a> about Schemaverse and it peaked my interest. A game meant to be played by programmers in SQL where scripting is the norm. My bot vs yours? Do we play for keeps?</p>
-
-<p>As a rubyist I wanted to play the game but writing scripts in PL/pgSQL wasn&#39;t exactly my first choice and it might not be yours either. So after contacting <a href="https://github.com/Abstrct">Abstrct</a> the creator of Schemaverse, I set out to write a ruby wrapper to play the game. Together we created a public github project which players can fork and deploy for free to <a href="http://heroku.com">Heroku</a>.</p>
-
-<h3>Getting Started</h3>
-
-<p>In order to play you must register at <a href="https://schemaverse.com/">Schemaverse.com</a>. You do not need to give an email address, just a username and password.</p>
-
-<p><a href="https://help.github.com/articles/fork-a-repo">Fork</a> <a href="https://github.com/func-i/ruby-schemaverse">ruby-schemaverse</a> and begin modifying the strategy inside <a href="https://github.com/func-i/ruby-schemaverse/blob/master/lib/schemaverse.rb">schemaverse.rb</a>.</p>
-
-<p>The current code contains basic game play which will do the following:
-* Build miners on your conquered planets to gather fuel
-* Upgrade the mining abilities of your ships
-* Build new ships to travel to other planets and conquer them
-* Attack any ships that enters your range</p>
-
-<h3>Heroku</h3>
-
-<p>Once you have your strategy ready to do battle, you can deploy it to Heroku. If you do not have an account, visit <a href="http://www.heroku.com/">Heroku.com</a> and sign up. It&#39;s free and your sign up comes with one free worker.</p>
-
-<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
-<span class="nv">$&gt;</span> heroku create
-<span class="nv">$&gt;</span> heroku config:add <span class="nv">SCHEMAVERSE_USERNAME</span><span class="o">=</span>YOUR_USERNAME
-<span class="nv">$&gt;</span> heroku config:add <span class="nv">DATABASE_URL</span><span class="o">=</span>postgres://YOUR_USERNAME:YOUR_PASSWORD@db.schemaverse.com/schemaverse
-<span class="nv">$&gt;</span> git push heroku master
-<span class="nv">$&gt;</span> heroku ps:scale <span class="nv">worker</span><span class="o">=</span>1
-</code></pre></div>
-
-<h3>It&#39;s on!</h3>
-
-<p>I will be perfecting my script on an ongoing basis. Feel free to pit your gaming and ruby expertise against mine!</p>
-
-<h3>Additional Documentation</h3>
-
-<ul>
-<li><a href="http://www.rubydoc.info/github/func-i/ruby-schemaverse/master/frames">RDoc</a></li>
-<li><a href="https://schemaverse.com/tutorial/tutorial.php">Schemaverse tutorial</a></li>
-</ul>
-
+          <p>
+            <a href="/2013/12/23/sorting-posts.html">More...</a>
+          </p>
         </div>
       </div>
     </div>

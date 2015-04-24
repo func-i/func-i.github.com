@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Protractor Socket Mocks</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+            <li>
+              <a href="/about/join.html"
+                >Join
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2015/04/22/protractor-socket-mocks.html">Protractor Socket Mocks</a>
+                      </h2>
+                      <small>Mock your socket functionality in Protractor</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://github.com/sailias">Jon Salis</a> on 22 Apr 2015
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <h3>Problem</h3>
+
+<p>While testing I wanted to mock two types of external calls, API calls a Socket connection.
+Mocking http calls is fairly straightforward and well documented using <a href="https://docs.angularjs.org/api/ngMock/service/$httpBackend">$httpBackEnd</a>.
+There is a <a href="https://github.com/nullivex/angular-socket.io-mock">socket mock</a> for <a href="https://github.com/btford/angular-socket-io">angular-socket.io</a>,
+but as we&#39;re using sio-client, we can&#39;t leverage it.
+So we had to do it another way.</p>
+
+<h3>Stack</h3>
+
+<ul>
+<li>AngularJS ~1.3</li>
+<li>sio-client ~1.3.6</li>
+</ul>
+
+<!--more-->
+
+<h3>Setup</h3>
+
+<p>Lets make a simple example where a user logs in and is brought to a chat channel for tech support.</p>
+
+<p>I write in Coffeescript, deal with it!<br>
+To see how we boilerplate our angular coffee apps visit <a href="https://github.com/func-i/angular-coffee-boilerplate">angular-coffee-boilerplate</a></p>
+
+<p>Consider the following socket service:  </p>
+
+<figure>
+  <figcaption>socket_service.coffee</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="coffeescript">      <span class="nx">@serviceModule</span><span class="p">.</span><span class="nx">service</span> <span class="s">&#39;socketService&#39;</span><span class="p">,</span> <span class="nf">($injector, userService) -&gt;</span>
+
+        <span class="nv">init: </span><span class="nf">-&gt;</span>        
+
+          <span class="c1"># connect to the socket</span>
+          <span class="vi">@socket = </span><span class="nx">io</span> <span class="s">&#39;https://some-socket.server.com:9999&#39;</span>
+
+          <span class="c1"># Subscribe to the user&#39;s chat room</span>
+          <span class="nx">@subscribe</span><span class="p">()</span>
+
+          <span class="c1"># The server will send back a subscribed event</span>
+          <span class="nx">@socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&#39;subscribed&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> 
+
+            <span class="c1"># All events will be handled by &quot;Handlers&quot;</span>
+            <span class="nx">$injector</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;SubscribeHandler&#39;</span><span class="p">).</span><span class="nx">process</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+
+        <span class="nv">subscribe: </span><span class="nf">-&gt;</span>
+
+          <span class="c1"># After logging in, </span>
+          <span class="c1"># the user should have a channel they can subscribe to</span>
+          <span class="nv">socketId = </span><span class="nx">userService</span><span class="p">.</span><span class="nx">socketChannelId</span>
+
+          <span class="c1"># Subscribe to the channel in the socket</span>
+          <span class="nx">@socket</span><span class="p">.</span><span class="nx">emit</span> <span class="s">&#39;subscribe&#39;</span><span class="p">,</span>
+            <span class="nv">socket_id: </span><span class="nx">socketId</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<figure>
+  <figcaption>./handlers/subscribed_handler.coffee</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="coffeescript">    <span class="nx">@serviceModule</span><span class="p">.</span><span class="nx">service</span> <span class="s">&#39;SubscribeHandler&#39;</span><span class="p">,</span> <span class="nf">($state) -&gt;</span> 
+
+      <span class="nv">process: </span><span class="nf">(data) -&gt;</span>  
+
+        <span class="c1"># We are logged in and have subscribed</span>
+        <span class="c1"># to our chat channel.  </span>
+
+        <span class="c1"># View the chat</span>
+        <span class="nx">$state</span><span class="p">.</span><span class="nx">go</span> <span class="s">&#39;chat&#39;</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<h3>Tests</h3>
+
+<p>The functionality above will connect to a socket, subscribe to a channel and redirect to a route that will view that chat channel.  Let&#39;s write a test for that.</p>
+
+<div class="highlight"><pre><code class="coffeescript">  <span class="c1"># Load our mocked socketService </span>
+  <span class="c1"># described below</span>
+  <span class="nv">socketServiceModule = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;./mock/socket_service_mock.js&quot;</span><span class="p">)</span>   
+
+  <span class="nx">describe</span> <span class="s">&#39;Subscribe Event&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+
+    <span class="nx">it</span> <span class="s">&#39;should bring me to my chat channel when logged in&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+      
+      <span class="c1"># Overwrite the socketService module with a mocked version</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addMockModule</span><span class="p">(</span><span class="s">&#39;myApp.services&#39;</span><span class="p">,</span> <span class="nx">socketServiceModule</span><span class="p">.</span><span class="nx">socketService</span><span class="p">)</span>        
+
+      <span class="c1"># Login to the app </span>
+      <span class="nx">login</span><span class="p">()</span>
+
+      <span class="c1"># Expect the app to login and redirect us to our chat channel</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">browser</span><span class="p">.</span><span class="nx">getLocationAbsUrl</span><span class="p">()).</span><span class="nx">toBe</span> <span class="s">&quot;/chat&quot;</span>
+</code></pre></div>
+
+<p>Assume that after logging into my API I call:</p>
+
+<div class="highlight"><pre><code class="coffeescript">  <span class="nx">socketService</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+</code></pre></div>
+
+<h3>Mocks</h3>
+
+<figure>
+  <figcaption>protractor.conf.coffee</figcaption>
+  <br />
+  
+<div class="highlight"><pre><code class="coffeescript">    <span class="nv">onPrepare: </span><span class="nf">-&gt;</span>
+
+      <span class="c1"># Declare a global login function</span>
+      <span class="c1"># that will log me in and I can call</span>
+      <span class="c1"># from my tests </span>
+      <span class="nv">global.login = </span><span class="nf">-&gt;</span>
+        <span class="c1"># Go to the login URL</span>
+        <span class="nx">browser</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BASE_URL</span> <span class="o">+</span> <span class="s">&#39;#/login&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Fill out the form and click the button</span>
+        <span class="nx">element</span><span class="p">(</span><span class="k">by</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s">&#39;input[type=&quot;text&quot;]&#39;</span><span class="p">)).</span><span class="nx">sendKeys</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
+        <span class="nx">element</span><span class="p">(</span><span class="k">by</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s">&#39;input[type=&quot;password&quot;]&#39;</span><span class="p">)).</span><span class="nx">sendKeys</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
+        <span class="nx">element</span><span class="p">(</span><span class="k">by</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s">&#39;button&#39;</span><span class="p">)).</span><span class="nx">click</span><span class="p">()</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<figure>
+  <figcaption>./mock/socket_service_mock.coffee</figcaption>
+  <br />
+  
+<div class="highlight"><pre><code class="coffeescript">    <span class="nv">module.exports.socketService = </span><span class="nf">-&gt;</span>
+      <span class="c1"># Important, DO NOT include &quot;, []&quot; in the line below.</span>
+      <span class="c1"># That will clear your entire services module!</span>
+      <span class="c1"># We only want to overwrite our socketService</span>
+      <span class="nv">socketModule = </span><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s">&quot;myApp.services&quot;</span><span class="p">)</span>
+
+      <span class="c1"># Redeclare the socketService</span>
+      <span class="nx">socketModule</span><span class="p">.</span><span class="nx">service</span> <span class="s">&#39;socketService&#39;</span><span class="p">,</span> <span class="nf">($injector) -&gt;</span>
+        <span class="nv">init: </span><span class="nf">-&gt;</span>
+          <span class="c1"># Instead of doing all the connection stuff</span>
+          <span class="c1"># just call our SubscribeHandler</span>
+          <span class="nx">@broadcast</span><span class="p">(</span><span class="s">&quot;SubscribeHandler&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="nv">broadcast: </span><span class="nf">(handler, data) -&gt;</span>
+          <span class="nx">$injector</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">handler</span><span class="p">).</span><span class="nx">process</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<p>Our test should now pass!  We have not mocked the socket library itself but we have mocked the socketService
+that handles all our socket functionality.</p>
+
+<p>We have made our code modular enough that replacing the socket functionality is extremely easy.</p>
+
+<h3>Testing events in the socket</h3>
+
+<p>We need a way to trigger events coming into the socket and test their outcome in the DOM.
+We have already decided that all events will have a Handler, we also have a broadcast event in our socketMock.</p>
+
+<p>We can use this setup to trigger socket events and test their outcome.</p>
+
+<p>Let&#39;s add the following line to our init function in:</p>
+
+<figure>
+  <figcaption>socket_service.coffee</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="coffeescript">      
+    <span class="c1"># The chat will receive messages</span>
+    <span class="nx">@socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&#39;messageReceived&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> 
+      <span class="nx">$injector</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;MessageHandler&#39;</span><span class="p">).</span><span class="nx">process</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> 
+
+  
+</code></pre></div>
+
+</figure>
+
+<figure>
+  <figcaption>./handlers/message_handler.coffee</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="coffeescript">    <span class="nx">@serviceModule</span><span class="p">.</span><span class="nx">service</span> <span class="s">&#39;MessageHandler&#39;</span><span class="p">,</span> <span class="nf">(messageService) -&gt;</span> 
+
+      <span class="nv">process: </span><span class="nf">(data) -&gt;</span>  
+
+        <span class="c1"># add the message to the message service</span>
+        <span class="c1"># We can assume that this service takes the message</span>
+        <span class="c1"># and adds it to an array</span>
+        <span class="nx">messageService</span><span class="p">.</span><span class="nx">messageReceived</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<h3>Test 2</h3>
+
+<div class="highlight"><pre><code class="coffeescript">  <span class="c1"># Load our mocked socketService </span>
+  <span class="nv">socketServiceModule = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;./mock/socket_service_mock.js&quot;</span><span class="p">)</span>   
+
+  <span class="nx">describe</span> <span class="s">&#39;Message Received Event&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+
+    <span class="nx">it</span> <span class="s">&#39;should add a new message to the chat&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+      
+      <span class="c1"># Overwrite the socketService module with a mocked version</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addMockModule</span><span class="p">(</span><span class="s">&#39;myApp.services&#39;</span><span class="p">,</span> <span class="nx">socketServiceModule</span><span class="p">.</span><span class="nx">socketService</span><span class="p">)</span>        
+
+      <span class="c1"># Login to the app </span>
+      <span class="nx">login</span><span class="p">()</span>
+
+      <span class="nv">chatData = </span>
+        <span class="nv">message: </span><span class="s">&quot;This is a new message&quot;</span>
+
+      <span class="c1"># Trigger message received</span>
+      <span class="c1"># Call a custom method that broadcasts in our socket</span>
+      <span class="c1"># defined below</span>
+      <span class="nx">broadcastToSocket</span><span class="p">(</span><span class="s">&quot;MessageHandler&quot;</span><span class="p">,</span> <span class="nx">chatData</span><span class="p">).</span><span class="nx">then</span> <span class="nf">-&gt;</span>
+        
+        <span class="c1"># Add your expect here to check the message length</span>
+        <span class="nx">expect</span><span class="p">(</span><span class="nx">element</span><span class="p">(</span><span class="nx">By</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s">&#39;.message&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">)).</span><span class="nx">toBe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Add to onPrepare in:</p>
+
+<figure>
+  <figcaption>protractor.conf.coffee</figcaption>
+  <br />
+  
+<div class="highlight"><pre><code class="coffeescript">    
+    <span class="nv">global.broadcastToSocket = </span><span class="nf">(handler, data) -&gt;</span>
+      <span class="c1"># Execute a script in the protractor browser</span>
+      <span class="c1"># Pass in handler and data as arguments</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span> <span class="nf">-&gt;</span>
+        <span class="nv">angularElement = </span><span class="nx">angular</span><span class="p">.</span><span class="nx">element</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+
+        <span class="c1"># Load the current socketService</span>
+        <span class="nv">socketService = </span><span class="nx">angularElement</span><span class="p">.</span><span class="nx">injector</span><span class="p">().</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;socketService&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Call the broadcast method which calls our handler</span>
+        <span class="nx">socketService</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+      <span class="p">,</span> <span class="nx">handler</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<p>And there you have it.  A socket setup that works in development and a socket mock that works in tests!
+We can now trigger any socket events we want and their affects on the DOM.</p>
+
+<p>If you want to test your socket functions in more detail, (ie, making sure it emits back to the socket),
+then you can always write unit tests.</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>

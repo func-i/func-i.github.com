@@ -146,6 +146,49 @@
               <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
                 <div class="text-content">
                   <h2>
+                    <a href="/2012/09/16/ruby-schemaverse.html">Rubies on Elephants in Space</a>
+                  </h2>
+                  <small>A ruby wrapper to play Schemaverse</small>
+                </div>
+              </div>
+            </div>
+            <div class="large-8 medium-7 small-6 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                <div class="text-content">
+                  <small>
+                    by <a href="http://github.com/sailias">Jon Salis</a> on 16 Sep 2012
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-9 medium-8 columns">
+        <div class="post-content">
+          <p><a href="http://schemaverse.com">Schemaverse</a> is a MMO written entirely in Postgres and promotes my favourite play style when it comes to gaming; botting. It&#39;s cheating, I&#39;m a horrible person and I should be banned from every game I play (I mean that). As a programmer and a gamer (who hates to lose), I can&#39;t resist combining my two passions. I was reading a <a href="http://news.ycombinator.com/item?id=3969108">HackerNews article</a> about Schemaverse and it peaked my interest. A game meant to be played by programmers in SQL where scripting is the norm. My bot vs yours? Do we play for keeps?</p>
+
+<p>As a rubyist I wanted to play the game but writing scripts in PL/pgSQL wasn&#39;t exactly my first choice and it might not be yours either. So after contacting <a href="https://github.com/Abstrct">Abstrct</a> the creator of Schemaverse, I set out to write a ruby wrapper to play the game. Together we created a public github project which players can fork and deploy for free to <a href="http://heroku.com">Heroku</a>.</p>
+
+          <p>
+            <a href="/2012/09/16/ruby-schemaverse.html">More...</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- liquid assignments -->
+    
+
+    <div class="row collapse post">
+      <div class="large-3 medium-4 columns">
+        <div class="canvas">
+          <div class="row collapse post-info">
+            <div class="small-12 columns">
+              <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                <div class="text-content">
+                  <h2>
                     <a href="/2012/09/01/better-bundler.html">Better Bundler</a>
                   </h2>
                   <small>Bundler gets better local gem support</small>
@@ -179,32 +222,9 @@
 <p>This will use my fork of nokogiri, but how would I do development on it?  I can clone it, push changes back to my fork, then bundle update. If I commit some bad code, I will end up cluttering my commit log with garbage, so this approach is not even a real option.
 What we really need to do is include a local version of our gem in our project.</p>
 
-<h3>Here comes :path</h3>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/nokogiri&#39;</span>
-</code></pre></div>
-
-<p>Up until now, using the path option was the recommended approach. This will use a local repository where I can freely modify it as I see fit.  From there I can commit and push my changes up.</p>
-
-<p>This approach does come with some drawbacks, though.</p>
-
-<p>Once included in your Gemfile, all developers will now have to install a local version of this gem in the path specified, even if they don&#39;t plan on modifying the gem like you do. This means the Gemfile is no longer production ready, the app can break and you now have a file that cannot be committed.  You could also run into path problems depending on your platform. What if we could still use a local gem <em>if we wanted to</em> and also allow the user to specify the location? A common problem that was <a href="https://gist.github.com/2063855">discussed recently</a>, which resulted in...</p>
-
-<h3>Bundler&#39;s latest answer</h3>
-
-<p>Recent <a href="https://github.com/carlhuda/bundler/pull/1779">commits</a> from <a href="https://github.com/josevalim">José Valim</a> to bundler have added functionality to configure local paths for each gem.</p>
-
-<div class="highlight"><pre><code class="bash"><span class="c"># in your project folder</span>
-<span class="nv">$&gt;</span> bundle config local.nokogiri /path/to/local/nokogiri
-</code></pre></div>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;nokogiri&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git@github.com:Sailias/nokogiri.git&#39;</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">&#39;master&#39;</span>
-</code></pre></div>
-
-<p>That&#39;s it! Bundler has now been configured to use the version of nokogiri at the specified location! This feature only works for git dependencies and the branch option is required because it will match up with the branch in the local path to ensure your local gem isn&#39;t on another branch. You can also switch between branches of this gem using this functionality.</p>
-
-<p>Bundler will work just like path and will still load your local changes, but will also keep track of the current revision in your Gemfile.lock in order to stay in sync with remote changes. This is a much more dynamic approach than :path, which allows each user to control their config, yet still keeps the simplicity that makes bundler <em>amazing</em>.</p>
-
+          <p>
+            <a href="/2012/09/01/better-bundler.html">More...</a>
+          </p>
         </div>
       </div>
     </div>
