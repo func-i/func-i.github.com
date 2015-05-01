@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Automated JSON API stress testing with JMeter Part 1</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+            <li>
+              <a href="/about/join.html"
+                >Join
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2015/05/01/jmeter-api-testing-part1.html">Automated JSON API stress testing with JMeter Part 1</a>
+                      </h2>
+                      <small>Stress test your APIs with millions of requests</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://github.com/sailias">Jon Salis</a> on 01 May 2015
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>Imagine you have created a JSON API that allows users to take tests or quizzes and you want to stress
+test it to discover it&#39;s load capability.</p>
+
+<p>JMeter is the &quot;go to&quot; tool for stress testing, and it should be.  It is extremely powerful, dynamic and scalable.  (insert reference to ec2-jmeter here)</p>
+
+<!--more-->
+
+<h3>What will I get from this guide?</h3>
+
+<p>This guide will show you how to:</p>
+
+<ul>
+<li>use JMeter to send requests to your API</li>
+<li>use javascript to parse responses from the API</li>
+<li>set variables to be used in other requests</li>
+<li>make additional calls to your API based on previous calls</li>
+</ul>
+
+<h3>Our example</h3>
+
+<p>Consider the following API:</p>
+
+<figure>
+  <figcaption>GET /test</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
+    <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;testee_id&quot;</span><span class="o">:</span>  <span class="s2">&quot;ABC123&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;question&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="o">:</span>  <span class="s2">&quot;What is 1 + 1?&quot;</span>
+        <span class="s2">&quot;choices&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+          <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+          <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">3</span> <span class="p">}</span>
+          <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+</code></pre></div>
+
+</figure>
+
+<p>Gets the first question in a test and returns a <em>testee_id</em> that will be sent as a header in future requests.
+The system will use this header to identify the Testee.  It will also return the first question in the test.</p>
+
+<figure>
+  <figcaption>POST /answer</figcaption>
+  <br />
+
+  post params:
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
+    <span class="s2">&quot;answer&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;question_id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;choice_id&quot;</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+</code></pre></div>
+
+
+  response:
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
+    <span class="s2">&quot;question&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;What is 1 x 1?&quot;</span>
+      <span class="s2">&quot;choices&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">3</span> <span class="p">}</span>
+        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+</code></pre></div>
+
+
+  if our test is complete:
+  <br />
+  response:
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
+    <span class="s2">&quot;complete&quot;</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+  
+</code></pre></div>
+
+</figure>
+
+<p>The endpoint for answering a question in the test.  The testee_id is required for this endpoint.
+The response is the next question we are to answer.</p>
+
+<figure>
+  <figcaption>GET /result</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
+    <span class="s2">&quot;result&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;questions_available&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s2">&quot;questions_answered&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s2">&quot;questions_correct&quot;</span><span class="o">:</span> <span class="mi">5</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+</code></pre></div>
+
+</figure>
+
+<p>The endpoint that gives us our final test results.  When POSTing an answer doesn&#39;t give us another question, we have finished the test and can retreive our result.</p>
+
+<h3>Getting started with JMeter</h3>
+
+<ul>
+<li>Add a &quot;User Defined Variables&quot; config element:
+
+<ul>
+<li><img src="/assets/blog_posts/jmeter/fig1.png" alt="Fig1"></li>
+</ul></li>
+<li><p>Add a new variable:</p>
+
+<ul>
+<li><img src="/assets/blog_posts/jmeter/fig2.png" alt="Fig1">
+
+<ul>
+<li><em>this makes it easier to switch it to a live server without changing all your samplers</em></li>
+</ul></li>
+</ul></li>
+<li><p>Add a Config Element/HTTP Header Manager:</p>
+
+<ul>
+<li><img src="/assets/blog_posts/jmeter/fig3.png" alt="Fig1"></li>
+</ul></li>
+<li><p>Add two values:</p>
+
+<ul>
+<li><img src="/assets/blog_posts/jmeter/fig4.png" alt="Fig1"></li>
+<li><em>TESTEE-ID will be set after the first call.  It is how the server will know who is answering questions.</em></li>
+</ul></li>
+<li><p>Add a sampler/HTTP Request:</p>
+
+<ul>
+<li><img src="/assets/blog_posts/jmeter/fig5.png" alt="Fig1"></li>
+</ul></li>
+</ul>
+
+<p>We now have a sample API, and a basic setup for a JMeter project which will hit our <em>/test</em> endpoint to start
+taking the test.</p>
+
+<p>The next steps will be to have the JMeter automatically answer the questions in the test 1 by 1
+and then call the results page when complete.</p>
+
+<p>We will do this by using a <strong>BSF PostProcessor</strong> with a script written in JavaScript.</p>
+
+<p>This will be covered in Part 2 of this tutorial which is coming soon.</p>
+
+<p>Happy Coding!</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>

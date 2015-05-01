@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Tips for More Painless Protractor Tests</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+            <li>
+              <a href="/about/join.html"
+                >Join
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2015/04/29/tips-protractor-angular-testing.html">Tips for More Painless Protractor Tests</a>
+                      </h2>
+                      <small>Lessons from my first AngularJS app</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="/about.html">Ting Chang</a> on 29 Apr 2015
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>Protractor is for writing end-to-end tests. It starts your web app in a browser and runs your tests against the app. The tests are written to simulate user actions in the browser, such as clicking a button, and to test DOM conditions as a result of those actions. In general, that means your test code runs against/can access the <em>browser</em>, not the internals of the app itself.</p>
+
+<p>As I worked through testing with Protractor for the first time, I learned a few things that I hope can help you as you get started.</p>
+
+<!--more-->
+
+<h3>Nest describes with Jasmine</h3>
+
+<p>In front-end testing, the developer often has to test multiple interaction sequences from one start point. For example, suppose on page Pa there are buttons a1 and a2; clicking a1 goes to page Pb, and clicking a2 goes to page Pc. On page Pb there are buttons b1 and b2; clicking b1 goes to page Pd, b2 goes to page Pe.</p>
+
+<p>What is the best way to organize the test scripts? The way I prefer is to use nested describes (Jasmine and CoffeeScript syntax):</p>
+
+<figure>
+  
+<div class="highlight"><pre><code class="coffeescript">      <span class="nx">describe</span> <span class="s">&#39;Page Pa&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>   
+        <span class="nx">beforeEach</span> <span class="nf">-&gt;</span>       
+          <span class="nx">login</span><span class="p">()</span>
+          <span class="nx">goToPagePa</span><span class="p">()</span>
+
+        <span class="nx">afterEach</span> <span class="nf">-&gt;</span>
+          <span class="nx">logout</span><span class="p">()</span>
+
+        <span class="nx">it</span> <span class="s">&#39;starts on page Pa&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+          <span class="nx">expect</span><span class="p">(</span><span class="nx">browser</span><span class="p">.</span><span class="nx">getLocationAbsUrl</span><span class="p">()).</span><span class="nx">toBe</span> <span class="nx">BASE_URL</span> <span class="o">+</span> <span class="s">&#39;/Pa&#39;</span>
+
+        <span class="nx">describe</span> <span class="s">&#39;Clicking button a1&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+          <span class="nx">beforeEach</span> <span class="nf">-&gt;</span>
+            <span class="nx">element</span><span class="p">(</span><span class="nx">By</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;.button-a1&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>
+
+          <span class="nx">it</span> <span class="s">&#39;goes to page Pb&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+            <span class="nx">expect</span><span class="p">(</span><span class="nx">browser</span><span class="p">.</span><span class="nx">getLocationAbsUrl</span><span class="p">()).</span><span class="nx">toBe</span> <span class="nx">BASE_URL</span> <span class="o">+</span> <span class="s">&#39;/Pb&#39;</span>
+
+          <span class="nx">describe</span> <span class="s">&#39;Clicking button b1&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+            <span class="p">.....</span>
+
+          <span class="nx">describe</span> <span class="s">&#39;Clicking button b2&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+            <span class="p">.....</span>
+
+        <span class="nx">describe</span> <span class="s">&#39;Clicking button a2&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+          <span class="p">.....</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<h3>Wait for DOM changes</h3>
+
+<p>Protractor uses the WebDriverJS API, which is asynchronous. All functions return promises, and WebDriverJS keeps a queue of pending promises (called the control flow) to execute them in sequence. On top of this, Protractor automatically applies browser.waitForAngular() before every action to wait for all Angular $http and $timeout calls to finish. This allows developers to write the test scripts without much dread &quot;callback hell,&quot; for the most part.</p>
+
+<p>My app, however, is largely socket-based. This means we have socket events firing off handlers that change the display of a directive embedded on a page. Neither the WebDriverJS control flow nor waitForAngular() could make Protractor test for the expected DOM condition <em>after</em> the socket action sequence finishes. </p>
+
+<p>One way to handle this problem is by using <strong>browser.driver.wait()</strong></p>
+
+<figure>
+  
+<div class="highlight"><pre><code class="coffeescript">      <span class="nx">browser</span><span class="p">.</span><span class="nx">driver</span><span class="p">.</span><span class="nx">wait</span> <span class="nf">-&gt;</span>
+        <span class="nx">element</span><span class="p">(</span><span class="nx">By</span><span class="p">.</span><span class="nx">css</span> <span class="s">&#39;.my-directive&#39;</span><span class="p">).</span><span class="nx">getText</span><span class="p">().</span><span class="nx">then</span> <span class="nf">(theText) -&gt;</span>
+          <span class="nx">theText</span> <span class="o">is</span> <span class="s">&#39;Some Socket Event&#39;</span>
+      <span class="p">,</span> <span class="mi">5000</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<p>The code above would keep checking the directive with class my-directive until its text changes to &#39;Some Socket Event&#39;, or it times out after 5 seconds. If it times out, the test fails.</p>
+
+<h3>Organize your mock modules</h3>
+
+<p>For my socket tests, I need to invoke specific socket-event handlers without mocking the events. That means my tests need to reach into the app and call those functions. How do we accomplish that in Protractor which only uses the browser? The setup relies on two Protractor functions: browser.addMockModule and browser.executeScript. (For some background, check out my coworker Jon&#39;s <a href="http://www.functionalimperative.com/2015/04/22/protractor-socket-mocks.html">previous post</a>.)</p>
+
+<p>As a general rule, I prefer to keep application code and test code in two separate places. The mock modules added by addMockModule are run <em>as</em> part of the app <em>from</em> the tests, as is the code inside executeScript blocks (in effect). I chose to place the mock modules and executeScript blocks in the /test folder, since they were written specifically for testing. Consequently, within my /test folder, some files contain test code, which accesses the browser and deals with DOM, while others contain app code running in the browser and playing with application internals. Some files even contain both, with app code inside executeScript blocks and test code elsewhere.</p>
+
+<p>It tooke me a while to organize the files and remember where I was. Am I writing test code or app code now? Should this function be in test code or (mock) app code? One annoying bit I kept messing up at first was mocking data: since different tests needed different mock data, it made better sense to me to put the factory functions in test code. But I kept forgetting myself, and kept getting errors when I called the factory functions from the mock app modules, instead of calling those functions from the tests and passing the generated data to the app modules.</p>
+
+<p>But all things considered, this setup makes the most sense and will help you maintain your sanity as you work with Protractor.</p>
+
+<p>Happy testing!</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>
