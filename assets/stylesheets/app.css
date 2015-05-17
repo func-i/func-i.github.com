@@ -4191,7 +4191,7 @@ header {
     border: solid 1px #ffbd1b; }
   .post-content code {
     background-color: #03a8ab;
-    padding: 0.3rem .5rem; }
+    padding: 0.1rem; }
   .post-content pre, .post-content blockquote {
     margin-left: 2rem; }
     .post-content pre code, .post-content blockquote code {
