@@ -3,7 +3,7 @@
 
   if ($('#map').length > 0) {
     map = new L.mapbox.map("mapbox", "nasercafi.g99p0nel", {
-      center: [43.6381250443368, -79.42535877227783],
+      center: [43.6471805, -79.4034034],
       zoom: 17,
       zoomControl: false,
       attributionControl: false,
