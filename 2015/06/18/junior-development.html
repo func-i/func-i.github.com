@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>How I train Developers</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+            <li>
+              <a href="/about/join.html"
+                >Join
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2015/06/18/junior-development.html">How I train Developers</a>
+                      </h2>
+                      <small>And how they can continue to improve.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="http://github.com/sailias">Jon Salis</a> on 18 Jun 2015
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>I&#39;ve trained a number of Junior Developers, mostly out of Bootcamps.  In fact, the owners of Functional Imperative have also founded
+a coding school in Toronto called <a href="http://lighthouselabs.ca">Lighthouse Labs</a>.  So I expect that I&#39;ll be training even more Junior Developers.</p>
+
+<!--more-->
+
+<h2>Juniors</h2>
+
+<p>They say a US Marine&#39;s head is like an empty jar, he only knows what you put in (Jarhead).  This does and doesn&#39;t apply to a new programmer.</p>
+
+<p>Their main task is solving problems!  They do this in code, but how they <em>think</em> and what steps they take when solving problems 
+is affected by personality and previous life experiences.  We can give them structure and coach their thought process, but each Junior Developer is as unique as the next.</p>
+
+<h3>Hurdles</h3>
+
+<p>We do a lot of work in Rails and AngularJS, and anyone who has used these two frameworks knows that there is a <em>Rails</em> way or an <em>Angular</em> way to write code.
+A big problem throughout a programmer&#39;s career is that you &quot;don&#39;t know what you don&#39;t know.&quot;
+What I mean by that is that if there is an accepted solution or library that is always used for this problem and you aren&#39;t aware of it, you might start trying to write
+code to solve the problem yourself rather than leverage the existing solution.  This is quickly followed by a facepalm when you learn the solution existed the whole time.
+It&#39;s hard to know about tools and best practices that you haven&#39;t been exposed to.</p>
+
+<p>So a general rule I tell juniors is that they are not going to do anything that people haven&#39;t already done and solved before.
+If they find themselves in a situation where they are completely blocked and start blaming the tools (we all have), the problem
+is likely they are doing something wrong or there is a better way.  No hacks needed by them just yet!</p>
+
+<h3>20 min rule</h3>
+
+<p>This brings us to the <strong>20 min</strong> rule.  In our dev shop we have a rule that if you&#39;re completely stuck for more than 20 mins, you ask for help.
+Even if it&#39;s just for a second opinion, or to talk your problem out.  After 20 mins, you get help rather than get blocked or frustrated for an extended period of time.</p>
+
+<p>This promotes discussion, it catches hacky solutions early, and it gives juniors an opportunity to learn from more experienced developers as often as possible.</p>
+
+<h3>Make mistakes</h3>
+
+<p>If a Junior Dev wants to implement a solution that I know will not work (I have the benefit of experience), 
+I talk to them about it and hint at potential problems, if they still want to go ahead with their implementation.  I let them!</p>
+
+<p>The benefit of them learning from their mistakes is tremendous, that&#39;s how I learned.  Of course this is a controlled process so I can peel them back
+when the time is right, but they are better for it in the end.</p>
+
+<h2>Intermediates</h2>
+
+<p>So you&#39;ve been coding for over a year now, you&#39;ve done some cool stuff and learned 2 or more languages on 2 or more frameworks.
+You can be productive and contribute to any project you are put on.  Congratulations you have made it past the &quot;First Gate&quot; and eliminated doubt in yourself.  (a <em>&quot;The Neverending Story&quot;</em> reference)</p>
+
+<h3>Where do we go from here?</h3>
+
+<p>To a lower level!  There are a lot of tools out there these days, and they do a lot of wonderful things for you.
+I find a lot of intermediates that learned to code from day 1 using these tools have taken for granted all the lower level things that are being done for them, and they don&#39;t go out of their way to close that gap.</p>
+
+<p>Should every web developer know SQL really well?  The quick answer is <strong>of course!</strong> How could that be a bad thing?</p>
+
+<p>Does every web developer know SQL really well?  Unfortunately no.</p>
+
+<p>If you learned to interact with the database using an <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a>, chances are your SQL skills aren&#39;t up to scratch.  You want to get to the next level, go and learn SQL really really well.  (Triggers, SPs (PG/PLSQL), Views, etc)</p>
+
+<p>There are a number of areas where this can apply:</p>
+
+<ul>
+<li>SQL</li>
+<li>security</li>
+<li>server deployment and sysadmin</li>
+<li>front-end optimizations</li>
+<li>writing data driven reports</li>
+<li>more thorough testing</li>
+</ul>
+
+<h3>Additional Responsibility</h3>
+
+<p>Eventually as you get better, you will be tasked with training others.  This is a natural progression in the programming industry.
+Use this opportunity to organize your coding process so that others can learn by example.
+Determine important parts of a project that different people can work on, (get a better understanding of the project and your coworkers).
+Improve your communication skills as you help explain different concepts and ideas.
+Contribute to all aspects of the projects and learn from all the challenges.</p>
+
+<p>Pay it forward.  </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>
