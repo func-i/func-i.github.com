@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
   <head>
-    <title>Automated JSON API stress testing with JMeter Part 1</title>
+    <title>Automated JSON API stress testing with JMeter Part 2</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -130,7 +130,7 @@
                   <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
                     <div class="text-content">
                       <h2>
-                        <a href="/2015/05/01/jmeter-api-testing-part1.html">Automated JSON API stress testing with JMeter Part 1</a>
+                        <a href="/2015/08/18/jmeter-api-testing-part2.html">Automated JSON API stress testing with JMeter Part 2</a>
                       </h2>
                       <small>Stress test your APIs with millions of requests</small>
                     </div>
@@ -140,7 +140,7 @@
                   <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
                     <div class="text-content">
                       <small>
-                        by <a href="http://github.com/sailias">Jon Salis</a> on 01 May 2015
+                        by <a href="http://github.com/sailias">Jon Salis</a> on 18 Aug 2015
                       </small>
                     </div>
                   </div>
@@ -149,27 +149,17 @@
             </div>
             <div class="large-9 medium-8 columns">
               <div class="post-content">
-                <p>Imagine you have created a JSON API that allows users to take tests or quizzes and you want to stress
-test it to discover it&#39;s load capability.</p>
+                <p>If you are just finding this post, refer to <a href="/2015/05/01/jmeter-api-testing-part1.html">Part 1</a> for the setup.
+It deals with some of the basic API functionality and a basic JMeter setup.</p>
 
-<p>JMeter is the &quot;go to&quot; tool for stress testing, and it should be.  It is extremely powerful, dynamic and scalable.</p>
+<p>Now we will get into the advanced JMeter setup that will allow you to traverse your API during your stress test.</p>
 
 <!--more-->
 
-<h3>What will I get from this guide?</h3>
+<p>This approach is great for stress testing every endpoint in your application like a real user would and it&#39;s also great for 
+building up data in your database to test your API as your dataset grows.</p>
 
-<p>This guide will show you how to:</p>
-
-<ul>
-<li>use JMeter to send requests to your API</li>
-<li>use javascript to parse responses from the API</li>
-<li>set variables to be used in other requests</li>
-<li>make additional calls to your API based on previous calls</li>
-</ul>
-
-<h3>Our example</h3>
-
-<p>Consider the following API:</p>
+<p>Ever had your database crash after 750K entries due to a missing index?  Yeah, me neither.</p>
 
 <figure>
   <figcaption>GET /test</figcaption>
@@ -196,14 +186,11 @@ test it to discover it&#39;s load capability.</p>
 
 </figure>
 
-<p>Gets the first question in a test and returns a <em>testee_id</em> that will be sent as a header in future requests.
-The system will use this header to identify the Testee.  It will also return the first question in the test.</p>
+<p>Our next request is:</p>
 
 <figure>
   <figcaption>POST /answer</figcaption>
   <br />
-
-  post params:
 
   
 <div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
@@ -215,106 +202,139 @@ The system will use this header to identify the Testee.  It will also return the
   
 </code></pre></div>
 
-
-  response:
-
-  
-<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
-    <span class="s2">&quot;question&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;What is 1 x 1?&quot;</span>
-      <span class="s2">&quot;choices&quot;</span><span class="o">:</span> <span class="p">[</span>
-        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
-        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
-        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">3</span> <span class="p">}</span>
-        <span class="p">{</span> <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-  
-</code></pre></div>
-
-
-  if our test is complete:
-  <br />
-  response:
-
-  
-<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
-    <span class="s2">&quot;complete&quot;</span><span class="o">:</span> <span class="kc">true</span>
-  <span class="p">}</span>
-  
-</code></pre></div>
-
 </figure>
 
-<p>The endpoint for answering a question in the test.  The testee_id is required for this endpoint.
-The response is the next question we are to answer.</p>
+<p>To set up the POST data for a new request we use a <em>BSF Post Processor</em></p>
+
+<ul>
+<li>Right click the HTTP Request</li>
+<li>Add a BSF Post Processor</li>
+<li>Set the language to javascript (I&#39;m writing this in JS, I&#39;m a web developer)</li>
+<li>Write your script</li>
+<li>Profit</li>
+</ul>
 
 <figure>
-  <figcaption>GET /result</figcaption>
+  <figcaption>Script:</figcaption>
   <br />
 
   
-<div class="highlight"><pre><code class="javascript">  <span class="p">{</span>
-    <span class="s2">&quot;result&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;questions_available&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s2">&quot;questions_answered&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="s2">&quot;questions_correct&quot;</span><span class="o">:</span> <span class="mi">5</span>
+<div class="highlight"><pre><code class="javascript">  
+  <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;var JSonResponse = &#39;</span> <span class="o">+</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">getResponseDataAsString</span><span class="p">());</span>
+
+  <span class="kd">var</span> <span class="nx">answerData</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">answer</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">question_id</span><span class="o">:</span> <span class="nx">JSonResponse</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">question</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+      <span class="nx">choice_id</span><span class="o">:</span> <span class="nx">JSonResonse</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">question</span><span class="p">.</span><span class="nx">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="p">}</span>
-  <span class="p">}</span>
+  <span class="p">}</span> 
+
+  <span class="nx">vars</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;answerData&quot;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">answerData</span><span class="p">));</span>
+
   
 </code></pre></div>
 
 </figure>
 
-<p>The endpoint that gives us our final test results.  When POSTing an answer doesn&#39;t give us another question, we have finished the test and can retreive our result.</p>
+<p>Well that was uneventful.  What was that for?<br>
+It was only to set the answerData variable for future use.</p>
 
-<h3>Getting started with JMeter</h3>
+<p>How do we use it? (In this example)</p>
+
+<h3>Continue with a while loop</h3>
 
 <ul>
-<li>Add a &quot;User Defined Variables&quot; config element:
+<li>Add a <em>While Controller</em>
 
 <ul>
-<li><img src="/assets/blog_posts/jmeter/fig1.png" alt="Fig1"></li>
+<li>Set the condition to: <code>${__javaScript(&#39;${answerData}&#39; !== &#39;&#39;)}</code></li>
 </ul></li>
-<li><p>Add a new variable:</p>
+<li>Add a HTTP Request to the While Controller
 
 <ul>
-<li><img src="/assets/blog_posts/jmeter/fig2.png" alt="Fig1">
-
-<ul>
-<li><em>this makes it easier to switch it to a live server without changing all your samplers</em></li>
+<li><img src="/assets/blog_posts/jmeter/fig6.png" alt="Fig6"></li>
 </ul></li>
-</ul></li>
-<li><p>Add a Config Element/HTTP Header Manager:</p>
+<li>Add a BSF Post Processor to this new HTTP Request</li>
+</ul>
+
+<figure>
+  <figcaption>Script:</figcaption>
+  <br />
+
+  
+<div class="highlight"><pre><code class="javascript">  <span class="c1">// Load the JSON response from our last request  </span>
+  <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;var JSonResponse = &#39;</span> <span class="o">+</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">getResponseDataAsString</span><span class="p">());</span>
+
+  <span class="c1">// If all the questions are done, the response will have a complete key</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">JSonResponse</span><span class="p">.</span><span class="nx">complete</span><span class="p">)</span>
+
+    <span class="c1">// clear the answerData, this will stop our while loop</span>
+    <span class="nx">vars</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;answerData&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>    
+  <span class="k">else</span> <span class="p">{</span>
+
+    <span class="c1">// We still have more questions to answer</span>
+    <span class="c1">// set the params for another answer to be created</span>
+    <span class="kd">var</span> <span class="nx">answerData</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">answer</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">question_id</span><span class="o">:</span> <span class="nx">JSonResponse</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">question</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+        <span class="nx">choice_id</span><span class="o">:</span> <span class="nx">JSonResonse</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">question</span><span class="p">.</span><span class="nx">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span> 
+
+    <span class="c1">// set the value for the global variable answerData</span>
+    <span class="nx">vars</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;answerData&quot;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">answerData</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  
+</code></pre></div>
+
+</figure>
+
+<p>Add our last HTTP request</p>
 
 <ul>
-<li><img src="/assets/blog_posts/jmeter/fig3.png" alt="Fig1"></li>
-</ul></li>
-<li><p>Add two values:</p>
+<li>Add a new HTTP Request to and make it do a GET to /result
 
 <ul>
-<li><img src="/assets/blog_posts/jmeter/fig4.png" alt="Fig1"></li>
-<li><em>TESTEE-ID will be set after the first call.  It is how the server will know who is answering questions.</em></li>
-</ul></li>
-<li><p>Add a sampler/HTTP Request:</p>
-
-<ul>
-<li><img src="/assets/blog_posts/jmeter/fig5.png" alt="Fig1"></li>
+<li>This will get the results after our questions have been answered</li>
 </ul></li>
 </ul>
 
-<p>We now have a sample API, and a basic setup for a JMeter project which will hit our <em>/test</em> endpoint to start
-taking the test.</p>
+<p>Remember our original workflow from <a href="/2015/05/01/jmeter-api-testing-part1.html">Part 1</a></p>
 
-<p>The next steps will be to have the JMeter automatically answer the questions in the test 1 by 1
-and then call the results page when complete.</p>
+<ul>
+<li>GET /test 
 
-<p>We will do this by using a <strong>BSF PostProcessor</strong> with a script written in JavaScript.
-This is covered in <a href="/2015/08/18/jmeter-api-testing-part2.html">Part 2</a></p>
+<ul>
+<li>done by our first HTTP Request</li>
+</ul></li>
+<li>POST an answer 
 
-<p>Happy Coding!</p>
+<ul>
+<li>a BSF Post Processor</li>
+<li>a new HTTP Request</li>
+</ul></li>
+<li>Returns the next question in the JSON Response</li>
+<li>Keep answering the questions until complete 
+
+<ul>
+<li>a While Controller</li>
+<li>HTTP Request posting answerData</li>
+<li>another BSF Post Processor</li>
+</ul></li>
+<li>GET /result (last HTTP Request)</li>
+</ul>
+
+<p>Your plan now may look like:</p>
+
+<p><img src="/assets/blog_posts/jmeter/fig7.png" alt="Fig7"></p>
+
+<p>And you&#39;re done.</p>
+
+<p>You now have a JMeter plan to traverse your api.  Now you need to DOS your site and create tons of data.
+Modify the plan to have more requests and threads or use Amazon EC2 to make the requests to your app.</p>
+
+<p>Part 3 will cover distributed load testing with <a href="https://github.com/oliverlloyd/jmeter-ec2">ec2-jmeter</a></p>
 
               </div>
             </div>

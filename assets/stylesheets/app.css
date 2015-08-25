@@ -4149,6 +4149,11 @@ header {
     height: 4em; } }
 #index #tweet {
   margin-top: 2em; }
+  #index #tweet #tweet-content {
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto; }
 #index #eventstream {
   top: -5em; }
 #index #address {
