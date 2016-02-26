@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Experimenting With Three.js and WebGL</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- favicons -->
+<!--[if IE]><link rel="shortcut icon" href="/assets/favicon.ico"><![endif]-->
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="stylesheet" href="/assets/stylesheets/app.css">
+
+<script src="/assets/javascripts/lib/modernizr.js"></script>
+    <!-- MathJax for displaying math -->
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- START MathJax Settings -->
+<script>
+  MathJax.Hub.Config({
+    preRemoveClass: "mj",
+  });
+</script>
+<!-- END MathJax Settings -->
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/loading.gif">
+    </div>
+    
+    <div id="body">
+      <header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/manifesto.html"
+          >Manifesto
+        </a>
+      </li>
+
+      <li>
+        <a href="/work.html" class="has-menu 
+          ">Work
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/work/eventstream.html"
+                >Eventstream
+              </a>
+            </li>
+            <li>
+              <a href="/work/canlii.html"
+                >CanLII
+              </a>
+            </li>
+            <li>
+              <a href="/work/myoscar.html"
+                >MyOSCAR
+              </a>
+            </li>
+            <li>
+              <a href="/work/votecompass.html"
+                >Vote Compass
+              </a>
+            </li>
+            <li>
+              <a href="/work/client_list.html"
+                >Partial Client List
+              </a>
+            </li>
+          </ul>
+        </div>  
+      </li>
+
+      <li>
+        <a href="/about.html" class="has-menu 
+          ">About
+        </a>
+
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <a href="/about.html"
+                >Team
+              </a>
+            </li>
+            <li>
+              <a href="/about/partners.html"
+                >Partners
+              </a>
+            </li>
+            <li>
+              <a href="/about/join.html"
+                >Join
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a href="/contact.html"
+          >Contact
+        </a>
+      </li>
+
+      <li>
+        <a href="/blog/"
+          >Blog
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <canvas id="logo-canvas"></canvas>
+  <div id="bg-line"></div>
+  <div id="logo" data-img-sprite="/assets/logo_sprite.png" data-img-full="/assets/logo.png" data-img-small="/assets/logo_small.png"></div>
+  <h1 style="position: absolute; left: -9999px;">Functional Imperative</h1>
+</header>
+      <div id="post" class="row collapse main-content">
+        <div class="canvas">
+          <div class="row collapse">
+            <div class="large-3 medium-4 columns">
+              <div class="row collapse post-info">
+                <div class="small-12 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="yellow">
+                    <div class="text-content">
+                      <h2>
+                        <a href="/2015/10/15/three-js.html">Experimenting With Three.js and WebGL</a>
+                      </h2>
+                      <small></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="large-8 medium-7 small-6 columns">
+                  <div class="square text" data-type="outlined" data-rollover="true" data-color="blue">
+                    <div class="text-content">
+                      <small>
+                        by <a href="">Bruno Opsenica</a> on 15 Oct 2015
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-8 columns">
+              <div class="post-content">
+                <p>I recently graduated from Lighthouse Labs, and as my final project I worked with two other students to create a small music visualizer webapp, 
+where users could choose songs from <a href="https://soundcloud.com/">Soundcloud</a> and create small music videos using our visualizer 
+by creating transitions at specific points in time. </p>
+
+<!--more-->
+
+<p>These transitions involved changes in post-processing effects, materials and geometry.</p>
+
+<p>The first step to creating a music visualizer is obviously making your visuals react to the musical information in an 
+interesting and fully dynamic way. The simplest and most obvious approach is simply using the amplitude (time domain data) as a scaling, 
+rotation or translation coefficient. 
+The other obvious (and slightly more interesting) approach is to also use the frequency domain data as well, 
+having your visualization change based off the distribution of frequencies used. Some examples 
+include a <a href="https://www.shadertoy.com/view/Xds3Rr">simple spectrogram</a> or this <a href="https://www.shadertoy.com/view/Xtl3W2">weird ball thing</a>, 
+the latter of which I found particularly interesting and exciting, so I sought to try and implement something similar in my project.</p>
+
+<p><a href="http://threejs.org/">Three.js</a> is a &#39;3D Javascript Library&#39; that includes WebGL, &lt;canvas&gt;, &lt;svg&gt;, and more. 
+WebGL itself is a javascript API for rendering 3D in a &lt;canvas&gt; element. Three.js make is really easy to get set up and 
+started in making simple 3D scenes invloving lighting, shading and materials, particles etc. It&#39;s great. Interacting directly with the 
+WebGL API can be tedious and is typically very low level, 
+so having Three.js handle basic things like <a href="https://en.wikipedia.org/wiki/Phong_shading">Phong Shading</a> and geometry loading is really great.</p>
+
+<p>Following the following examples, I set out to impletment <a href="http://www.clicktorelease.com/blog/creating-spherical-environment-mapping-shader">spherical environment mapping</a> 
+and <a href="http://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js">vertex displacement</a> as a function of perlin noise and the frequency spectrum. 
+To do this you&#39;re probably going to have to write your own GLSL shaders that describe this behaviour for each pixel/subpixel (fragment shader) and vertex (vertex shader). 
+Writing these shaders is still a bit of a strange experience, as you need to either write it as a string in your javascript code, 
+write it in as a script tag in your html and grab the text using the DOM or load it from another file using ajax (I chose to use the 
+html approach, it was easiest even if it resulted in having GLSL&#39;s C-like syntax in the middle of my html page).</p>
+
+<p>To pass the frequency information in to my vertex shaders, I wrote the information to a texture using the array of values passed through 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">WebAudio API&#39;s</a> analyzer node. 
+The reasoning behind this is that you can only pass a specific set of data types to your shaders as 
+<a href="https://www.opengl.org/wiki/Uniform_(GLSL">uniforms</a>) (basically any input params that are considered immutable in the shader scope). 
+These can be things like 2D &amp; 3D vectors, matrices, and textures, but must be of a specific type. It made sense to me to just access the 
+frequency information as if it were a low resolution discplacement map.</p>
+
+<p>I quickly encountered (a now obvious) problem in that my SEM shading relied on the object&#39;s normal information, 
+which was passed in BEFORE any displacement occured. The naive solution is to just recalulate the normal vector for each vertex after the 
+displacement, but this is not really possible as the whole point of vertex and fragment shaders is that they can run in parallel on the GPU, 
+without needing any knowledge of adjacent verticies. My approach was to instead use the extension GL<em>OES</em>standard_derivatives, which would allow me to take the partial derivatives of 
+my new vertex positions in my fragment shader, but this ended breaking the smooth shading implementaion of my SEM shader. 
+This was fine in the end, as it produced interesting patterns, but it&#39;s definitely something to be aware of if you plan on implementing any sort of 
+dynamic vertex displacement. If I were to do this again, I would look into just creating a height map that properly maps to the UV coordinates of my geometry, 
+and then create an associated normal map whose values I could use in the fragment shader to preserve the smooth shading. </p>
+
+<p>Either way, Three.js and WebGL are really exciting technologies that I&#39;m pretty eager to experiment with more. 
+I&#39;ve barely scratched the surface of what the library has to offer (I&#39;m particularly keen to test out the deferred lighting system) 
+and I&#39;m very excited to see what new features are pulled into it in the future (as of this writing, it has 77 pull requests on 
+<a href="https://github.com/mrdoob/three.js/pulls?q=is%3Aopen+is%3Apr">GitHub</a></p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  <script src="/assets/javascripts/lib/twitter.js"></script>
+<script src="/assets/javascripts/lib/mapbox.min.js"></script>
+<script src="/assets/javascripts/lib/jquery-2.1.0.min.js"></script>
+<script src="/assets/javascripts/lib/jquery.hammer.min.js"></script>
+<script src="/assets/javascripts/lib/request_animation_frame_polyfill.js"></script>
+<script src="/assets/javascripts/lib/underscore-min.js"></script>
+<script src="/assets/javascripts/lib/parse-min.js"></script>
+<script src="/assets/javascripts/lib/quick-change.js"></script>
+<script src="/assets/javascripts/base.js"></script>
+<script src="/assets/javascripts/header.js"></script>
+<script src="/assets/javascripts/contact.js"></script>
+<script src="/assets/javascripts/canvas/animator.js"></script>
+<script src="/assets/javascripts/canvas/canvas.js"></script>
+<script src="/assets/javascripts/canvas/context.js"></script>
+<script src="/assets/javascripts/canvas/hold.js"></script>
+<script src="/assets/javascripts/canvas/logo.js"></script>
+<script src="/assets/javascripts/canvas/logo_canvas.js"></script>
+<script src="/assets/javascripts/canvas/logo_letter.js"></script>
+<script src="/assets/javascripts/canvas/pinch.js"></script>
+<script src="/assets/javascripts/canvas/square.js"></script>
+<script src="/assets/javascripts/icons.js"></script>
+<script src="/assets/javascripts/helpers/logo_helper.js"></script>
+<script src="/assets/javascripts/helpers/resize_helper.js"></script>
+<script src="/assets/javascripts/helpers/square_helper.js"></script>
+<script src="/assets/javascripts/pages/index.js"></script>
+<script src="/assets/javascripts/canvas.js"></script>
+<script src="/assets/javascripts/app.js"></script>
+  </body>
+</html>
