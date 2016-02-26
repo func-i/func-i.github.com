@@ -7,12 +7,6 @@
 
   this.blendingSupported = Modernizr.canvasblending;
 
-  if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('/service_worker.js', {
-      scope: '/'
-    });
-  }
-
   onHome = function() {
     return window.location.pathname === "/";
   };
